@@ -1,19 +1,26 @@
-import jwt, models, os, base64
+import jwt, models, util
 from dotenv import load_dotenv
 from flask import request
 from functools import wraps
-from pprint import pprint
+
 
 load_dotenv()
+
+users = models.Users()
+
 
 def token_required(f):
     @wraps(f)
     def decorate(*args, **kwargs):
         token = None
-
         if "Authorization" in request.headers:
             token = request.headers["Authorization"].split()[-1]
-
+        else:
+            return {
+                "message": "Your token is empty, you must add 'Authorized_token in your request'",
+                "error": "Unauthorized",
+                "data": None
+            }, 401
         if not token:
             return {
                 "message": "Your token is empty, you must add 'Authorized_token in your request'",
@@ -22,14 +29,11 @@ def token_required(f):
             }, 401
         
         try:
-            secret = "HealthyNutrition@2008"
-            algorithm = os.environ.get("JWT_ALGO")
+            payload = util.decode_token(token)
 
-            payload = jwt.decode(token, secret, algorithms=[algorithm])
+            user = users.search(payload["username"])
 
-            user = models.User().user_col.find_one({"username": payload["username"]})
-
-            if (models.User().search_user(payload) is None) or not (payload["email"] == user["email"]): 
+            if (user is None): 
                 return {
                     "message": "Your token is wrong",
                     "error": "Unauthorized #2",
@@ -47,7 +51,7 @@ def token_required(f):
                 "error": str(error),
                 "data": None
             }, 500
-        
+
         return f(*args, **kwargs)
     
     return decorate
