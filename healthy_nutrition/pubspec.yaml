@@ -13,6 +13,12 @@ dependencies:
   material_symbols_icons: ^4.2811.0
   camera: ^0.11.1
   persistent_bottom_nav_bar: ^6.2.1
+  shared_preferences: ^2.5.3
+  jwt_decoder: ^2.0.1
+  flutter_secure_storage: ^9.2.4
+  google_fonts: ^6.2.1
+  multi_circular_slider: ^1.1.0
+
 
 
 dev_dependencies:
@@ -22,3 +28,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/icons/

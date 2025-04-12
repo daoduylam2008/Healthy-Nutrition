@@ -2,12 +2,23 @@ import jwt, models, util
 from dotenv import load_dotenv
 from flask import request
 from functools import wraps
+from datetime import datetime, date
+
 
 
 load_dotenv()
 
 users = models.Users()
 
+
+def isExpired(text):
+    expiration_date = datetime.strptime(text, "%d/%m/%Y").date()
+    today = date.today()
+
+    if expiration_date >= today:
+        return False
+    else:
+        return True
 
 def token_required(f):
     @wraps(f)
@@ -39,12 +50,11 @@ def token_required(f):
                     "error": "Unauthorized #2",
                     "data": None
                 }, 401
-        except jwt.ExpiredSignatureError as e:
-            return {
-                "message": "Your token is expired",
-                "error": str(e),
-                "data": None
-            }, 500
+            elif (isExpired(payload["expiration date"])): 
+                return {
+                    "message": "Your token is expired",
+                    "data": None
+                }, 500
         except Exception as error:
             return {
                 "message": "Something went wrong",

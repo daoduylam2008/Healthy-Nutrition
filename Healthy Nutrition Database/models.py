@@ -20,11 +20,15 @@ class UserInformation:
             data = {
                 "user_id": user_id,
                 "username": username,
+                "last_name": "",
+                "first_name": "",
                 "email": "",
-                "history": [],
+                "history": {},
                 "height": "",
                 "weight": "",
-                "goal": ""
+                "goal": "",
+                "age": "",
+                "favorite": []
             }
 
             self.info_col.insert_one(data)
@@ -33,6 +37,9 @@ class UserInformation:
     def search(self, user_id):
         return self.info_col.find_one({"user_id": [user_id]})
     
+    def search_email(self, email):
+        return self.info_col.find_one({"email": email})
+    
     def search_by_username(self, username):
         user_id = util.convert_to_id(username)
         data = self.search(user_id)
@@ -40,9 +47,14 @@ class UserInformation:
         return data
 
     def update(self, username, query, data):
+        if query == "email" and self.search_email(data) is not None:
+            return False
+        
         user_info = self.search_by_username(username)
         new_data = { "$set": { query: data } }
         self.info_col.update_one(user_info, new_data)
+
+        return True
   
 
 class Users:

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/file_manager.dart';
 import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/request.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -9,23 +12,73 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreen extends State<HistoryScreen> {
-  var user = userExample;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Text("Today"), Text("Hello")],
-        ),
+      minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
+      child: FutureBuilder(
+        future: fetchUserInfo(),
+        builder: (context, snapshot1) {
+          return FutureBuilder(
+            future: loadJsonFromAssets("assets/food_data.json"),
+            builder: (context, snapshot2) {
+              if (snapshot1.hasData && snapshot2.hasData) {
+                UserInfo info = snapshot1.data!;
+                Map<String, dynamic> history = info.history;
+                return Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("History",
+                      style: nunitoFont(50, foregroundColor, FontStyle.normal, FontWeight
+                      .bold)),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: history.keys.toList().length,
+                        itemBuilder: (context, index) {
+                          String date = history.keys.toList()[index];
+                          return historyCard(date, history[date]);
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return Center(child: const CircularProgressIndicator());
+            },
+          );
+        },
       ),
     );
   }
 
-  Widget todayWidget(Map<String, dynamic> history) {
-    var data = history[today];
-    return Text("data");
+  Widget historyCard(String date, List<dynamic> data) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 8,
+        bottom: 8
+      ),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.all(12),
+        width: double.infinity,
+        height: 100,
+        decoration: BoxDecoration(
+          color: boxColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Text(
+              date,
+              style: robotoFont(20, foregroundColor, FontStyle.normal, FontWeight.normal),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

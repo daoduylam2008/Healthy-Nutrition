@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:healthy_nutrition/main.dart';
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});

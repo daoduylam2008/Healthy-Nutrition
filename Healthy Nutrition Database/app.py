@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_bcrypt import Bcrypt
 from auth_middleware import *
 
@@ -11,7 +11,7 @@ bcrypt = Bcrypt(app)
 users = models.Users()
 infos = models.UserInformation()
 
-queries = ["user_id", "username", "email", "history", "height", "weight", "goal", "password"]
+queries = ["user_id", "username", "email", "history", "height", "weight", "goal", "password", "favorite"]
 
 
 @app.route("/")
@@ -19,7 +19,7 @@ def start_page():
     return "Hello, this is the server for Healthy Nutrition application", 200
 
 
-@app.route("/login", methods=["GET"])
+@app.route("/login", methods=["POST"])
 def login():
     args = request.json
 
@@ -28,10 +28,10 @@ def login():
     user = users.search(username)
 
     if user is not None and bcrypt.check_password_hash(user["password"], args["password"]):
+        del user["_id"]
         return {
             "Authorization": util.generate_new_token(username),
-            'data': user,
-        }
+        }, 200
         
     return {
         "error": "Your username or your password might be wrong"
@@ -53,7 +53,7 @@ def register():
     }, 409
 
 
-@app.route("/info", methods=["GET"])
+@app.route("/info", methods=["POST"])
 @token_required
 def info():
     args = request.json
@@ -84,15 +84,18 @@ def update_info():
             "error": f"Cannot find '{username}'"
         }, 409
     else:
-        infos.update(username, query, data)
+        if infos.update(username, query, data):
+            return {
+                "message": "Successfully update your information"
+            }, 200
         return {
-            "message": "Successfully update your information"
-        }, 200
+            "error": "This email was taken"
+        }, 409
     
 
 @app.route("/update_user", methods=["POST"])
 @token_required
-def update_info():
+def update_user():
     args = request.json
     username = args["username"]
     query = args["query"]
@@ -111,8 +114,18 @@ def update_info():
         return {
             "message": "Successfully update your user information"
         }, 200
+    
+
+@app.route('/refresh_token')
+def refresh_token():
+    token = request.headers["Authorization"].split()[-1]
+    token = util.refresh_token(token)
+
+    return {
+        "Authorization": str(token)
+    }, 200
+    return ""
 
 
 if __name__ == "__main__": 
     app.run()
-# eyJhbGciOiJIUzI1NiIsImV4cCI6MTc0NjMxOTU0MCwidHlwIjoiSldUIn0.eyJ1c2VybmFtZSI6ImRhb2R1eWxhbSIsImlkIjoiOTAxNzk4MDExMjE3MTEwMDExMTE3OTAwMSJ9.lU0znesPH6vn0bDdtbDLHfu7wcKKEv-bZ5PH58BzqlU
