@@ -10,7 +10,7 @@ const tabBarColor = Color.fromRGBO(0, 0, 0, 0.309);
 const inactiveColor = Color.fromARGB(255, 69, 69, 69);
 const boxColor = Color.fromARGB(132, 58, 57, 57);
 const textColor = Color.fromARGB(229, 255, 255, 255);
-
+const blurTextColor = Color.fromARGB(160, 238, 233, 233);
 ThemeData theme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,

@@ -115,30 +115,34 @@ class FoodInformation extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(alignment: Alignment.topLeft, child: BackButton()),
-                SizedBox(
-                  width: 250,
-                  height: 250,
-                  child: Image(
-                    image: AssetImage("assets/icons/$name.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   width: double.infinity,
-                  height: 100,
+                  height: 350,
                   decoration: BoxDecoration(
                     color: boxColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(
-                    "We have not collected enough information and data about $name!",
-                    style: latoFont(
-                      20,
-                      foregroundColor,
-                      FontStyle.normal,
-                      FontWeight.normal,
-                    ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: 250,
+                        height: 250,
+                        child: Image(
+                          image: AssetImage("assets/icons/$name.png"),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Text(
+                        "We have not collected enough information and data about $name!",
+                        style: latoFont(
+                          20,
+                          foregroundColor,
+                          FontStyle.normal,
+                          FontWeight.normal,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -154,6 +158,14 @@ class FoodInformation extends StatelessWidget {
       "Fat": double.parse(data[name]["Fat"]),
     };
     double total = dataMap["Protein"]! + dataMap["Carbs"]! + dataMap["Fat"]!;
+
+    Widget infoText(String text, bool blur) {
+      if (blur) {
+        return Text(text, style: latoFont(20, blurTextColor, FontStyle.normal, FontWeight.normal),);
+      }
+      return Text(text, style: latoFont(20, foregroundColor, FontStyle.normal, FontWeight.bold),);
+    }
+
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.only(top: 60, right: 20, left: 20),
@@ -167,13 +179,14 @@ class FoodInformation extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(20),
                 width: double.infinity,
-                height: 500,
+                height: 1000,
                 decoration: BoxDecoration(
                   color: boxColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
                   children: [
+                    // Image and name of food section
                     SizedBox(
                       width: 250,
                       height: 250,
@@ -193,22 +206,138 @@ class FoodInformation extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Divider(),
-                    SizedBox(height: 15),
+                    SizedBox(height: 10),
+                    // Calories section
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MultiCircularSlider(
-                          trackWidth: 8,
-                          values: [dataMap["Protein"]! / total, dataMap["Carbs"]! / total, dataMap["Fat"]! / total],
-                          colors: [Colors.red, Colors.green, Colors.blue],
-                          size: 100,
-                          progressBarType: MultiCircularSliderType.circular,
+                        Flexible(
+                          flex: 2,
+                          child: MultiCircularSlider(
+                            showTotalPercentage: false,
+                            innerWidget: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${dataMap["Calories"]}",
+                                  style: latoFont(
+                                    25,
+                                    foregroundColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                                Text(
+                                  "Calories",
+                                  style: latoFont(
+                                    15,
+                                    blurTextColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trackWidth: 8,
+                            values: [
+                              dataMap["Protein"]! / total,
+                              dataMap["Carbs"]! / total,
+                              dataMap["Fat"]! / total,
+                            ],
+                            colors: [Colors.red, Colors.orange, Colors.blue],
+                            size: 150,
+                            progressBarType: MultiCircularSliderType.circular,
+                          ),
                         ),
+                        SizedBox(width: 30),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-
-                        ],)
+                            Row(
+                              children: [
+                                Icon(Icons.circle, color: Colors.red),
+                                SizedBox(width: 5),
+                                Text(
+                                  "Protein",
+                                  style: latoFont(
+                                    20,
+                                    blurTextColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Icon(Icons.circle, color: Colors.orange),
+                                SizedBox(width: 5),
+                                Text(
+                                  "Carbs",
+                                  style: latoFont(
+                                    20,
+                                    blurTextColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Icon(Icons.circle, color: Colors.blue),
+                                SizedBox(width: 5),
+                                Text(
+                                  "Fat",
+                                  style: latoFont(
+                                    20,
+                                    blurTextColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                    SizedBox(height: 10),
+                    // More information and data
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        spacing: 10,
+                        children: [
+                          infoText("Measure", true),
+                          infoText("Grams", true),
+                          infoText("Calories", true),
+                          infoText("Protein", true),
+                          infoText("Fat", true),
+                          infoText("Sat.Fat", true),
+                          infoText("Fiber", true),
+                          infoText("Carbs", true),
+                          ]
+                        ),
+                        Column(
+                        spacing: 10,
+                        children: [
+                          infoText(data[name]["Measure"], false),
+                          infoText(data[name]["Grams"], false),
+                          infoText(data[name]["Calories"], false),
+                          infoText(data[name]["Protein"], false),
+                          infoText(data[name]["Fat"], false),
+                          infoText(data[name]["Sat.Fat"], false),
+                          infoText(data[name]["Fiber"], false),
+                          infoText(data[name]["Carbs"], false),                          ]),
                       ],
                     ),
                   ],
