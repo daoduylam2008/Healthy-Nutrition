@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
+import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:healthy_nutrition/machine_learning.dart';
+
+// import 'package:camerawesome/pigeon.dart';
+
+// 192.168.6.193
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
@@ -9,53 +14,21 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreen extends State<ScannerScreen> {
-  List<CameraDescription> cameras = [];
-  CameraController? cameraController;
-  @override
-  void initState() {
-    super.initState();
-    _setupCamera();
-  }
-
-  // @override
-  // void dispose() {
-  //   cameraController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    if (cameraController == null ||
-        cameraController?.value.isInitialized == false) {
-      return Center(child: CircularProgressIndicator());
-    }
-    return SafeArea(
-      child: SizedBox.expand(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [CameraPreview(cameraController!)],
-        ),
+    return Scaffold(
+      body: FutureBuilder(
+        future: loadModel(),
+        builder: (context, snapshot) {
+          return CameraAwesomeBuilder.awesome(
+            enablePhysicalButton: true,
+            topActionsBuilder: (state) {
+              return Container();
+            },
+            saveConfig: SaveConfig.photo(),
+          );
+        }
       ),
     );
-  }
-
-  Future<void> _setupCamera() async {
-    List<CameraDescription> _cameras = await availableCameras();
-    if (cameras.isNotEmpty) {
-      setState(() {
-        cameras = _cameras;
-        cameraController = CameraController(
-          _cameras.first,
-          ResolutionPreset.high,
-        );
-      });
-      cameraController?.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
-      });
-    }
   }
 }

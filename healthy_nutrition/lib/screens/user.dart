@@ -11,6 +11,17 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
+int currentIndex = 0;
+int previousIndex = 0;
+
+final List<Widget> screens = [
+  HomeScreen(),
+  FavoriteScreen(),
+  ScannerScreen(),
+  AnalysisScreen(),
+  HistoryScreen(),
+];
+
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
 
@@ -19,15 +30,6 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreen extends State<UserScreen> {
-  int _currentIndex = 0;
-  final List<Widget> _screens = [
-    HomeScreen(),
-    FavoriteScreen(),
-    ScannerScreen(),
-    AnalysisScreen(),
-    HistoryScreen(),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -36,12 +38,12 @@ class _UserScreen extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: PersistentTabView(
+      bottomNavigationBar: PersistentTabView(
         context,
         navBarHeight: kBottomNavigationBarHeight + 5,
         backgroundColor: tabBarColor,
-        screens: _screens,
-        navBarStyle: NavBarStyle.style15,
+        screens: screens,
+        navBarStyle: NavBarStyle.style3,
         items: [
           PersistentBottomNavBarItem(
             title: "home",
@@ -57,9 +59,10 @@ class _UserScreen extends State<UserScreen> {
             inactiveColorPrimary: inactiveColor,
           ),
           PersistentBottomNavBarItem(
-            icon: Icon(Symbols.center_focus_strong, color: Colors.black),
+            title: "detect",
+            icon: Icon(Symbols.center_focus_strong),
             activeColorPrimary: white,
-            inactiveColorSecondary: inactiveColor,
+            inactiveColorPrimary: inactiveColor,
           ),
           PersistentBottomNavBarItem(
             title: "analysis",
@@ -74,10 +77,8 @@ class _UserScreen extends State<UserScreen> {
             inactiveColorPrimary: inactiveColor,
           ),
         ],
-        onItemSelected: (value) => _currentIndex = value,
       ),
       backgroundColor: backgroundColor,
-      body: _screens[_currentIndex],
-    );
+     );
   }
 }

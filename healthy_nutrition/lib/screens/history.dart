@@ -3,6 +3,7 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/file_manager.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -29,55 +30,27 @@ class _HistoryScreen extends State<HistoryScreen> {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("History",
-                      style: nunitoFont(50, foregroundColor, FontStyle.normal, FontWeight
-                      .bold)),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: history.keys.toList().length,
-                        itemBuilder: (context, index) {
-                          String date = history.keys.toList()[index];
-                          return historyCard(date, history[date]);
-                        },
+                      child: Text(
+                        "History",
+                        style: nunitoFont(
+                          50,
+                          foregroundColor,
+                          FontStyle.normal,
+                          FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ],
+                    TableCalendar(
+                      firstDay: DateTime.utc(2010, 10, 16),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      focusedDay: DateTime.now(),
+                    )               ],
                 );
               }
               return Center(child: const CircularProgressIndicator());
             },
           );
         },
-      ),
-    );
-  }
-
-  Widget historyCard(String date, List<dynamic> data) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8
-      ),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.all(12),
-        width: double.infinity,
-        height: 100,
-        decoration: BoxDecoration(
-          color: boxColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            Text(
-              date,
-              style: robotoFont(20, foregroundColor, FontStyle.normal, FontWeight.normal),
-            )
-          ],
-        ),
       ),
     );
   }
