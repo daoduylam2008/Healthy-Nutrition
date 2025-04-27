@@ -116,9 +116,9 @@ class FoodInformation extends StatelessWidget {
               children: [
                 Align(alignment: Alignment.topLeft, child: BackButton()),
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(20),
                   width: double.infinity,
-                  height: 350,
+                  height: 500,
                   decoration: BoxDecoration(
                     color: boxColor,
                     borderRadius: BorderRadius.circular(20),
@@ -126,14 +126,27 @@ class FoodInformation extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        width: 250,
-                        height: 250,
+                        width: 200,
+                        height: 200,
                         child: Image(
                           image: AssetImage("assets/icons/$name.png"),
                           fit: BoxFit.fill,
                         ),
                       ),
                       Text(
+                      name.capitalize(),
+                      style: latoFont(
+                        25,
+                        foregroundColor,
+                        FontStyle.normal,
+                        FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Divider(),
+                    SizedBox(height: 10),
+                      Text(
+                        textAlign: TextAlign.center,
                         "We have not collected enough information and data about $name!",
                         style: latoFont(
                           20,

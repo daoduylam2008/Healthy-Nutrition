@@ -21,6 +21,7 @@ dependencies:
   table_calendar: ^3.2.0
   haptic_feedback: ^0.5.1+1
   pytorch_lite: ^4.3.2
+  syncfusion_flutter_gauges: ^29.1.38
 
 dev_dependencies:
   flutter_test:
