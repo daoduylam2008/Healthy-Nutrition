@@ -1,0 +1,6 @@
+flask
+flask_bcrypt
+jwt
+python-dotenv
+pymongo
+pandas

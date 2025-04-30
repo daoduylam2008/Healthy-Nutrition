@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./Healthy Nutrition Database/
+    container_name: backend
+    ports:
+      - 5000:5000
+    develop:
+      watch:
+        - path: ./Healthy Nutrition Database
+          target: /app
+          action: sync
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: "111111"
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./Healthy Nutrition Database/mongodb/initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongodb-datavolume:/data/db/
+
+volumes:
+  mongodb-datavolume:
+    driver: local
+    name: mongodb-data
