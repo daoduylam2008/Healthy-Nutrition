@@ -1,6 +1,6 @@
 flask
 flask_bcrypt
-jwt
+pyjwt
 python-dotenv
 pymongo
 pandas
