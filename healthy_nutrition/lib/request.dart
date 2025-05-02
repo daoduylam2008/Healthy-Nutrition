@@ -19,11 +19,8 @@ Future<String?> login(String username, String password) async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return jsonDecode(response.body)["Authorization"];
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    return null;
-  }
+  } 
+  return null;
 }
 
 Future<UserInfo?> fetchUserInfo() async {
@@ -43,9 +40,8 @@ Future<UserInfo?> fetchUserInfo() async {
   );
 
   if (response.statusCode == 200) {
+    print("fetched");
     return UserInfo.fromJson(jsonDecode(response.body));
-  } else {
-    return null;
   }
+  return null;
 }
-
