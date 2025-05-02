@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:flutter/material.dart' hide Preview;
+import 'package:camerawesome/camerawesome_plugin.dart' ;
 import 'package:healthy_nutrition/machine_learning.dart';
 
 // import 'package:camerawesome/pigeon.dart';

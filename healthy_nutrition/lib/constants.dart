@@ -17,7 +17,7 @@ ThemeData theme = ThemeData(
   primaryColor: foregroundColor,
 );
 
-const url = "http://192.168.6.193:3000";
+const url = "http://localhost:3000";
 
 TextStyle latoFont(
   double size,
