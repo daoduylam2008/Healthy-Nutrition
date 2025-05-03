@@ -1,14 +1,18 @@
-import jwt
-from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
-payload = {
-    "data": "1234"
-}
+import os, pymongo
+import util
 
-header = {
-    "exp": datetime.now() + timedelta(seconds=1)
-}
 
-token = jwt.encode(payload, "secret", "HS256", headers=header)
+load_dotenv()
 
-jwt.decode(token, "secret",["HS256"])
+
+url = os.environ.get("MONGODB_CONNECT")
+client = pymongo.MongoClient(url)
+database = client["healthy_nutrition"]
+
+print(database)
+
+users = database['users']
+
+print(users.find_one({"username" : "daoduylam"}))

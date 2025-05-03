@@ -125,5 +125,11 @@ def refresh_token():
         "Authorization": str(token)
     }, 200
 
+
+@app.route('/get_food')
+def get_food():
+    pass
+
+
 if __name__ == "__main__": 
     app.run(host='0.0.0.0')

@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 
 import os, pymongo
 import util
+from pprint import pprint
 
 
 load_dotenv()
@@ -34,20 +35,17 @@ class UserInformation:
             self.info_col.insert_one(data)
             return data
     
-    def search(self, user_id):
-        return self.info_col.find_one({"user_id": [user_id]})
-    
     def search_email(self, email):
         return self.info_col.find_one({"email": email})
     
     def search_by_username(self, username):
-        user_id = util.convert_to_id(username)
-        data = self.search(user_id)
+        data = self.search(username)
+        pprint(data)
         del data["_id"]
         return data
 
     def update(self, username, query, data):
-        if query == "email" and self.search_email(data) is not None:
+        if query != None and query == "email" and self.search_email(data) is not None:
             return False
         
         user_info = self.search_by_username(username)
