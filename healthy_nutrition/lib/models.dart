@@ -24,7 +24,7 @@ class User {
 }
 
 class UserInfo {
-  final List user_id;
+  final String user_id;
   final String username;
   final String email;
   final Map<String, dynamic> history;
@@ -53,7 +53,7 @@ class UserInfo {
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
-        "user_id": List user_id,
+        "user_id": String user_id,
         "username": String username,
         "email": String email,
         "history": Map<String, dynamic> history,

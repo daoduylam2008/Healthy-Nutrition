@@ -29,7 +29,7 @@ Future<UserInfo?> fetchUserInfo() async {
   String token = prefs.getString("token") ?? "";
 
   String username = JwtDecoder.decode(token)["username"];
-
+  
   final response = await http.post(
     Uri.parse("$url/info"),
     body: jsonEncode({"username": username}),
@@ -40,7 +40,6 @@ Future<UserInfo?> fetchUserInfo() async {
   );
 
   if (response.statusCode == 200) {
-    print("fetched");
     return UserInfo.fromJson(jsonDecode(response.body));
   }
   return null;
