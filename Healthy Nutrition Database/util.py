@@ -8,6 +8,14 @@ import os
 
 dotenv.load_dotenv()
 
+
+def convert_to_id(text):
+    result = ""
+    for i in text:
+        result += str(ord(i))
+    
+    return result
+
 def load_csv(path):
     return pd.read_csv(path)
 
@@ -60,7 +68,7 @@ def generate_new_token(username):
     date = datetime.now(timezone.utc) + timedelta(days=28)
     payload = {
         "username": username,
-        "id": username,
+        "id": encode_user_id(convert_to_id(username)),
         "expiration date": date_to_string(date)
     }
     algorithm = os.environ.get("JWT_ALGO")
