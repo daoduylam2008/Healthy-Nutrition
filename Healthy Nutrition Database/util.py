@@ -9,13 +9,6 @@ import os
 dotenv.load_dotenv()
 
 
-def convert_to_id(text):
-    result = ""
-    for i in text:
-        result += str(ord(i))
-    
-    return result
-
 def load_csv(path):
     return pd.read_csv(path)
 
@@ -25,16 +18,6 @@ def decode_token(token):
     algorithm = os.environ.get("JWT_ALGO")
 
     return jwt.decode(token,secret, algorithms=[algorithm])
-    
-
-
-def encode_user_id(user_id):
-    encode = ""
-
-    for i in range(0, len(user_id)):
-        encode += user_id[len(user_id) - 1 - i]
-    
-    return encode
 
 
 def is_expired(token): 
@@ -68,7 +51,7 @@ def generate_new_token(username):
     date = datetime.now(timezone.utc) + timedelta(days=28)
     payload = {
         "username": username,
-        "id": encode_user_id(convert_to_id(username)),
+        "id": username,
         "expiration date": date_to_string(date)
     }
     algorithm = os.environ.get("JWT_ALGO")

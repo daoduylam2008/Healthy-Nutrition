@@ -1,5 +1,5 @@
 class User {
-  final List user_id;
+  final String user_id;
   final String username;
   final String password;
 
@@ -13,7 +13,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
-        'user_id': List user_id,
+        'user_id': String user_id,
         'username': String username,
         'password': String password,
       } =>
