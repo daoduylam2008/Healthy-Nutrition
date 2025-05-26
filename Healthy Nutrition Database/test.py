@@ -6,13 +6,14 @@ import util
 
 load_dotenv()
 
-
 url = os.environ.get("MONGODB_CONNECT")
 client = pymongo.MongoClient(url)
 database = client["healthy_nutrition"]
 
-print(database)
+food_col = database["food"]
 
-users = database['users']
+data = food_col.find({"description": "Custard"})
 
-print(users.find_one({"username" : "daoduylam"}))
+for i in data:
+    print(i)
+     

@@ -11,6 +11,33 @@ url = os.environ.get("MONGODB_CONNECT")
 client = pymongo.MongoClient(url)
 database = client["healthy_nutrition"]
 
+
+class Food:
+    def __init__(self):
+        self.food_col = database["foods"]
+
+    def search_category(self, category):
+        data = self.food_col.find_one({
+            "category": category
+        })
+        del data["_id"]
+        return data
+    
+    def search_description(self, description):
+        data =  self.food_col.find_one({
+            "description": description
+        })
+        del data["_id"]
+        return data
+    
+    def search_foods(self, foods):
+        results = []
+        for food in foods:
+            results.append(self.search_description(food))
+
+        return results
+
+
 class UserInformation:
     def __init__(self):
         self.info_col = database["infos"]
@@ -28,7 +55,8 @@ class UserInformation:
                 "weight": "",
                 "goal": "",
                 "age": "",
-                "favorite": []
+                "favorite": [],
+                "gender": ""
             }
 
             self.info_col.insert_one(data)

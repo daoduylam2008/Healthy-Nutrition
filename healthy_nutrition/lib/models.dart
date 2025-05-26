@@ -18,7 +18,7 @@ class User {
         'password': String password,
       } =>
         User(user_id: user_id, username: username, password: password),
-      _ => throw const FormatException('Failed to load album.'),
+      _ => throw const FormatException('Failed to load user.'),
     };
   }
 }
@@ -35,6 +35,7 @@ class UserInfo {
   final String firstName;
   final String age;
   final List<dynamic> favorite;
+  final String gender;
 
   const UserInfo({
     required this.user_id,
@@ -48,6 +49,7 @@ class UserInfo {
     required this.lastName,
     required this.age,
     required this.favorite,
+    required this.gender,
   });
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
@@ -64,6 +66,7 @@ class UserInfo {
         "first_name": String firstName,
         "age": String age,
         "favorite": List<dynamic> favorite,
+        "gender": String gender,
       } =>
         UserInfo(
           user_id: user_id,
@@ -77,64 +80,36 @@ class UserInfo {
           lastName: lastName,
           age: age,
           favorite: favorite,
+          gender: gender
         ),
-      _ => throw const FormatException('Failed to load album.'),
+      _ => throw const FormatException('Failed to load user information.'),
     };
   }
 }
 
 class Food {
-  final String name;
-  final String measure;
-  final double grams;
-  final double calories;
-  final double protein;
-  final double fat;
-  final double satFat;
-  final double fiber;
-  final double carbs;
+  final String description;
   final String category;
+  final Map<String, dynamic> portion;
+  final Map<String, dynamic> nutrients;
 
   Food({
-    required this.name,
-    required this.measure,
-    required this.grams,
-    required this.calories,
-    required this.protein,
-    required this.fat,
-    required this.satFat,
-    required this.fiber,
-    required this.carbs,
     required this.category,
+    required this.description,
+    required this.nutrients,
+    required this.portion
   });
 
   factory Food.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
-        "Food": String name,
-        "Measure": String measure,
-        "Grams": double grams,
-        "Calories": double calories,
-        "Protein": double protein,
-        "Fat": double fat,
-        "Sat.Fat": double satFat,
-        "Fiber": double fiber,
-        "Carbs": double carbs,
-        "Category": String category,
+        "description": String description,
+        "category": String category,
+        "portion": Map<String, dynamic> portion,
+        "nutrient_per_100g": Map<String, dynamic> nutrients,
       } =>
-        Food(
-          name: name,
-          measure: measure,
-          grams: grams,
-          calories: calories,
-          protein: protein,
-          fat: fat,
-          satFat: satFat,
-          fiber: fiber,
-          carbs: carbs,
-          category: category,
-        ),
-      _ => throw const FormatException('Failed to load album.'),
+        Food(category: category, description: description, nutrients: nutrients, portion: portion),
+      _ => throw const FormatException('Failed to load food.'),
     };
   }
 }

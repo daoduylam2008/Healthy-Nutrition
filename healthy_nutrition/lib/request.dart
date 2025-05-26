@@ -2,11 +2,10 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<String?> login(String username, String password) async {
   final response = await http.post(
@@ -19,7 +18,7 @@ Future<String?> login(String username, String password) async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return jsonDecode(response.body)["Authorization"];
-  } 
+  }
   return null;
 }
 
@@ -29,7 +28,7 @@ Future<UserInfo?> fetchUserInfo() async {
   String token = prefs.getString("token") ?? "";
 
   String username = JwtDecoder.decode(token)["username"];
-  
+
   final response = await http.post(
     Uri.parse("$url/info"),
     body: jsonEncode({"username": username}),
@@ -42,5 +41,67 @@ Future<UserInfo?> fetchUserInfo() async {
   if (response.statusCode == 200) {
     return UserInfo.fromJson(jsonDecode(response.body));
   }
+  return null;
+}
+
+Future<List<Food>?> fetchCategory(String category) async {
+  final response = await http.post(
+    Uri.parse("$url/get_category"),
+    body: jsonEncode({"category": category}),
+    headers: {"content-type": "application/json"},
+  );
+
+  if (response.statusCode == 200) {
+    List<Food> d = [];
+    List<Map<String, dynamic>> data = jsonDecode(response.body)["data"];
+
+    for (int i = 0; i < data.length; i++) {
+      d.add(Food.fromJson(data[i]));
+    }
+
+    return d;
+  }
+
+  return null;
+}
+
+Future<List<Food>?> fetchFoods(List foods) async {
+  final response = await http.post(
+    Uri.parse("$url/get_foods"),
+    body: jsonEncode({"foods": foods}),
+    headers: {"content-type": "application/json"},
+  );
+  
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body)["data"];
+    List<Food> d = [];
+
+    for (int i = 0; i < data.length; i++) {
+      d.add(Food.fromJson(data[i]));
+    }
+
+    return d;
+  }
+
+  return null;
+}
+
+Future<List<Food>?> fetchDescription(String description) async {
+  final response = await http.post(
+    Uri.parse("$url/get_description"),
+    body: jsonEncode({"description": description}),
+    headers: {"content-type": "application/json"},
+  );
+
+  if (response.statusCode == 200) {
+    List results = jsonDecode(response.body)["data"];
+    List<Food> data = [];
+    for (final r in results) {
+      data.add(Food.fromJson(r));
+    }
+
+    return data;
+  }
+
   return null;
 }

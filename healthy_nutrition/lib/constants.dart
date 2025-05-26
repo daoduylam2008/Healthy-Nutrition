@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const String apiKey = "BUMkFqihTdLYxFb4qi1psoxY6c9vldorsVcLk8eL";
-
-const backgroundColor = Color.fromARGB(255, 51, 52, 51);
+// Color constants
+const backgroundColor = Color.fromARGB(255, 0, 0, 0);
 const foregroundColor = Color(0xFFEEE9E9);
 const white = Color(0xFFFFFFFF);
-const tabBarColor = Color.fromRGBO(0, 0, 0, 0.309);
-const inactiveColor = Color.fromARGB(255, 69, 69, 69);
-const boxColor = Color.fromARGB(132, 58, 57, 57);
+const tabBarColor = Color.fromARGB(255, 34, 34, 34);
+const inactiveColor = Color.fromARGB(255, 100, 100, 100);
+const boxColor = Color.fromARGB(255, 34, 34, 34);
 const textColor = Color.fromARGB(229, 255, 255, 255);
 const blurTextColor = Color.fromARGB(160, 238, 233, 233);
+const barColor = Color.fromARGB(255, 68, 68, 68);
+const signatureColor = Color.fromARGB(255, 76, 228, 255);
+const maleColor = Color.fromARGB(255, 76, 228, 255);
+const femaleColor = Color.fromARGB(255, 255, 76, 76);
+
+// Date constants
+DateTime today = DateTime.now();
+DateTime todayTest = DateTime(2025, 5, 2);
+
 ThemeData theme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
@@ -33,7 +41,7 @@ TextStyle latoFont(
   );
 }
 
-TextStyle robotoFont(
+TextStyle poppins(
   double size,
   Color color,
   FontStyle style,
@@ -54,6 +62,20 @@ TextStyle nunitoFont(
   FontWeight? weight,
 ) {
   return GoogleFonts.nunito(
+    fontSize: size,
+    color: color,
+    fontStyle: style,
+    fontWeight: weight,
+  );
+}
+
+TextStyle interFont(
+  double size,
+  Color color,
+  FontStyle style,
+  FontWeight? weight,
+) {
+  return GoogleFonts.inter(
     fontSize: size,
     color: color,
     fontStyle: style,

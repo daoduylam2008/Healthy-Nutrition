@@ -10,6 +10,7 @@ bcrypt = Bcrypt(app)
 
 users = models.Users()
 infos = models.UserInformation()
+foods = models.Food()
 
 queries = ["user_id", "username", "email", "history", "height", "weight", "goal", "password", "favorite"]
 
@@ -116,7 +117,7 @@ def update_user():
         }, 200
     
 
-@app.route('/refresh_token')
+@app.route('/refresh_token', methods=["GET"])
 def refresh_token():
     token = request.headers["Authorization"].split()[-1]
     token = util.refresh_token(token)
@@ -126,9 +127,54 @@ def refresh_token():
     }, 200
 
 
-@app.route('/get_food')
-def get_food():
-    pass
+@app.route('/get_foods', methods=["POST"])
+def get_foods():
+    args = request.json
+    f = args["foods"]
+
+    data = foods.search_foods(f)
+
+    if data is None or data == []:
+        return {
+            "data": None,
+            "error": "Your foods request has something wrong or invalid value. "
+        }, 409
+    
+    return {
+        "data": data
+        }, 200
+
+
+@app.route('/get_category', methods=["POST"])
+def get_category():
+    args = request.json
+    category = args["category"]
+    data = foods.search_category(category)
+    if data is None:
+        return {
+            "error": f"Cannot find {category} in the database. ",
+            "data": None
+        }, 409
+    return {
+        "data": data
+    }, 200
+
+
+@app.route('/get_description', methods=["POST"])
+def get_description():
+    args = request.json
+    description = args["description"]
+
+    data = foods.search_description(description)
+
+    if data is None or data == []:
+        return {
+            "data": None,
+            "error": f"Cannot find {description} in the database"
+        }, 409
+    return {
+        "data": data
+    }, 400
 
 
 if __name__ == "__main__": 
