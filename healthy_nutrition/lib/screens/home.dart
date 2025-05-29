@@ -22,52 +22,55 @@ class _HomeScreen extends State<HomeScreen> {
     return SafeArea(
       minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
       child: SingleChildScrollView(
-        child: FutureBuilder(
-          future: fetchUserInfo(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              UserInfo info = snapshot.data!;
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Today",
+        child: SingleChildScrollView(
+          child: FutureBuilder(
+            future: fetchUserInfo(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                UserInfo info = snapshot.data!;
+                print(info);
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Today",
+                            style: interFont(
+                              32,
+                              white,
+                              FontStyle.normal,
+                              FontWeight.w600,
+                            ),
+                          ),
+                          profileButton(info),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Click the below menu to see detail!",
                           style: interFont(
-                            32,
-                            white,
+                            14,
+                            inactiveColor,
                             FontStyle.normal,
                             FontWeight.w600,
                           ),
                         ),
-                        profileButton(info),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Click the below menu to see detail!",
-                        style: interFont(
-                          14,
-                          inactiveColor,
-                          FontStyle.normal,
-                          FontWeight.w600,
-                        ),
                       ),
-                    ),
-                    SizedBox(height: 5),
-                    healthProfileContainer(info, false, width),
-                  ],
-                ),
-              );
-            }
-            return Center(child: CircularProgressIndicator());
-          },
+                      SizedBox(height: 5),
+                      healthProfileContainer(info, false, width, todayTest),
+                    ],
+                  ),
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          ),
         ),
       ),
     );

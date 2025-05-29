@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart' hide Preview;
-import 'package:camerawesome/camerawesome_plugin.dart' ;
-import 'package:healthy_nutrition/machine_learning.dart';
+import 'package:healthy_nutrition/screens/external_screen/scanning_camera.dart';
+import 'package:flutter/material.dart';
 
-// import 'package:camerawesome/pigeon.dart';
-
-// 192.168.6.193
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
@@ -17,17 +13,16 @@ class _ScannerScreen extends State<ScannerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: loadModel(),
-        builder: (context, snapshot) {
-          return CameraAwesomeBuilder.awesome(
-            enablePhysicalButton: true,
-            topActionsBuilder: (state) {
-              return Container();
-            },
-            saveConfig: SaveConfig.photo(),
-          );
-        }
+      body: SafeArea(
+        minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ScaningSreen()));
+            }, child: Text("Scan!"))
+          ],
+        ),
       ),
     );
   }
