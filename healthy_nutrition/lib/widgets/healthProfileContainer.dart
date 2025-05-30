@@ -137,9 +137,13 @@ Widget nutritionSection(
       ),
       Row(
         children: [
-          Text(
-            "$value ",
-            style: interFont(14, white, FontStyle.normal, FontWeight.normal),
+          SizedBox(
+            width: 30,
+            child: Text(
+              "$value ",
+              overflow: TextOverflow.ellipsis,
+              style: interFont(14, white, FontStyle.normal, FontWeight.normal),
+            ),
           ),
           Text(
             "/ ${maxValue}g",

@@ -4,6 +4,7 @@ import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/info.dart';
 import 'package:healthy_nutrition/widgets/healthProfileContainer.dart';
+import 'package:healthy_nutrition/widgets/historyNutritionView.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,10 +29,10 @@ class _HomeScreen extends State<HomeScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 UserInfo info = snapshot.data!;
-                print(info);
+
                 return SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
@@ -64,6 +65,17 @@ class _HomeScreen extends State<HomeScreen> {
                       ),
                       SizedBox(height: 5),
                       healthProfileContainer(info, false, width, todayTest),
+                      SizedBox(height: 33),
+                      Text(
+                        "Food",
+                        style: interFont(
+                          32,
+                          white,
+                          FontStyle.normal,
+                          FontWeight.w500,
+                        ),
+                      ),
+                      historyNutritionView(info, todayTest, width, null, false)
                     ],
                   ),
                 );

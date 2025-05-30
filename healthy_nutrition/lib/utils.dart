@@ -59,3 +59,24 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods) {
   }
   return nutrition;
 }
+
+bool isFavorite(UserInfo info, Food food) {
+  for (final i in info.favorite) {
+    if (i["description"] == food.description) {
+      return true;
+    }
+  }
+  return false;
+}
+
+List<DateTime> getDaysInTheWeek(DateTime date) {
+  var weekDay = date.weekday;
+  var firstDayOfWeek = date.subtract(Duration(days: weekDay));
+
+  List<DateTime> results = [firstDayOfWeek];
+
+  for (var i = 1; i < 7; i++) {
+    results.add(firstDayOfWeek.add(Duration(days: i)));
+  }
+  return results;
+}

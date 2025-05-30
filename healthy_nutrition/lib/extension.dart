@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension StringExtension on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
@@ -18,6 +20,10 @@ extension DateTimeExtension on DateTime {
     }
 
     return "$day/$month/$year";
+  }
+
+  String date() {
+    return DateFormat("EEEE").format(this);
   }
 }
 

@@ -29,7 +29,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
               CircleAvatar(
                 radius: 40,
                 backgroundColor: boxColor,
-                child: Icon(Icons.add, size: 40),
+                child: Icon(Icons.add, size: 40, color: inactiveColor,),
               ),
             ],
           ),
@@ -42,7 +42,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                 List favoriteFoods = [];
 
                 for (final f in favorites) {
-                  favoriteFoods.add(f["name"]);
+                  favoriteFoods.add(f["description"]);
                 }
 
                 return FutureBuilder(
@@ -54,7 +54,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                           itemCount: favoriteFoods.length,
                           itemBuilder: (context, index) {
                             Food food = snapshot2.data![index];
-                            return foodBox(favorites[index]["name"], favorites[index]["portion"], true, food, context);
+                            return foodBox(favorites[index]["portion"], true, food, context);
                           },
                         ),
                       );

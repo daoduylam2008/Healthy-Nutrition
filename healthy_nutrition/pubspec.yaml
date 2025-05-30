@@ -17,7 +17,6 @@ dependencies:
   jwt_decoder: ^2.0.1
   flutter_secure_storage: ^9.2.4
   google_fonts: ^6.2.1
-  multi_circular_slider: ^1.1.0
   table_calendar: ^3.2.0
   haptic_feedback: ^0.5.1+1
   syncfusion_flutter_gauges: ^29.1.38
