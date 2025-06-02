@@ -20,7 +20,7 @@ Widget historyNutritionView(
       children: [
         Text(
           "You did not scan any food on this day!!!",
-          style: interFont(18, white, FontStyle.normal, FontWeight.normal),
+          style: interFont(16, white, FontStyle.normal, FontWeight.normal),
         ),
       ],
     );
@@ -57,19 +57,20 @@ Widget historyNutritionView(
           );
         }
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 28),
             (isHistory == true) ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10),
-                healthProfileContainer(info, true, width, date),
+                healthProfileContainer(info, true, width, date, context),
+                SizedBox(height: 28),
                 Text(
                   "Food",
                   style: interFont(24, white, FontStyle.normal, FontWeight.w500),
                 ),
               ],
             ) : Container(),
+            SizedBox(height: 28),
             Column(children: currentScans),
           ],
         );

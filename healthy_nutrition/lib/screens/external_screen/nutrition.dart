@@ -31,7 +31,9 @@ class _NutritionScreen extends State<NutritionScreen> {
                   CircleAvatar(
                     radius: 40,
                     backgroundColor: boxColor,
-                    child: BackButton(),
+                    child: BackButton(
+                      color: white
+                    ),
                   ),
                   SizedBox(
                     width: width * 0.4,

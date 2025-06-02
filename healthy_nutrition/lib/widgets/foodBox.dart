@@ -20,7 +20,7 @@ Widget foodBox(int portion, bool favorite, Food food, context) {
           );
         },
         child: Container(
-          height: 131,
+          height: 120,
           padding: EdgeInsets.only(top: 4, left: 4, bottom: 4, right: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(38),
@@ -32,8 +32,8 @@ Widget foodBox(int portion, bool favorite, Food food, context) {
               Row(
                 children: [
                   Container(
-                    width: 120,
-                    height: 120,
+                    width: 110,
+                    height: 110,
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(34),
@@ -50,7 +50,7 @@ Widget foodBox(int portion, bool favorite, Food food, context) {
                           food.description,
                           overflow: TextOverflow.ellipsis,
                           style: interFont(
-                            20,
+                            18,
                             white,
                             FontStyle.normal,
                             FontWeight.w500,
@@ -60,7 +60,7 @@ Widget foodBox(int portion, bool favorite, Food food, context) {
                       Text(
                         food.category,
                         style: interFont(
-                          16,
+                          14,
                           inactiveColor,
                           FontStyle.normal,
                           FontWeight.normal,

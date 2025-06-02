@@ -39,10 +39,32 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods) {
     "Protein": 0.0,
     "Fat": 0.0,
     "Carbs": 0.0,
+    
+    "Vitamin A": 0.0,
+    "Vitamin B": 0.0,
+    "Vitamin E": 0.0,
+    "Vitamin K": 0.0,
+    "Vitamin B-12": 0.0,
+    "Vitamin B-6": 0.0,
+    "Vitamin D": 0.0,
+    "Vitamin C": 0.0,
+    
+    "Calcium": 0.0,
+    "Zinc": 0.0,
+    "Magnesium": 0.0,
+    "Water": 0.0,
+    "Sodium": 0.0,
+    "Iron": 0.0,
+    "Copper": 0.0,
+    "Selenium": 0.0,
+    "Potassium": 0.0,
+    "Phosphorus": 0.0,
   };
 
   for (int i = 0; i < foods.length; i++) {
     var nutrients = foods[i].nutrients;
+
+    // Basic nutrition summarization
     nutrition["Energy"] += nutrients["Energy"][0];
     nutrition["Carbs"] += valueConverter(
       nutrients["Carbohydrate, by difference"][0],
@@ -56,7 +78,92 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods) {
       nutrients["Total lipid (fat)"][0],
       nutrients["Total lipid (fat)"][1],
     ).roundNum(1);
+
+    // Vitamin summarization
+    nutrition["Vitamin A"] += valueConverter(
+      (nutrients["Vitamin A, RAE"][0]).toDouble(),
+      nutrients["Vitamin A, RAE"][1],
+    ).roundNum(1);
+    nutrition["Vitamin B"] += valueConverter(
+      nutrients["Vitamin B-12, added"][0].toDouble(),
+      nutrients["Vitamin B-12, added"][1],
+    ).roundNum(1);
+    nutrition["Vitamin E"] += valueConverter(
+      nutrients["Vitamin E (alpha-tocopherol)"][0].toDouble(), 
+      nutrients["Vitamin E (alpha-tocopherol)"][1]
+    ).roundNum(1);
+    nutrition["Vitamin E"] += valueConverter(
+      nutrients["Vitamin E, added"][0].toDouble(), 
+      nutrients["Vitamin E, added"][1]
+    ).roundNum(1);
+    nutrition["Vitamin K"] += valueConverter(
+      nutrients["Vitamin K (phylloquinone)"][0].toDouble(), 
+      nutrients["Vitamin K (phylloquinone)"][1]
+    ).roundNum(1);
+    nutrition["Vitamin B-12"] += valueConverter(
+      nutrients["Vitamin B-12"][0].toDouble(), 
+      nutrients["Vitamin B-12"][1]
+    ).roundNum(1);
+    nutrition["Vitamin B-12"] += valueConverter(
+      nutrients["Vitamin B-12, added"][0].toDouble(), 
+      nutrients["Vitamin B-12, added"][1]
+    ).roundNum(1);
+    nutrition["Vitamin B-6"] += valueConverter(
+      nutrients["Vitamin B-6"][0].toDouble(), 
+      nutrients["Vitamin B-6"][1]
+    ).roundNum(1);
+    nutrition["Vitamin D"] += valueConverter(
+      nutrients["Vitamin D (D2 + D3)"][0].toDouble(), 
+      nutrients["Vitamin D (D2 + D3)"][1]
+    ).roundNum(1);
+    nutrition["Vitamin C"] += valueConverter(
+      nutrients["Vitamin C, total ascorbic acid"][0].toDouble(), 
+      nutrients["Vitamin C, total ascorbic acid"][1]
+    ).roundNum(1);
+
+    // Mineral
+    nutrition["Calcium"] += valueConverter(
+      nutrients["Calcium, Ca"][0].toDouble(), 
+      nutrients["Calcium, Ca"][1]
+    ).roundNum(1);
+    nutrition["Phosphorus"] += valueConverter(
+      nutrients["Phosphorus, P"][0].toDouble(), 
+      nutrients["Phosphorus, P"][1]
+    ).roundNum(1);
+    nutrition["Zinc"] += valueConverter(
+      nutrients["Zinc, Zn"][0].toDouble(), 
+      nutrients["Zinc, Zn"][1]
+    ).roundNum(1);
+    nutrition["Magnesium"] += valueConverter(
+      nutrients["Magnesium, Mg"][0].toDouble(), 
+      nutrients["Magnesium, Mg"][1]
+    ).roundNum(1);
+    nutrition["Copper"] += valueConverter(
+      nutrients["Copper, Cu"][0].toDouble(), 
+      nutrients["Copper, Cu"][1]
+    ).roundNum(1);
+    nutrition["Potassium"] += valueConverter(
+      nutrients["Potassium, K"][0].toDouble(), 
+      nutrients["Potassium, K"][1]
+    ).roundNum(1);
+    nutrition["Iron"] += valueConverter(
+      nutrients["Iron, Fe"][0].toDouble(), 
+      nutrients["Iron, Fe"][1]
+    ).roundNum(1);
+    nutrition["Selenium"] += valueConverter(
+      nutrients["Selenium, Se"][0].toDouble(), 
+      nutrients["Selenium, Se"][1]
+    ).roundNum(1);
+    nutrition["Sodium"] += valueConverter(
+      nutrients["Sodium, Na"][0].toDouble(), 
+      nutrients["Sodium, Na"][1]
+    ).roundNum(1);
+    nutrition["Water"] += valueConverter(
+      nutrients["Water"][0].toDouble(), 
+      nutrients["Water"][1]
+    ).roundNum(1);
   }
+
   return nutrition;
 }
 

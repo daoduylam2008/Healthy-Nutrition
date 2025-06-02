@@ -3,9 +3,16 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
+import 'package:healthy_nutrition/screens/external_screen/specific_nutrition.dart';
 import 'package:healthy_nutrition/utils.dart';
 
-Widget healthProfileContainer(UserInfo info, bool history, double width, DateTime date) {
+Widget healthProfileContainer(
+  UserInfo info,
+  bool history,
+  double width,
+  DateTime date,
+  context,
+) {
   List todayHistoryFood = info.history[date.dateToString()];
   List todayHistory = [];
 
@@ -13,91 +20,100 @@ Widget healthProfileContainer(UserInfo info, bool history, double width, DateTim
     todayHistory.add(i["description"]);
   }
 
-  return Container(
-    padding: EdgeInsets.only(top: 17, bottom: 17, right: 23, left: 23),
-    width: double.infinity,
-    height: 227,
-    decoration: BoxDecoration(
-      color: boxColor,
-      borderRadius: BorderRadius.circular(38),
-    ),
-    child: FutureBuilder(
-      future: fetchFoods(todayHistory),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          Map<String, dynamic> data = nutritionCalculator(snapshot.data!);
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "${data["Energy"]}",
-                        style: interFont(
-                          48,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.w500,
+  return FutureBuilder(
+    future: fetchFoods(todayHistory),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        Map<String, dynamic> data = nutritionCalculator(snapshot.data!);
+        return InkWell(
+          borderRadius: BorderRadius.circular(30),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SpecificNutrition(data: data)),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.only(top: 17, bottom: 17, right: 23, left: 23),
+            width: double.infinity,
+            height: 227,
+            decoration: BoxDecoration(
+              color: boxColor,
+              borderRadius: BorderRadius.circular(38),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "${data["Energy"]}",
+                          style: interFont(
+                            48,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        "Kcal",
-                        style: interFont(
-                          24,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.normal,
+                        SizedBox(width: 10),
+                        Text(
+                          "Kcal",
+                          style: interFont(
+                            24,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Image(image: AssetImage("assets/icons/fire.png")),
-                      SizedBox(width: 15),
-                    ],
-                  ),
-                ],
-              ),
-              // SizedBox(height: 16),
-              caloriesBar(data["Energy"], width),
-              SizedBox(height: 9),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  nutritionSection(
-                    "Carbs",
-                    data["Carbs"],
-                    width,
-                    Colors.yellow,
-                    300,
-                  ),
-                  nutritionSection(
-                    "Protein",
-                    data["Protein"],
-                    width,
-                    Colors.red,
-                    100,
-                  ),
-                  nutritionSection(
-                    "Fat",
-                    data["Fat"],
-                    width,
-                    Colors.pinkAccent,
-                    60,
-                  ),
-                ],
-              ),
-            ],
-          );
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-    ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Image(image: AssetImage("assets/icons/fire.png")),
+                        SizedBox(width: 15),
+                      ],
+                    ),
+                  ],
+                ),
+                // SizedBox(height: 16),
+                caloriesBar(data["Energy"], width),
+                SizedBox(height: 9),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    nutritionSection(
+                      "Carbs",
+                      data["Carbs"],
+                      width,
+                      Colors.yellow,
+                      300,
+                    ),
+                    nutritionSection(
+                      "Protein",
+                      data["Protein"],
+                      width,
+                      Colors.red,
+                      100,
+                    ),
+                    nutritionSection(
+                      "Fat",
+                      data["Fat"],
+                      width,
+                      Colors.pinkAccent,
+                      90,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+      return Center(child: CircularProgressIndicator());
+    },
   );
 }
 

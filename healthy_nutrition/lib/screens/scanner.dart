@@ -10,6 +10,7 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreen extends State<ScannerScreen> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

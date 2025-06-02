@@ -27,7 +27,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                 style: interFont(32, white, FontStyle.normal, FontWeight.bold),
               ),
               CircleAvatar(
-                radius: 40,
+                radius: 35,
                 backgroundColor: boxColor,
                 child: Icon(Icons.add, size: 40, color: inactiveColor,),
               ),

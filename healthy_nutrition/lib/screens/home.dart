@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/info.dart';
@@ -30,6 +31,57 @@ class _HomeScreen extends State<HomeScreen> {
               if (snapshot.hasData) {
                 UserInfo info = snapshot.data!;
 
+                bool empty = true;
+                for (final i in info.history.keys.toList()) {
+                  if (todayTest.dateToString() == i) {
+                    empty = false;
+                  }
+                }
+
+                if (info.history == {} || empty == true) {
+                  return SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Today",
+                              style: interFont(
+                                32,
+                                white,
+                                FontStyle.normal,
+                                FontWeight.w600,
+                              ),
+                            ),
+                            profileButton(info),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Your today history is empty!!",
+                          style: interFont(
+                            16,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                          ),
+                        ),
+                        Text(
+                          "Let's scan today!!",
+                          style: interFont(
+                            16,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
                 return SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +116,7 @@ class _HomeScreen extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(height: 5),
-                      healthProfileContainer(info, false, width, todayTest),
+                      healthProfileContainer(info, false, width, todayTest, context),
                       SizedBox(height: 33),
                       Text(
                         "Food",
@@ -75,7 +127,7 @@ class _HomeScreen extends State<HomeScreen> {
                           FontWeight.w500,
                         ),
                       ),
-                      historyNutritionView(info, todayTest, width, null, false)
+                      historyNutritionView(info, todayTest, width, null, false),
                     ],
                   ),
                 );

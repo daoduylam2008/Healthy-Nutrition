@@ -26,7 +26,9 @@ class _InfoPage extends State<InfoPage> {
                   CircleAvatar(
                     backgroundColor: boxColor,
                     radius: 40,
-                    child: BackButton(),
+                    child: BackButton(
+                      color: white,
+                    ),
                   ),
                   CircleAvatar(
                     backgroundColor: boxColor,

@@ -10,22 +10,15 @@ class ScaningSreen extends StatefulWidget {
   State<ScaningSreen> createState() => _ScaningSreen();
 }
 
-class _ScaningSreen extends State<ScaningSreen> {
+class _ScaningSreen extends State<ScaningSreen>  with WidgetsBindingObserver, TickerProviderStateMixin {
   var size, width, height;
   late List<CameraDescription> cameras;
   late CameraController controller;
 
-  Future<void> initializeCamera() async {
-    cameras = await availableCameras();
-    final camera = cameras.first;
-    controller = CameraController(camera, ResolutionPreset.high );
-    await controller.initialize();
-  }
-
   @override
   void initState() {
     super.initState();
-    initializeCamera();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override

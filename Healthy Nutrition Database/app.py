@@ -117,7 +117,7 @@ def update_user():
         }, 200
     
 
-@app.route('/refresh_token', methods=["GET"])
+@app.route('/refresh_token', methods=["POST"])
 def refresh_token():
     token = request.headers["Authorization"].split()[-1]
     token = util.refresh_token(token)
