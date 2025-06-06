@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/utils.dart';
+import 'package:healthy_nutrition/widgets/vitaminContainer.dart';
 
+// ignore: must_be_immutable
 class NutritionScreen extends StatefulWidget {
   Food food;
   bool favorite;
-  NutritionScreen({super.key, required this.food, required this.favorite});
+  int portion;
+  int amount;
+  NutritionScreen({
+    super.key,
+    required this.food,
+    required this.favorite,
+    required this.portion,
+    required this.amount,
+  });
 
   @override
   State<NutritionScreen> createState() => _NutritionScreen();
@@ -18,6 +29,11 @@ class _NutritionScreen extends State<NutritionScreen> {
     size = MediaQuery.of(context).size;
     width = size.width;
     height = size.height;
+
+    Map<String, dynamic> nutrition = nutritionCalculator([
+      widget.food,
+    ], [widget.portion], [widget.amount]);
+
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
@@ -29,11 +45,9 @@ class _NutritionScreen extends State<NutritionScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CircleAvatar(
-                    radius: 40,
+                    radius: 30,
                     backgroundColor: boxColor,
-                    child: BackButton(
-                      color: white
-                    ),
+                    child: BackButton(color: white),
                   ),
                   SizedBox(
                     width: width * 0.4,
@@ -50,7 +64,7 @@ class _NutritionScreen extends State<NutritionScreen> {
                       ),
                     ),
                   ),
-                  CircleAvatar(radius: 40, backgroundColor: boxColor),
+                  CircleAvatar(radius: 30, backgroundColor: boxColor),
                 ],
               ),
               SizedBox(height: 31),
@@ -63,7 +77,19 @@ class _NutritionScreen extends State<NutritionScreen> {
                 ),
               ),
               SizedBox(height: 31),
-              Text("Category", style: interFont(24, white, FontStyle.normal, FontWeight.w500),),
+              Text(
+                "Category",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              Text(
+                "Vitamin",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              vitaminContainer(nutrition, context)
             ],
           ),
         ),

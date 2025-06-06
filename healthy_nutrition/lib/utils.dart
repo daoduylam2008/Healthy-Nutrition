@@ -1,4 +1,4 @@
-import 'package:healthy_nutrition/extension.dart';
+
 import 'package:healthy_nutrition/models.dart';
 
 String dateToString(DateTime date) {
@@ -23,23 +23,23 @@ DateTime stringToDate(String text) {
   return date;
 }
 
-double valueConverter(double value, String unit) {
+double valueConverter(double value, String unit, double portion) {
   if (unit == "MG") {
-    return 0.001 * value;
+    return 0.001 * value * portion / 100;
   } else if (unit == "UG") {
-    return 0.000001 * value;
+    return 0.000001 * value * portion / 100;
   } else {
-    return value;
+    return value * portion / 100;
   }
 }
 
-Map<String, dynamic> nutritionCalculator(List<Food> foods) {
+Map<String, dynamic> nutritionCalculator(List<Food> foods, List<int> portions, List<int> amounts) {
   Map<String, dynamic> nutrition = {
     "Energy": 0.0,
     "Protein": 0.0,
     "Fat": 0.0,
     "Carbs": 0.0,
-    
+
     "Vitamin A": 0.0,
     "Vitamin B": 0.0,
     "Vitamin E": 0.0,
@@ -48,7 +48,7 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods) {
     "Vitamin B-6": 0.0,
     "Vitamin D": 0.0,
     "Vitamin C": 0.0,
-    
+
     "Calcium": 0.0,
     "Zinc": 0.0,
     "Magnesium": 0.0,
@@ -63,106 +63,115 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods) {
 
   for (int i = 0; i < foods.length; i++) {
     var nutrients = foods[i].nutrients;
+    double portion = foods[i].portion[foods[i].portion.keys.toList()[portions[i]]].toDouble();
 
     // Basic nutrition summarization
-    nutrition["Energy"] += nutrients["Energy"][0];
+    nutrition["Energy"] += nutrients["Energy"][0] * portion / 100;
     nutrition["Carbs"] += valueConverter(
       nutrients["Carbohydrate, by difference"][0],
-      nutrients["Carbohydrate, by difference"][1],
-    ).roundNum(1);
+      nutrients["Carbohydrate, by difference"][1],portion
+    );
     nutrition["Protein"] += valueConverter(
       nutrients["Protein"][0],
       nutrients["Protein"][1],
-    ).roundNum(1);
+      portion
+    );
     nutrition["Fat"] += valueConverter(
       nutrients["Total lipid (fat)"][0],
       nutrients["Total lipid (fat)"][1],
-    ).roundNum(1);
+      portion
+    );
 
     // Vitamin summarization
     nutrition["Vitamin A"] += valueConverter(
       (nutrients["Vitamin A, RAE"][0]).toDouble(),
       nutrients["Vitamin A, RAE"][1],
-    ).roundNum(1);
+      portion
+    );
     nutrition["Vitamin B"] += valueConverter(
       nutrients["Vitamin B-12, added"][0].toDouble(),
       nutrients["Vitamin B-12, added"][1],
-    ).roundNum(1);
+      portion
+    );
     nutrition["Vitamin E"] += valueConverter(
-      nutrients["Vitamin E (alpha-tocopherol)"][0].toDouble(), 
-      nutrients["Vitamin E (alpha-tocopherol)"][1]
-    ).roundNum(1);
+      nutrients["Vitamin E (alpha-tocopherol)"][0].toDouble(),
+      nutrients["Vitamin E (alpha-tocopherol)"][1],
+      portion
+    );
     nutrition["Vitamin E"] += valueConverter(
-      nutrients["Vitamin E, added"][0].toDouble(), 
-      nutrients["Vitamin E, added"][1]
-    ).roundNum(1);
+      nutrients["Vitamin E, added"][0].toDouble(),
+      nutrients["Vitamin E, added"][1],
+      portion
+    );
     nutrition["Vitamin K"] += valueConverter(
-      nutrients["Vitamin K (phylloquinone)"][0].toDouble(), 
-      nutrients["Vitamin K (phylloquinone)"][1]
-    ).roundNum(1);
+      nutrients["Vitamin K (phylloquinone)"][0].toDouble(),
+      nutrients["Vitamin K (phylloquinone)"][1],portion
+    );
     nutrition["Vitamin B-12"] += valueConverter(
-      nutrients["Vitamin B-12"][0].toDouble(), 
-      nutrients["Vitamin B-12"][1]
-    ).roundNum(1);
+      nutrients["Vitamin B-12"][0].toDouble(),
+      nutrients["Vitamin B-12"][1],portion
+    );
     nutrition["Vitamin B-12"] += valueConverter(
-      nutrients["Vitamin B-12, added"][0].toDouble(), 
-      nutrients["Vitamin B-12, added"][1]
-    ).roundNum(1);
+      nutrients["Vitamin B-12, added"][0].toDouble(),
+      nutrients["Vitamin B-12, added"][1],portion
+    );
     nutrition["Vitamin B-6"] += valueConverter(
-      nutrients["Vitamin B-6"][0].toDouble(), 
-      nutrients["Vitamin B-6"][1]
-    ).roundNum(1);
+      nutrients["Vitamin B-6"][0].toDouble(),
+      nutrients["Vitamin B-6"][1],portion
+    );
     nutrition["Vitamin D"] += valueConverter(
-      nutrients["Vitamin D (D2 + D3)"][0].toDouble(), 
-      nutrients["Vitamin D (D2 + D3)"][1]
-    ).roundNum(1);
+      nutrients["Vitamin D (D2 + D3)"][0].toDouble(),
+      nutrients["Vitamin D (D2 + D3)"][1],portion
+    );
     nutrition["Vitamin C"] += valueConverter(
-      nutrients["Vitamin C, total ascorbic acid"][0].toDouble(), 
-      nutrients["Vitamin C, total ascorbic acid"][1]
-    ).roundNum(1);
+      nutrients["Vitamin C, total ascorbic acid"][0].toDouble(),
+      nutrients["Vitamin C, total ascorbic acid"][1],portion
+    );
 
     // Mineral
     nutrition["Calcium"] += valueConverter(
-      nutrients["Calcium, Ca"][0].toDouble(), 
-      nutrients["Calcium, Ca"][1]
-    ).roundNum(1);
+      nutrients["Calcium, Ca"][0].toDouble(),
+      nutrients["Calcium, Ca"][1],portion
+    );
     nutrition["Phosphorus"] += valueConverter(
-      nutrients["Phosphorus, P"][0].toDouble(), 
-      nutrients["Phosphorus, P"][1]
-    ).roundNum(1);
+      nutrients["Phosphorus, P"][0].toDouble(),
+      nutrients["Phosphorus, P"][1],portion
+    );
     nutrition["Zinc"] += valueConverter(
-      nutrients["Zinc, Zn"][0].toDouble(), 
-      nutrients["Zinc, Zn"][1]
-    ).roundNum(1);
+      nutrients["Zinc, Zn"][0].toDouble(),
+      nutrients["Zinc, Zn"][1],portion
+    );
     nutrition["Magnesium"] += valueConverter(
-      nutrients["Magnesium, Mg"][0].toDouble(), 
-      nutrients["Magnesium, Mg"][1]
-    ).roundNum(1);
+      nutrients["Magnesium, Mg"][0].toDouble(),
+      nutrients["Magnesium, Mg"][1],portion
+    );
     nutrition["Copper"] += valueConverter(
-      nutrients["Copper, Cu"][0].toDouble(), 
-      nutrients["Copper, Cu"][1]
-    ).roundNum(1);
+      nutrients["Copper, Cu"][0].toDouble(),
+      nutrients["Copper, Cu"][1],portion
+    );
     nutrition["Potassium"] += valueConverter(
-      nutrients["Potassium, K"][0].toDouble(), 
-      nutrients["Potassium, K"][1]
-    ).roundNum(1);
+      nutrients["Potassium, K"][0].toDouble(),
+      nutrients["Potassium, K"][1],portion
+    );
     nutrition["Iron"] += valueConverter(
-      nutrients["Iron, Fe"][0].toDouble(), 
-      nutrients["Iron, Fe"][1]
-    ).roundNum(1);
+      nutrients["Iron, Fe"][0].toDouble(),
+      nutrients["Iron, Fe"][1],portion
+    );
     nutrition["Selenium"] += valueConverter(
-      nutrients["Selenium, Se"][0].toDouble(), 
-      nutrients["Selenium, Se"][1]
-    ).roundNum(1);
+      nutrients["Selenium, Se"][0].toDouble(),
+      nutrients["Selenium, Se"][1],portion
+    );
     nutrition["Sodium"] += valueConverter(
-      nutrients["Sodium, Na"][0].toDouble(), 
-      nutrients["Sodium, Na"][1]
-    ).roundNum(1);
+      nutrients["Sodium, Na"][0].toDouble(),
+      nutrients["Sodium, Na"][1],portion
+    );
     nutrition["Water"] += valueConverter(
-      nutrients["Water"][0].toDouble(), 
-      nutrients["Water"][1]
-    ).roundNum(1);
+      nutrients["Water"][0].toDouble(),
+      nutrients["Water"][1],portion
+    );
   }
+
+
 
   return nutrition;
 }

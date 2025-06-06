@@ -21,7 +21,7 @@ class _SpecificNutrition extends State<SpecificNutrition> {
           children: [
             CircleAvatar(
               backgroundColor: boxColor,
-              radius: 40,
+              radius: 30,
               child: BackButton(color: white),
             ),
             SizedBox(height: 46),
@@ -30,7 +30,7 @@ class _SpecificNutrition extends State<SpecificNutrition> {
               style: interFont(24, white, FontStyle.normal, FontWeight.w500),
             ),
             SizedBox(height: 26),
-            vitaminContainer(widget.data),
+            vitaminContainer(widget.data, context),
           ],
         ),
       ),

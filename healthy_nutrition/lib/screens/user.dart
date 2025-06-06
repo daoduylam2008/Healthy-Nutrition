@@ -59,7 +59,7 @@ class _UserScreen extends State<UserScreen> {
             inactiveColorPrimary: inactiveColor,
           ),
           PersistentBottomNavBarItem(
-            title: "detect",
+            title: "scan",
             icon: Icon(Symbols.center_focus_strong),
             activeColorPrimary: white,
             inactiveColorPrimary: inactiveColor,

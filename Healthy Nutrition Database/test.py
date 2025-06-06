@@ -1,19 +1,6 @@
-from dotenv import load_dotenv
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
-import os, pymongo
-import util
+url = "https://www.nhs.uk/conditions/vitamins-and-minerals/others/"
 
-
-load_dotenv()
-
-url = os.environ.get("MONGODB_CONNECT")
-client = pymongo.MongoClient(url)
-database = client["healthy_nutrition"]
-
-food_col = database["food"]
-
-data = food_col.find({"description": "Custard"})
-
-for i in data:
-    print(i)
-     
+page = urlopen(url)

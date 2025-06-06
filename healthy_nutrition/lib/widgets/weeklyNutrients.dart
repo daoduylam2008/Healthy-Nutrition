@@ -109,9 +109,13 @@ Widget _columnChart(UserInfo info, DateTime date) {
   }
 
   List<String> descriptions = [];
+  List<int> portions = [];
+  List<int> amounts = [];
 
   for (final i in history) {
     descriptions.add(i["description"]);
+    portions.add(i["portion"]);
+    amounts.add(int.parse(i["amount"]));
   }
 
   if (descriptions.isEmpty) {
@@ -122,7 +126,7 @@ Widget _columnChart(UserInfo info, DateTime date) {
     future: fetchFoods(descriptions),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        Map<String, dynamic> data = nutritionCalculator(snapshot.data!);
+        Map<String, dynamic> data = nutritionCalculator(snapshot.data!, portions, amounts);
         return Column(
           mainAxisAlignment: MainAxisAlignment.end,
           spacing: 2,
@@ -131,11 +135,11 @@ Widget _columnChart(UserInfo info, DateTime date) {
               decoration: BoxDecoration(
                 color: _proteinColor,
                 borderRadius: BorderRadius.circular(5),
-              ), 
+              ),
               width: 34,
               height: data["Protein"] * 208 / 490,
             ),
-            Container( 
+            Container(
               decoration: BoxDecoration(
                 color: _carbsColor,
                 borderRadius: BorderRadius.circular(5),

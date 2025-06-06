@@ -46,30 +46,39 @@ Widget historyNutritionView(
           maxRange = history.length;
         }
 
+
         for (var i = 0; i < maxRange; i++) {
           currentScans.add(
             foodBox(
               history[i]["portion"],
               isFavorite(info, data[i]),
               data[i],
+              int.parse(history[i]["amount"]),
               context,
             ),
           );
         }
         return Column(
           children: [
-            (isHistory == true) ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10),
-                healthProfileContainer(info, true, width, date, context),
-                SizedBox(height: 28),
-                Text(
-                  "Food",
-                  style: interFont(24, white, FontStyle.normal, FontWeight.w500),
-                ),
-              ],
-            ) : Container(),
+            (isHistory == true)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
+                      healthProfileContainer(info, true, width, date, context),
+                      SizedBox(height: 28),
+                      Text(
+                        "Food",
+                        style: interFont(
+                          24,
+                          white,
+                          FontStyle.normal,
+                          FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  )
+                : Container(),
             SizedBox(height: 28),
             Column(children: currentScans),
           ],

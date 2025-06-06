@@ -3,10 +3,9 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/screens/external_screen/nutrition.dart';
 
-Widget foodBox(int portion, bool favorite, Food food, context) {
+Widget foodBox(int portion, bool favorite, Food food, int amount, context) {
   var size = MediaQuery.of(context).size;
   var width = size.width;
-  List<String> portions = food.portion.keys.toList();
 
   return Column(
     children: [
@@ -15,7 +14,7 @@ Widget foodBox(int portion, bool favorite, Food food, context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NutritionScreen(food: food, favorite: true),
+              builder: (context) => NutritionScreen(food: food, favorite: true, portion: portion, amount: amount,),
             ),
           );
         },

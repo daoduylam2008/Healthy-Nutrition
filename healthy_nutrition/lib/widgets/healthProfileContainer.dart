@@ -6,6 +6,10 @@ import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/specific_nutrition.dart';
 import 'package:healthy_nutrition/utils.dart';
 
+double __roundNumber(double value, int r) {
+  return value.roundNum(r);
+}
+
 Widget healthProfileContainer(
   UserInfo info,
   bool history,
@@ -15,22 +19,32 @@ Widget healthProfileContainer(
 ) {
   List todayHistoryFood = info.history[date.dateToString()];
   List todayHistory = [];
+  List<int> portions = [];
+  List<int> amounts = [];
 
   for (final i in todayHistoryFood) {
     todayHistory.add(i["description"]);
+    portions.add(i["portion"]);
+    amounts.add(int.parse(i["amount"]));
   }
 
   return FutureBuilder(
     future: fetchFoods(todayHistory),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        Map<String, dynamic> data = nutritionCalculator(snapshot.data!);
+        Map<String, dynamic> data = nutritionCalculator(
+          snapshot.data!,
+          portions,
+          amounts,
+        );
         return InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SpecificNutrition(data: data)),
+              MaterialPageRoute(
+                builder: (context) => SpecificNutrition(data: data),
+              ),
             );
           },
           child: Container(
@@ -50,7 +64,7 @@ Widget healthProfileContainer(
                     Row(
                       children: [
                         Text(
-                          "${data["Energy"]}",
+                          "${__roundNumber(data["Energy"], 2)}",
                           style: interFont(
                             48,
                             white,
@@ -86,21 +100,21 @@ Widget healthProfileContainer(
                   children: [
                     nutritionSection(
                       "Carbs",
-                      data["Carbs"],
+                      __roundNumber(data["Carbs"], 1),
                       width,
                       Colors.yellow,
                       300,
                     ),
                     nutritionSection(
                       "Protein",
-                      data["Protein"],
+                      __roundNumber(data["Protein"], 1),
                       width,
                       Colors.red,
                       100,
                     ),
                     nutritionSection(
                       "Fat",
-                      data["Fat"],
+                      __roundNumber(data["Fat"], 1),
                       width,
                       Colors.pinkAccent,
                       90,

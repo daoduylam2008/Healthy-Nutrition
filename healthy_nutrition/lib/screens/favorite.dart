@@ -3,6 +3,7 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 
 class FavoriteScreen extends StatefulWidget {
@@ -26,10 +27,18 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                 "Favorites",
                 style: interFont(32, white, FontStyle.normal, FontWeight.bold),
               ),
-              CircleAvatar(
-                radius: 35,
-                backgroundColor: boxColor,
-                child: Icon(Icons.add, size: 40, color: inactiveColor,),
+              InkResponse(
+                onTap: () async {
+                  final can = await Haptics.canVibrate();
+
+                  if (!can) return;
+                  await Haptics.vibrate(HapticsType.success);
+                },
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundColor: boxColor,
+                  child: Icon(Icons.add, size: 40, color: inactiveColor,),
+                ),
               ),
             ],
           ),
@@ -54,7 +63,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                           itemCount: favoriteFoods.length,
                           itemBuilder: (context, index) {
                             Food food = snapshot2.data![index];
-                            return foodBox(favorites[index]["portion"], true, food, context);
+                            return foodBox(favorites[index]["portion"], true, food, 1, context);
                           },
                         ),
                       );

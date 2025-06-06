@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
-import 'package:healthy_nutrition/widgets/healthProfileContainer.dart';
 import 'package:healthy_nutrition/widgets/historyNutritionView.dart';
 import 'package:table_calendar/table_calendar.dart';
 

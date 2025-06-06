@@ -3,6 +3,7 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
+// ignore: must_be_immutable
 class InfoPage extends StatefulWidget {
   UserInfo info;
   InfoPage({super.key, required this.info});
@@ -25,14 +26,14 @@ class _InfoPage extends State<InfoPage> {
                 children: [
                   CircleAvatar(
                     backgroundColor: boxColor,
-                    radius: 40,
+                    radius: 30,
                     child: BackButton(
                       color: white,
                     ),
                   ),
                   CircleAvatar(
                     backgroundColor: boxColor,
-                    radius: 40,
+                    radius: 30,
                     child: Icon(Symbols.edit),
                   ),
                 ],
