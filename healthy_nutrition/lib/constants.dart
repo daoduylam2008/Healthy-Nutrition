@@ -9,7 +9,7 @@ const tabBarColor = Color.fromARGB(255, 34, 34, 34);
 const inactiveColor = Color.fromARGB(255, 100, 100, 100);
 const boxColor = Color.fromARGB(255, 34, 34, 34);
 const textColor = Color.fromARGB(229, 255, 255, 255);
-const blurTextColor = Color.fromARGB(160, 238, 233, 233);
+const blurTextColor = Color.fromARGB(255, 176, 174, 174);
 const barColor = Color.fromARGB(255, 68, 68, 68);
 const signatureColor = Color.fromARGB(255, 76, 228, 255);
 const maleColor = Color.fromARGB(255, 76, 228, 255);
@@ -17,7 +17,7 @@ const femaleColor = Color.fromARGB(255, 255, 76, 76);
 
 // Date constants
 DateTime today = DateTime.now();
-DateTime todayTest = DateTime(2025, 5, 2);
+DateTime todayTest = DateTime(2025, 5, 28);
 
 ThemeData theme = ThemeData(
   useMaterial3: true,
@@ -26,6 +26,7 @@ ThemeData theme = ThemeData(
 );
 
 const url = "http://localhost:3000";
+// const url = "http://10.0.0.77:3000";
 
 TextStyle latoFont(
   double size,

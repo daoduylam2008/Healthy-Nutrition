@@ -1,0 +1,6 @@
+0 Muffin
+1 Hotdog
+2 Burger
+3 Tomato
+4 Pizza
+5 French Fries

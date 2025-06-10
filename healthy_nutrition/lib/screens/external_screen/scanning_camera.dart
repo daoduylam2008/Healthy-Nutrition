@@ -1,12 +1,15 @@
 import 'dart:ui';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/main.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:camera/camera.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
-
+import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
+import 'package:healthy_nutrition/utils.dart';
 
 class ScaningSreen extends StatefulWidget {
   ScaningSreen({super.key});
@@ -17,9 +20,25 @@ class ScaningSreen extends StatefulWidget {
 
 class _ScaningSreen extends State<ScaningSreen>
     with WidgetsBindingObserver, TickerProviderStateMixin {
+  // ignore: prefer_typing_uninitialized_variables
   var size, width, height;
 
+  late ImageLabeler imageLabeler;
+
+  bool _canProcess = false;
+  bool _isBusy = false;
+  bool scan = false;
+
+  List results = [];
+
   CameraController? controller;
+
+  final _orientations = {
+    DeviceOrientation.portraitUp: 0,
+    DeviceOrientation.landscapeLeft: 90,
+    DeviceOrientation.portraitDown: 180,
+    DeviceOrientation.landscapeRight: 270,
+  };
 
   @override
   void initState() {
@@ -27,12 +46,24 @@ class _ScaningSreen extends State<ScaningSreen>
     WidgetsBinding.instance.addObserver(this);
     final camera = cameras.first;
     controller = CameraController(camera, ResolutionPreset.high);
+    init();
   }
 
   @override
   void dispose() {
     controller!.dispose();
+    _canProcess = false;
+    imageLabeler.close();
     super.dispose();
+  }
+
+  init() async {
+    final String path = "test_models/my_model.tflite";
+    final modelPath = await getAssetPath(path);
+    final options = LocalLabelerOptions(modelPath: modelPath);
+    imageLabeler = ImageLabeler(options: options);
+
+    _canProcess = true;
   }
 
   @override
@@ -48,40 +79,37 @@ class _ScaningSreen extends State<ScaningSreen>
             future: controller!.initialize(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return CameraPreview(controller!,
-                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 40, right: 20, left: 20),
-                      child: Row(
-                      children: [
-                  CircleAvatar(
-                    backgroundColor: boxColor,
-                    radius: 30,
-                    child: BackButton(
-                      color: white,
+                return CameraPreview(
+                  controller!,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 40, right: 20, left: 20),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: boxColor,
+                              radius: 30,
+                              child: BackButton(color: white),
+                            ),
+                          ],
                         ),
-                      ),                    
+                      ),
+                      BlurryContainer(
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                        blur: 10,
+                        elevation: 0,
+                        width: double.infinity,
+                        height: 130,
+                        color: const Color.fromARGB(128, 0, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [captureButton(controller!)],
+                        ),
+                      ),
                     ],
-                  ), 
-                    ),
-                  BlurryContainer(
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                    blur: 10,
-                    elevation: 0,
-                    width: double.infinity,
-                    height: 130,
-                    color: const Color.fromARGB(128, 0, 0, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        captureButton()
-                      ],
-                    ),
-                    )
-                  ],
-                 ),
+                  ),
                 );
               }
               return Center(child: CircularProgressIndicator());
@@ -92,31 +120,133 @@ class _ScaningSreen extends State<ScaningSreen>
     );
   }
 
-  Widget captureButton() {
+  Widget captureButton(CameraController controller) {
     return InkResponse(
       onTap: () async {
         final can = await Haptics.canVibrate();
+        controller.startImageStream((image) {
+          process(image);
+        });
 
         if (!can) return;
         await Haptics.vibrate(HapticsType.success);
-
       },
       child: Stack(
         alignment: Alignment.center,
         children: [
-          CircleAvatar(
-            radius: 43,
-            backgroundColor: white,
-          ),
-          CircleAvatar(
-            radius: 40,
-            backgroundColor: Colors.black,
-          ),
-          CircleAvatar(
-            radius: 36,
-            backgroundColor: white,
-          )
+          CircleAvatar(radius: 43, backgroundColor: white),
+          CircleAvatar(radius: 40, backgroundColor: Colors.black),
+          CircleAvatar(radius: 36, backgroundColor: white),
         ],
+      ),
+    );
+  }
+
+  void process(CameraImage image) async {
+    final inputImage = _imageInputFromCamera(image);
+    if (inputImage == null) return;
+    _scanProcess(inputImage);
+  }
+
+  Future<void> _scanProcess(InputImage inputImage) async {
+    setState(() {
+      scan = false;
+    });
+    if (!_canProcess) return;
+    if (_isBusy) return;
+    _isBusy = true;
+
+    setState(() {
+      results = [];
+    });
+
+    var _results = [];
+    final labels = await imageLabeler.processImage(inputImage);
+    print(labels.first.label.split(" ")[1]);
+    for (final label in labels) {
+      _results.add({
+        "label": label.label.split(" ")[1],
+        "confidence": label.confidence,
+      });
+    }
+    setState(() {
+      results = _results;
+      scan = true;
+    });
+    _isBusy = false;
+    controller!.stopImageStream();
+  
+    showModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      showDragHandle: true,
+      backgroundColor: boxColor,
+      isScrollControlled: true,
+      builder: (context) {
+        return SafeArea(
+          minimum: EdgeInsets.only(top: 10, right: 20, left: 20),
+          child: SizedBox(
+            height: height * 0.5,
+            width: double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("${results.length } categories detected", style: interFont(32, white, FontStyle.normal, FontWeight.w500),)
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  InputImage? _imageInputFromCamera(CameraImage image) {
+    if (controller == null) return null;
+    final camera = cameras.first;
+    final sensorOrientation = camera.sensorOrientation;
+
+    InputImageRotation? rotation;
+    if (Platform.isIOS) {
+      rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
+    } else if (Platform.isAndroid) {
+      var rotationCompensation =
+          _orientations[controller!.value.deviceOrientation];
+      if (rotationCompensation == null) return null;
+      if (camera.lensDirection == CameraLensDirection.front) {
+        // front-facing
+        rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
+      } else {
+        // back-facing
+        rotationCompensation =
+            (sensorOrientation - rotationCompensation + 360) % 360;
+      }
+      rotation = InputImageRotationValue.fromRawValue(rotationCompensation);
+    }
+
+    if (rotation == null) return null;
+
+    final format = InputImageFormatValue.fromRawValue(image.format.raw);
+    if (format == null ||
+        (Platform.isAndroid && format != InputImageFormat.nv21) ||
+        (Platform.isIOS && format != InputImageFormat.bgra8888)) {
+      // validate format depending on platform
+      return null;
+    }
+
+    // since format is constraint to nv21 or bgra8888, both only have one plane
+    if (image.planes.length != 1) return null;
+    final plane = image.planes.first;
+
+    // compose InputImage using bytes
+    return InputImage.fromBytes(
+      bytes: plane.bytes,
+      metadata: InputImageMetadata(
+        size: Size(image.width.toDouble(), image.height.toDouble()),
+        rotation: rotation, // used only in Android
+        format: format, // used only in iOS
+        bytesPerRow: plane.bytesPerRow, // used only in iOS
       ),
     );
   }

@@ -26,7 +26,8 @@ class _ScannerScreen extends State<ScannerScreen> {
           children: [
             Text("Scan", style: interFont(32, white, FontStyle.normal, FontWeight.w500)),
             SizedBox(height: 49),
-            InkResponse(
+            InkWell(
+              borderRadius: BorderRadius.circular(38),
               onTap: () async {
                 Navigator.push(
                   context,

@@ -17,11 +17,15 @@ class Food:
         self.food_col = database["foods"]
 
     def search_category(self, category):
-        data = self.food_col.find_one({
+        results = []
+        data = self.food_col.find({
             "category": category
         })
-        del data["_id"]
-        return data
+        for d in data:
+            del d["_id"]
+            results.append(d)
+
+        return results
     
     def search_description(self, description):
         data =  self.food_col.find_one({
