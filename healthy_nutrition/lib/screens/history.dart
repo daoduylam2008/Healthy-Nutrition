@@ -14,6 +14,7 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreen extends State<HistoryScreen> {
   DateTime _selectedDay = DateTime.now();
+  // ignore: prefer_typing_uninitialized_variables
   var size, width, height;
 
   @override
@@ -36,7 +37,7 @@ class _HistoryScreen extends State<HistoryScreen> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "History",
-                      style: nunitoFont(
+                      style: interFont(
                         50,
                         foregroundColor,
                         FontStyle.normal,
@@ -54,7 +55,7 @@ class _HistoryScreen extends State<HistoryScreen> {
                       defaultTextStyle: TextStyle(fontSize: 16),
                       selectedDecoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: white,
+                        color: signatureColor,
                       ),
                       todayDecoration: BoxDecoration(
                         shape: BoxShape.circle,

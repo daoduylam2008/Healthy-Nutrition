@@ -1,4 +1,5 @@
 class User {
+  // ignore: non_constant_identifier_names
   final String user_id;
   final String username;
   final String password;
@@ -24,12 +25,13 @@ class User {
 }
 
 class UserInfo {
+  // ignore: non_constant_identifier_names
   final String user_id;
   final String username;
   final String email;
   final Map<String, dynamic> history;
-  final String height;
-  final String weight;
+  final List height;
+  final List weight;
   final String goal;
   final String lastName;
   final String firstName;
@@ -59,8 +61,8 @@ class UserInfo {
         "username": String username,
         "email": String email,
         "history": Map<String, dynamic> history,
-        "height": String height,
-        "weight": String weight,
+        "height": List height,
+        "weight": List weight,
         "goal": String goal,
         "last_name": String lastName,
         "first_name": String firstName,

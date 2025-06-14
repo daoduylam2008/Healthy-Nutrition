@@ -12,7 +12,7 @@ users = models.Users()
 infos = models.UserInformation()
 foods = models.Food()
 
-queries = ["user_id", "username", "email", "history", "height", "weight", "goal", "password", "favorite"]
+queries = ["first_name", "last_name", "user_id", "username", "email", "history", "height", "weight", "goal", "password", "favorite", "age", "gender"]
 
 
 @app.route("/")

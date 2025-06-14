@@ -23,8 +23,8 @@ Future<String?> login(String username, String password) async {
 }
 
 Future<UserInfo?> fetchUserInfo() async {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await _prefs;
+  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
   String token = prefs.getString("token") ?? "";
 
   String username = JwtDecoder.decode(token)["username"];
@@ -71,7 +71,7 @@ Future<List<Food>?> fetchFoods(List foods) async {
     body: jsonEncode({"foods": foods}),
     headers: {"content-type": "application/json"},
   );
-  
+
   if (response.statusCode == 200) {
     var data = jsonDecode(response.body)["data"];
     List<Food> d = [];
@@ -104,4 +104,141 @@ Future<List<Food>?> fetchDescription(String description) async {
   }
 
   return null;
+}
+
+Future<void> updateAge(int age) async {
+  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
+  String token = prefs.getString("token") ?? "";
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({"username": username, "query": "age", "data": "$age"}),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("Successfully change age");
+  }
+}
+
+Future<void> updateHeight(double height, String unit) async {
+  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
+  String token = prefs.getString("token") ?? "";
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({"username": username, "query": "height", "data": ["$height", unit]}),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("Successfully change height");
+  }
+}
+
+Future<void> updateWeight(double weight, String unit) async {
+  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
+  String token = prefs.getString("token") ?? "";
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({"username": username, "query": "weight", "data": ["$weight", unit]}),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("Successfully change weight");
+  }
+}
+
+Future<void> updateLastName(String lastName) async {
+  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
+  String token = prefs.getString("token") ?? "";
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({
+      "username": username,
+      "query": "last_name",
+      "data": lastName,
+    }),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("Successfully change last name");
+  }
+}
+
+Future<void> updateFirstName(String firstName) async {
+  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
+  String token = prefs.getString("token") ?? "";
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({
+      "username": username,
+      "query": "first_name",
+      "data": firstName,
+    }),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+  if (response.statusCode == 200) {
+    print("Successfully change first name");
+  }
+}
+
+Future<void> updateGender(String gender) async {
+    final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await prefs0;
+  String token = prefs.getString("token") ?? "";
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({
+      "username": username,
+      "query": "gender",
+      "data": gender,
+    }),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+  print(response.body);
+  if (response.statusCode == 200) {
+    print("Successfully change gender");
+  }
 }

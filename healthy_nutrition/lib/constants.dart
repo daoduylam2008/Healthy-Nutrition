@@ -25,50 +25,8 @@ ThemeData theme = ThemeData(
   primaryColor: foregroundColor,
 );
 
-const url = "http://localhost:3000";
-// const url = "http://10.0.0.77:3000";
-
-TextStyle latoFont(
-  double size,
-  Color color,
-  FontStyle style,
-  FontWeight? weight,
-) {
-  return GoogleFonts.lato(
-    fontSize: size,
-    color: color,
-    fontStyle: style,
-    fontWeight: weight,
-  );
-}
-
-TextStyle poppins(
-  double size,
-  Color color,
-  FontStyle style,
-  FontWeight? weight,
-) {
-  return GoogleFonts.poppins(
-    fontSize: size,
-    color: color,
-    fontStyle: style,
-    fontWeight: weight,
-  );
-}
-
-TextStyle nunitoFont(
-  double size,
-  Color color,
-  FontStyle style,
-  FontWeight? weight,
-) {
-  return GoogleFonts.nunito(
-    fontSize: size,
-    color: color,
-    fontStyle: style,
-    fontWeight: weight,
-  );
-}
+// const url = "http://localhost:3000";
+const url = "http://10.0.0.77:3000";
 
 TextStyle interFont(
   double size,
