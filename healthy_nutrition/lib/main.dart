@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/screens/start.dart';
 import 'package:healthy_nutrition/screens/user.dart';
 import 'package:healthy_nutrition/screens/login.dart';
 import 'package:healthy_nutrition/token.dart';
@@ -67,7 +68,7 @@ class _MainApp extends State<MainApp> {
               if (snapshot.hasData) {
                 String t = snapshot.data!;
                 if (t == "" || isExpired(t)) {
-                  return LoginScreen();
+                  return StartScreen();
                 }
                 return UserScreen();
               }

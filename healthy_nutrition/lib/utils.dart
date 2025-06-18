@@ -72,16 +72,16 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods, List<int> portions, L
     "Vitamin D": 0.0,
     "Vitamin C": 0.0,
 
-    "Calcium": 0.0,
-    "Zinc": 0.0,
-    "Magnesium": 0.0,
-    "Water": 0.0,
-    "Sodium": 0.0,
-    "Iron": 0.0,
-    "Copper": 0.0,
-    "Selenium": 0.0,
-    "Potassium": 0.0,
-    "Phosphorus": 0.0,
+    "Calcium-M": 0.0,
+    "Zinc-M": 0.0,
+    "Magnesium-M": 0.0,
+    "Water-M": 0.0,
+    "Sodium-M": 0.0,
+    "Iron-M": 0.0,
+    "Copper-M": 0.0,
+    "Selenium-M": 0.0,
+    "Potassium-M": 0.0,
+    "Phosphorus-M": 0.0,
   };
 
   for (int i = 0; i < foods.length; i++) {
@@ -152,43 +152,43 @@ Map<String, dynamic> nutritionCalculator(List<Food> foods, List<int> portions, L
     );
 
     // Mineral
-    nutrition["Calcium"] += valueConverter(
+    nutrition["Calcium-M"] += valueConverter(
       nutrients["Calcium, Ca"][0].toDouble(),
       nutrients["Calcium, Ca"][1],portion
     );
-    nutrition["Phosphorus"] += valueConverter(
+    nutrition["Phosphorus-M"] += valueConverter(
       nutrients["Phosphorus, P"][0].toDouble(),
       nutrients["Phosphorus, P"][1],portion
     );
-    nutrition["Zinc"] += valueConverter(
+    nutrition["Zinc-M"] += valueConverter(
       nutrients["Zinc, Zn"][0].toDouble(),
       nutrients["Zinc, Zn"][1],portion
     );
-    nutrition["Magnesium"] += valueConverter(
+    nutrition["Magnesium-M"] += valueConverter(
       nutrients["Magnesium, Mg"][0].toDouble(),
       nutrients["Magnesium, Mg"][1],portion
     );
-    nutrition["Copper"] += valueConverter(
+    nutrition["Copper-M"] += valueConverter(
       nutrients["Copper, Cu"][0].toDouble(),
       nutrients["Copper, Cu"][1],portion
     );
-    nutrition["Potassium"] += valueConverter(
+    nutrition["Potassium-M"] += valueConverter(
       nutrients["Potassium, K"][0].toDouble(),
       nutrients["Potassium, K"][1],portion
     );
-    nutrition["Iron"] += valueConverter(
+    nutrition["Iron-M"] += valueConverter(
       nutrients["Iron, Fe"][0].toDouble(),
       nutrients["Iron, Fe"][1],portion
     );
-    nutrition["Selenium"] += valueConverter(
+    nutrition["Selenium-M"] += valueConverter(
       nutrients["Selenium, Se"][0].toDouble(),
       nutrients["Selenium, Se"][1],portion
     );
-    nutrition["Sodium"] += valueConverter(
+    nutrition["Sodium-M"] += valueConverter(
       nutrients["Sodium, Na"][0].toDouble(),
       nutrients["Sodium, Na"][1],portion
     );
-    nutrition["Water"] += valueConverter(
+    nutrition["Water-M"] += valueConverter(
       nutrients["Water"][0].toDouble(),
       nutrients["Water"][1],portion
     );

@@ -59,14 +59,29 @@ class _LoginScreen extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
+        minimum: EdgeInsets.only(right: 20, left: 20),
         child: Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                  CircleAvatar(
+                    backgroundColor: boxColor,
+                    radius: 30,
+                    child: BackButton(color: white),
+                  ),
+                  Text("Login", style: interFont(32, white, FontStyle.normal, FontWeight.w500),),
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 30,
+                  ),
+              ],
+            ),
+            SizedBox(height: 28),
             // Username Field
             Padding(
               padding: const EdgeInsets.only(
                 top: 10,
-                left: 20,
-                right: 20,
                 bottom: 10,
               ),
               child: Container(
@@ -90,8 +105,6 @@ class _LoginScreen extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.only(
                 top: 10,
-                left: 20,
-                right: 20,
                 bottom: 10,
               ),
               child: Container(
@@ -128,8 +141,6 @@ class _LoginScreen extends State<LoginScreen> {
             Padding(
               padding: EdgeInsetsGeometry.only(
                 top: 50,
-                right: 20,
-                left: 20,
                 bottom: 20,
               ),
               child: GestureDetector(

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/utils.dart';
+import 'package:healthy_nutrition/widgets/factorsPieChart.dart';
+import 'package:healthy_nutrition/widgets/mineralContainer.dart';
 import 'package:healthy_nutrition/widgets/vitaminContainer.dart';
 
 // ignore: must_be_immutable
 class NutritionScreen extends StatefulWidget {
   Food food;
-  bool favorite;
   int portion;
   int amount;
   NutritionScreen({
     super.key,
     required this.food,
-    required this.favorite,
     required this.portion,
     required this.amount,
   });
@@ -24,18 +24,25 @@ class NutritionScreen extends StatefulWidget {
 
 class _NutritionScreen extends State<NutritionScreen> {
   var size, width, height;
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     width = size.width;
     height = size.height;
 
-    Map<String, dynamic> nutrition = nutritionCalculator([
-      widget.food,
-    ], [widget.portion], [widget.amount]);
+    var portions = widget.food.portion;
+    String portion = portions.keys.toList()[widget.portion];
+
+    Map<String, dynamic> nutrition = nutritionCalculator(
+      [widget.food],
+      [widget.portion],
+      [widget.amount],
+    );
 
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
         child: SingleChildScrollView(
           child: Column(
@@ -69,11 +76,22 @@ class _NutritionScreen extends State<NutritionScreen> {
               ),
               SizedBox(height: 31),
               Container(
-                height: 77,
-                width: 233,
+                padding: EdgeInsets.only(
+                  top: 15,
+                  bottom: 15,
+                  left: 30,
+                  right: 100
+                ),
                 decoration: BoxDecoration(
                   color: boxColor,
                   borderRadius: BorderRadius.circular(25),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(portion, style: interFont(16, white, FontStyle.normal, FontWeight.w500)),
+                    Text("(${portions[portion].toString()}g)", style: interFont(16, inactiveColor, FontStyle.normal, FontWeight.normal)),
+                  ],
                 ),
               ),
               SizedBox(height: 31),
@@ -81,15 +99,71 @@ class _NutritionScreen extends State<NutritionScreen> {
                 "Category",
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
-              SizedBox(
-                height: 60,
+              SizedBox(height: 26),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: signatureColor,
+                  borderRadius: BorderRadius.circular(38),
+                ),
+                child: Text(
+                  widget.food.category,
+                  style: interFont(
+                    14,
+                    Colors.black,
+                    FontStyle.normal,
+                    FontWeight.bold,
+                  ),
+                ),
               ),
+              SizedBox(height: 51),
+              Text(
+                "Description",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: signatureColor,
+                  borderRadius: BorderRadius.circular(38),
+                ),
+                child: Text(
+                  widget.food.description,
+                  style: interFont(
+                    14,
+                    Colors.black,
+                    FontStyle.normal,
+                    FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 50),
+              factorsPieChart(nutrition),
+              SizedBox(height: 60),
               Text(
                 "Vitamin",
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
               SizedBox(height: 26),
-              vitaminContainer(nutrition, context)
+              vitaminContainer(nutrition, context),
+              SizedBox(height: 60),
+              Text(
+                "Mineral",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              mineralContainer(nutrition, context),
             ],
           ),
         ),

@@ -11,8 +11,9 @@ bcrypt = Bcrypt(app)
 users = models.Users()
 infos = models.UserInformation()
 foods = models.Food()
+goals = models.Goal()
 
-queries = ["first_name", "last_name", "user_id", "username", "email", "history", "height", "weight", "goal", "password", "favorite", "age", "gender"]
+queries = ["first_name", "last_name", "user_id", "username", "email", "history", "height", "weight", "goal", "password", "favorite", "age", "gender", "goal"]
 
 
 @app.route("/")
@@ -172,6 +173,43 @@ def get_description():
             "data": None,
             "error": f"Cannot find {description} in the database"
         }, 409
+    return {
+        "data": data
+    }, 400
+
+
+@app.route("/get_goals_by_name")
+def get_goals_by_name():
+    args = request.json
+    name = args["name"]
+
+    data = goals.search_name(name)
+
+    if data == []:
+        return {
+            "data": None,
+            "error": f"Cannot find {name} in the database"
+        }, 409
+
+    return {
+        "data": data
+    }, 400
+
+
+@app.route("/get_goals_by_name_and_calorie")
+def get_goals_by_name_and_calorie():
+    args = request.json
+    name = args["name"]
+    calorie = int(args["calorie"])
+
+    data = goals.search_name_calorie(name, calorie)
+
+    if data == []:
+        return {
+            "data": None,
+            "error": f"Cannot find {name} with {calorie} in the database"
+        }, 409
+
     return {
         "data": data
     }, 400

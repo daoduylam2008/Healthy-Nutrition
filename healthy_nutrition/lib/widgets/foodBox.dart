@@ -14,7 +14,7 @@ Widget foodBox(int portion, bool favorite, Food food, int amount, context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NutritionScreen(food: food, favorite: true, portion: portion, amount: amount,),
+              builder: (context) => NutritionScreen(food: food, portion: portion, amount: amount,),
             ),
           );
         },

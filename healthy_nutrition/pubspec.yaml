@@ -27,6 +27,7 @@ dependencies:
   flutter_launcher_icons: "^0.14.3"
   wheel_picker: ^0.2.1
   material_dialogs: ^1.1.5
+  pie_chart: ^5.4.0
 
 
 dev_dependencies:

@@ -22,7 +22,7 @@ Widget vitaminContainer(Map<String, dynamic> data, BuildContext context) {
 
   return Container(
     width: double.infinity,
-    height: 512,
+    height: 400,
     decoration: BoxDecoration(
       color: boxColor,
       borderRadius: BorderRadius.circular(38),

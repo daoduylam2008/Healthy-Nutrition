@@ -57,7 +57,7 @@ class UserInformation:
                 "history": {},
                 "height": "",
                 "weight": "",
-                "goal": "",
+                "goal": {},
                 "age": "",
                 "favorite": [],
                 "gender": ""
@@ -114,3 +114,35 @@ class Users:
         old_data = self.search(username)
         new_data = {"$set": { query: data }}
         self.user_col.update_one(old_data, new_data)
+
+
+class Goal:
+    def __init__(self):
+        self.goals_col = database["goals"]
+
+    def search_name(self, name):
+        results = []
+        data = self.goals_col.find({
+            "name": "name"
+        })
+
+        for d in data:
+            del d["_id"]
+
+            results.append(d)
+
+        return results
+    
+    def search_name_calorie(self, name, calorie):
+        results = []
+        data = self.goals_col.find({
+            "name": name,
+            "calorie": calorie
+        })
+
+        for d in data:
+            del d["_id"]
+
+            results.append(d)
+        
+        return results
