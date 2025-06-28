@@ -93,7 +93,7 @@ Widget healthProfileContainer(
                   ],
                 ),
                 // SizedBox(height: 16),
-                caloriesBar(data["Energy"], width),
+                caloriesBar(data["Energy"], width, 3000),
                 SizedBox(height: 9),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,21 +103,21 @@ Widget healthProfileContainer(
                       __roundNumber(data["Carbs"], 1),
                       width,
                       Colors.yellow,
-                      300,
+                      double.parse(info.goal["carbs"]),
                     ),
                     nutritionSection(
                       "Protein",
                       __roundNumber(data["Protein"], 1),
                       width,
                       Colors.red,
-                      100,
+                      double.parse(info.goal["protein"]),
                     ),
                     nutritionSection(
                       "Fat",
                       __roundNumber(data["Fat"], 1),
                       width,
                       Colors.pinkAccent,
-                      90,
+                      double.parse(info.goal["fat"]),
                     ),
                   ],
                 ),
@@ -190,7 +190,7 @@ Widget nutritionSection(
   );
 }
 
-Widget caloriesBar(double value, double width) {
+Widget caloriesBar(double value, double width, double maxValue) {
   double barWidth = width * 0.8;
   return Stack(
     alignment: Alignment(0, 0.5),
@@ -207,7 +207,7 @@ Widget caloriesBar(double value, double width) {
           ),
           Container(
             height: 6,
-            width: barWidth * value / 3000,
+            width: barWidth * value / maxValue,
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(3.5),

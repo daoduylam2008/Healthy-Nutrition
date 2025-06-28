@@ -27,12 +27,15 @@ def login():
 
     username = args["username"]
 
-    user = users.search(username)
+    if "@" in username: 
+        user = users.search_email(username)
+    else:
+        user = users.search(username)
 
     if user is not None and bcrypt.check_password_hash(user["password"], args["password"]):
         del user["_id"]
         return {
-            "Authorization": util.generate_new_token(username),
+            "Authorization": util.generate_new_token(user["username"]),
         }, 200
         
     return {
@@ -46,12 +49,15 @@ def register():
 
     username = args["username"]
     password = bcrypt.generate_password_hash(args["password"], 12)
-    new_user = users.create(username, password)
+    email = args["email"]
+    data = args["data"]
+    
+    new_user = users.create(username, password, email, data)
 
     if new_user is not None:
         return new_user, 200
     return {
-        "error": "This username was taken"
+        "error": "This username or this email was taken"
     }, 409
 
 
@@ -175,10 +181,10 @@ def get_description():
         }, 409
     return {
         "data": data
-    }, 400
+    }, 200
 
 
-@app.route("/get_goals_by_name")
+@app.route("/get_goals_by_name", methods=["POST"])
 def get_goals_by_name():
     args = request.json
     name = args["name"]
@@ -193,10 +199,10 @@ def get_goals_by_name():
 
     return {
         "data": data
-    }, 400
+    }, 200
 
 
-@app.route("/get_goals_by_name_and_calorie")
+@app.route("/get_goals_by_name_and_calorie", methods=["POST"])
 def get_goals_by_name_and_calorie():
     args = request.json
     name = args["name"]
@@ -212,7 +218,7 @@ def get_goals_by_name_and_calorie():
 
     return {
         "data": data
-    }, 400
+    }, 200
 
 
 if __name__ == "__main__": 

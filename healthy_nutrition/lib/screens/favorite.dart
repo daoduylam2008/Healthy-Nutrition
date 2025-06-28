@@ -5,7 +5,6 @@ import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 
-
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
 
@@ -37,7 +36,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                 child: CircleAvatar(
                   radius: 35,
                   backgroundColor: boxColor,
-                  child: Icon(Icons.add, size: 40, color: inactiveColor,),
+                  child: Icon(Icons.add, size: 40, color: inactiveColor),
                 ),
               ),
             ],
@@ -54,6 +53,18 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                   favoriteFoods.add(f["description"]);
                 }
 
+                if (favoriteFoods.isEmpty) {
+                  return Text(
+                    "Your favorite list is empty",
+                    style: interFont(
+                      16,
+                      white,
+                      FontStyle.normal,
+                      FontWeight.normal,
+                    ),
+                  );
+                }
+
                 return FutureBuilder(
                   future: fetchFoods(favoriteFoods),
                   builder: (context, snapshot2) {
@@ -63,7 +74,13 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                           itemCount: favoriteFoods.length,
                           itemBuilder: (context, index) {
                             Food food = snapshot2.data![index];
-                            return foodBox(favorites[index]["portion"], true, food, 1, context);
+                            return foodBox(
+                              favorites[index]["portion"],
+                              true,
+                              food,
+                              1,
+                              context,
+                            );
                           },
                         ),
                       );

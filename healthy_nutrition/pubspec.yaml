@@ -13,7 +13,6 @@ dependencies:
   material_symbols_icons: ^4.2811.0
   camera: ^0.11.1
   persistent_bottom_nav_bar: ^6.2.1
-  shared_preferences: ^2.5.3
   jwt_decoder: ^2.0.1
   flutter_secure_storage: ^9.2.4
   google_fonts: ^6.2.1
@@ -28,7 +27,7 @@ dependencies:
   wheel_picker: ^0.2.1
   material_dialogs: ^1.1.5
   pie_chart: ^5.4.0
-
+  flutter_phoenix: "^1.0.0"
 
 dev_dependencies:
   flutter_test:

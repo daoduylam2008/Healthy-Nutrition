@@ -32,7 +32,7 @@ class UserInfo {
   final Map<String, dynamic> history;
   final List height;
   final List weight;
-  final String goal;
+  final Map<String, dynamic> goal;
   final String lastName;
   final String firstName;
   final String age;
@@ -63,7 +63,7 @@ class UserInfo {
         "history": Map<String, dynamic> history,
         "height": List height,
         "weight": List weight,
-        "goal": String goal,
+        "goal": Map<String, dynamic> goal,
         "last_name": String lastName,
         "first_name": String firstName,
         "age": String age,
@@ -82,7 +82,7 @@ class UserInfo {
           lastName: lastName,
           age: age,
           favorite: favorite,
-          gender: gender
+          gender: gender,
         ),
       _ => throw const FormatException('Failed to load user information.'),
     };
@@ -99,7 +99,7 @@ class Food {
     required this.category,
     required this.description,
     required this.nutrients,
-    required this.portion
+    required this.portion,
   });
 
   factory Food.fromJson(Map<String, dynamic> json) {
@@ -110,8 +110,48 @@ class Food {
         "portion": Map<String, dynamic> portion,
         "nutrient_per_100g": Map<String, dynamic> nutrients,
       } =>
-        Food(category: category, description: description, nutrients: nutrients, portion: portion),
+        Food(
+          category: category,
+          description: description,
+          nutrients: nutrients,
+          portion: portion,
+        ),
       _ => throw const FormatException('Failed to load food.'),
+    };
+  }
+}
+
+class Goal {
+  final String name;
+  final int calorie;
+  final int carbs;
+  final int protein;
+  final int fat;
+
+  Goal({
+    required this.name,
+    required this.calorie,
+    required this.carbs,
+    required this.protein,
+    required this.fat,
+  });
+  factory Goal.fromJson(Map<String, dynamic> json) {
+    return switch (json) {
+      {
+        "name": String name,
+        "calorie": int calorie,
+        "carbs": int carbs,
+        "protein": int protein,
+        "fat": int fat,
+      } =>
+        Goal(
+          name: name,
+          calorie: calorie,
+          carbs: carbs,
+          protein: protein,
+          fat: fat,
+        ),
+        _ => throw const FormatException("Failed to load goal")
     };
   }
 }

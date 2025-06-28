@@ -24,7 +24,10 @@ class _ScannerScreen extends State<ScannerScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Scan", style: interFont(32, white, FontStyle.normal, FontWeight.w500)),
+            Text(
+              "Scan",
+              style: interFont(32, white, FontStyle.normal, FontWeight.w500),
+            ),
             SizedBox(height: 49),
             InkWell(
               borderRadius: BorderRadius.circular(38),
@@ -42,19 +45,34 @@ class _ScannerScreen extends State<ScannerScreen> {
                 height: 131,
                 decoration: BoxDecoration(
                   color: signatureColor,
-                  borderRadius: BorderRadius.circular(38)
+                  borderRadius: BorderRadius.circular(38),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Symbols.center_focus_strong, size: 25, color: Colors.black),
-                    Text("Scan", style: interFont(20, Colors.black, FontStyle.normal, FontWeight.normal),)
+                    Icon(
+                      Symbols.center_focus_strong,
+                      size: 25,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      "Scan",
+                      style: interFont(
+                        20,
+                        Colors.black,
+                        FontStyle.normal,
+                        FontWeight.normal,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
             SizedBox(height: 50),
-            Text("Recent Scans", style: interFont(32, white, FontStyle.normal, FontWeight.w500)),
+            Text(
+              "Recent Scans",
+              style: interFont(32, white, FontStyle.normal, FontWeight.w500),
+            ),
             SizedBox(height: 63),
             FutureBuilder(
               future: fetchUserInfo(),
@@ -76,26 +94,38 @@ class _ScannerScreen extends State<ScannerScreen> {
                   for (final i in history) {
                     descriptions.add(i["description"]);
                   }
-
+                  if (index == 0) {
+                    return Center(
+                      child: Text(
+                        "Your history is empty\nStart scanning now!!",
+                        style: interFont(
+                          16,
+                          white,
+                          FontStyle.normal,
+                          FontWeight.normal,
+                        ),
+                      ),
+                    );
+                  }
                   return FutureBuilder(
                     future: fetchFoods(descriptions),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
+                    builder: (context, snapshot2) {
+                      if (snapshot2.hasData) {
                         return Expanded(
                           child: ListView.builder(
                             itemCount: descriptions.length,
                             itemBuilder: (context, ind) {
-                                bool favorite = false;
-                                for (final i in info.favorite) {
-                                  if (i["description"] ==
-                                      snapshot.data![ind].description) {
-                                    favorite = true;
-                                  }
+                              bool favorite = false;
+                              for (final i in info.favorite) {
+                                if (i["description"] ==
+                                    snapshot2.data![ind].description) {
+                                  favorite = true;
                                 }
+                              }
                               return foodBox(
                                 history[ind]["portion"],
                                 favorite,
-                                snapshot.data![ind],
+                                snapshot2.data![ind],
                                 int.parse(history[ind]["amount"]),
                                 context,
                               );

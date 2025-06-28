@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/main.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/edit_info.dart';
+import 'package:healthy_nutrition/token.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -77,7 +80,7 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                   final can = await Haptics.canVibrate();
 
                   if (edit == true) {
-                    Navigator.push(
+                    Navigator.pop(
                       context,
                       MaterialPageRoute(
                         builder: (context) => EditInfoScreen(info: widget.info),
@@ -117,6 +120,27 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
               ),
               SizedBox(height: 38),
               userMeasurement(),
+              SizedBox(height: 40),
+              InkWell(
+                onTap: () async {
+                  await writeToken("");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainApp(), maintainState: false),
+                  );
+                  Phoenix.rebirth(context);
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 65,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(228, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                child: Center(child: Text("Log out", style: TextStyle(color: Colors.black, fontSize: 20),
+)),
+                ),
+              )
             ],
           ),
         ),

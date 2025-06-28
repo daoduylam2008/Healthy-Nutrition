@@ -4,7 +4,6 @@ import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 
-
 // ignore: must_be_immutable
 class EditInfoScreen extends StatefulWidget {
   UserInfo info;
@@ -26,6 +25,13 @@ class _EditInfoScreen extends State<EditInfoScreen> {
     lastNameController = TextEditingController();
     firstNameController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    lastNameController.dispose();
+    firstNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -147,11 +153,13 @@ class _EditInfoScreen extends State<EditInfoScreen> {
                   Navigator.pop(context);
                   final can = await Haptics.canVibrate();
 
-                  if (firstNameController.text != "" && firstNameController.text != widget.info.firstName) {
+                  if (firstNameController.text != "" &&
+                      firstNameController.text != widget.info.firstName) {
                     updateFirstName(firstNameController.text);
                   }
 
-                  if (lastNameController.text != "" && lastNameController.text != widget.info.lastName) {
+                  if (lastNameController.text != "" &&
+                      lastNameController.text != widget.info.lastName) {
                     updateLastName(lastNameController.text);
                   }
 

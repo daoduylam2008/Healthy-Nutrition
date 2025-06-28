@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/main.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/user.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:healthy_nutrition/token.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,8 +14,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
 
@@ -32,8 +31,6 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   Future<void> logIn() async {
-    final SharedPreferences prefs = await _prefs;
-
     var log = await login(username.text, password.text);
 
     if (log == null) {
@@ -41,15 +38,15 @@ class _LoginScreen extends State<LoginScreen> {
         visible = true;
       });
     } else {
+      await writeToken(log);
       setState(() {
         visible = false;
-        token = prefs.setString('token', log).then((bool success) {
-          return token;
-        });
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const UserScreen()),
-      );
+        token = readToken();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MainApp()),
+        );
+        Phoenix.rebirth(context);
       });
     }
   }
@@ -65,25 +62,27 @@ class _LoginScreen extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                  CircleAvatar(
-                    backgroundColor: boxColor,
-                    radius: 30,
-                    child: BackButton(color: white),
+                CircleAvatar(
+                  backgroundColor: boxColor,
+                  radius: 30,
+                  child: BackButton(color: white),
+                ),
+                Text(
+                  "Login",
+                  style: interFont(
+                    32,
+                    white,
+                    FontStyle.normal,
+                    FontWeight.w500,
                   ),
-                  Text("Login", style: interFont(32, white, FontStyle.normal, FontWeight.w500),),
-                  CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 30,
-                  ),
+                ),
+                CircleAvatar(backgroundColor: Colors.transparent, radius: 30),
               ],
             ),
             SizedBox(height: 28),
             // Username Field
             Padding(
-              padding: const EdgeInsets.only(
-                top: 10,
-                bottom: 10,
-              ),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Container(
                 height: 65,
                 decoration: BoxDecoration(
@@ -95,7 +94,7 @@ class _LoginScreen extends State<LoginScreen> {
                   controller: username,
                   cursorColor: white,
                   decoration: InputDecoration(
-                    hintText: "Username",
+                    hintText: "username/email",
                     border: InputBorder.none,
                   ),
                 ),
@@ -103,10 +102,7 @@ class _LoginScreen extends State<LoginScreen> {
             ),
             // Password field
             Padding(
-              padding: const EdgeInsets.only(
-                top: 10,
-                bottom: 10,
-              ),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Container(
                 height: 65,
                 decoration: BoxDecoration(
@@ -120,10 +116,9 @@ class _LoginScreen extends State<LoginScreen> {
                   cursorColor: white,
                   decoration: InputDecoration(
                     suffixIcon: GestureDetector(
-                      child:
-                          (showPassword)
-                              ? Icon(Icons.visibility)
-                              : Icon(Icons.visibility_off),
+                      child: (showPassword)
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
                       onTap: () {
                         setState(() {
                           showPassword = !showPassword;
@@ -139,11 +134,8 @@ class _LoginScreen extends State<LoginScreen> {
 
             // Login Button
             Padding(
-              padding: EdgeInsetsGeometry.only(
-                top: 50,
-                bottom: 20,
-              ),
-              child: GestureDetector(
+              padding: EdgeInsetsGeometry.only(top: 50, bottom: 20),
+              child: InkWell(
                 onTap: logIn,
                 child: Container(
                   width: double.infinity,
@@ -166,7 +158,11 @@ class _LoginScreen extends State<LoginScreen> {
               visible: visible,
               child: Text(
                 "Your email or password is wrong",
-                style: TextStyle(fontSize: 25, color: Colors.red, fontWeight: FontWeight.normal),
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.red,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ],

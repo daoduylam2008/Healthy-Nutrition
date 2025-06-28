@@ -1,8 +1,8 @@
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/token.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:async';
 import 'dart:convert';
@@ -15,17 +15,30 @@ Future<String?> login(String username, String password) async {
   );
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
+    return jsonDecode(response.body)["Authorization"];
+  }
+  return null;
+}
+
+Future<String?> register(String username, String password, String email, Map<String, dynamic> data) async {
+  final response = await http.post(
+    Uri.parse("$url/register"),
+    body: jsonEncode({
+      "username": username,
+      "password": password,
+      "email": email,
+      "data": data
+    }),
+    headers: <String, String>{"content-type": "application/json"},
+  );
+  if (response.statusCode == 200) {
     return jsonDecode(response.body)["Authorization"];
   }
   return null;
 }
 
 Future<UserInfo?> fetchUserInfo() async {
-  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
@@ -107,9 +120,7 @@ Future<List<Food>?> fetchDescription(String description) async {
 }
 
 Future<void> updateAge(int age) async {
-  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
@@ -128,15 +139,17 @@ Future<void> updateAge(int age) async {
 }
 
 Future<void> updateHeight(double height, String unit) async {
-  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
   final response = await http.post(
     Uri.parse("$url/update_info"),
-    body: jsonEncode({"username": username, "query": "height", "data": ["$height", unit]}),
+    body: jsonEncode({
+      "username": username,
+      "query": "height",
+      "data": ["$height", unit],
+    }),
     headers: {
       "content-type": "application/json",
       "Authorization": "Bearer $token",
@@ -149,15 +162,17 @@ Future<void> updateHeight(double height, String unit) async {
 }
 
 Future<void> updateWeight(double weight, String unit) async {
-  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
   final response = await http.post(
     Uri.parse("$url/update_info"),
-    body: jsonEncode({"username": username, "query": "weight", "data": ["$weight", unit]}),
+    body: jsonEncode({
+      "username": username,
+      "query": "weight",
+      "data": ["$weight", unit],
+    }),
     headers: {
       "content-type": "application/json",
       "Authorization": "Bearer $token",
@@ -170,9 +185,7 @@ Future<void> updateWeight(double weight, String unit) async {
 }
 
 Future<void> updateLastName(String lastName) async {
-  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
@@ -195,9 +208,7 @@ Future<void> updateLastName(String lastName) async {
 }
 
 Future<void> updateFirstName(String firstName) async {
-  final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
@@ -219,19 +230,13 @@ Future<void> updateFirstName(String firstName) async {
 }
 
 Future<void> updateGender(String gender) async {
-    final Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  final SharedPreferences prefs = await prefs0;
-  String token = prefs.getString("token") ?? "";
+  String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
   final response = await http.post(
     Uri.parse("$url/update_info"),
-    body: jsonEncode({
-      "username": username,
-      "query": "gender",
-      "data": gender,
-    }),
+    body: jsonEncode({"username": username, "query": "gender", "data": gender}),
     headers: {
       "content-type": "application/json",
       "Authorization": "Bearer $token",
@@ -241,4 +246,40 @@ Future<void> updateGender(String gender) async {
   if (response.statusCode == 200) {
     print("Successfully change gender");
   }
+}
+
+Future<List<Goal>?> searchGoalByName(String name) async {
+  final response = await http.post(
+    Uri.parse("$url/get_goals_by_name"),
+    body: jsonEncode({"name": name}),
+    headers: {"content-type": "application/json"},
+  );
+
+  if (response.statusCode == 200) {
+    List results = jsonDecode(response.body)["data"];
+    List<Goal> data = [];
+    for (final r in results) {
+      data.add(Goal.fromJson(r));
+    }
+
+    return data;
+  }
+
+  return null;
+}
+
+Future<Goal?> getGoalByNameAndCalorie(String name, int calorie) async {
+  final response = await http.post(
+    Uri.parse("$url/get_goals_by_name_and_calorie"),
+    body: jsonEncode({"name": name, "calorie": calorie}),
+    headers: {"content-type": "application/json"},
+  );
+
+  if (response.statusCode == 200) {
+    Goal data = Goal.fromJson(jsonDecode(response.body)["data"]);
+
+    return data;
+  }
+
+  return null;
 }

@@ -46,21 +46,21 @@ class UserInformation:
     def __init__(self):
         self.info_col = database["infos"]
     
-    def create(self, user_id, username):
+    def create(self, user_id, username, email, data):
         if self.search(user_id) is None:
             data = {
                 "user_id": username,
                 "username": username,
-                "last_name": "",
-                "first_name": "",
-                "email": "",
+                "last_name": data["last_name"],
+                "first_name": data["first_name"],
+                "email": email,
                 "history": {},
-                "height": "",
-                "weight": "",
-                "goal": {},
-                "age": "",
+                "height": data["height"],
+                "weight": data["weight"],
+                "goal": data["goal"],
+                "age": data["age"],
                 "favorite": [],
-                "gender": ""
+                "gender": data["gender"]
             }
 
             self.info_col.insert_one(data)
@@ -93,15 +93,16 @@ class Users:
         self.user_col = database["users"]
         self.infos = UserInformation()
 
-    def create(self, username, password):
-        if self.search(username) is None:
+    def create(self, username, password, email, d):
+        if self.search(username) is None and self.infos.search_email(email) is None:
             data = {
                 "user_id": username,
                 "username": username,
                 "password": password
             }
             self.user_col.insert_one(data)
-            self.infos.create(username, username)
+            self.infos.create(username, username, email, d)
+
 
             return {
                 "Authorization": util.generate_new_token(username)
@@ -109,6 +110,13 @@ class Users:
 
     def search(self, username):
         return self.user_col.find_one({"username": username})
+
+    def search_email(self, email):
+        try:
+            username = self.infos.search_email(email)["username"]
+            return self.search(username)
+        except:
+            return None
     
     def update(self, username, query, data):
         old_data = self.search(username)
@@ -119,30 +127,11 @@ class Users:
 class Goal:
     def __init__(self):
         self.goals_col = database["goals"]
-
-    def search_name(self, name):
-        results = []
-        data = self.goals_col.find({
-            "name": "name"
-        })
-
-        for d in data:
-            del d["_id"]
-
-            results.append(d)
-
-        return results
     
     def search_name_calorie(self, name, calorie):
-        results = []
-        data = self.goals_col.find({
+        data = self.goals_col.find_one({
             "name": name,
             "calorie": calorie
         })
-
-        for d in data:
-            del d["_id"]
-
-            results.append(d)
-        
-        return results
+        del data["_id"]
+        return data

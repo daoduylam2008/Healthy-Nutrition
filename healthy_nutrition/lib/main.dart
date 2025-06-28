@@ -7,18 +7,18 @@ import 'package:healthy_nutrition/screens/user.dart';
 import 'package:healthy_nutrition/screens/login.dart';
 import 'package:healthy_nutrition/token.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 List<CameraDescription> cameras = <CameraDescription>[];
-
 
 void _logError(String code, String? message) {
   // ignore: avoid_print
   print('Error: $code${message == null ? '' : '\nError Message: $message'}');
 }
 
+bool bottomBarVisible = true;
 
-Future<void> main() async{
+Future<void> main() async {
   // Fetch the available cameras before initializing the app.
   try {
     WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +27,7 @@ Future<void> main() async{
     _logError(e.code, e.description);
   }
 
-  runApp(MainApp());
+  runApp(Phoenix(child: MainApp()));
 }
 
 class MainApp extends StatefulWidget {
@@ -39,25 +39,13 @@ class MainApp extends StatefulWidget {
 
 // ignore: must_be_immutable
 class _MainApp extends State<MainApp> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<String> token;
-
-  @override
-  void initState() {
-    super.initState();
-    // Create SharedPreference value, particularly token
-    token = _prefs.then((pref) {
-      return pref.getString('token') ?? "";
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: FutureBuilder<String>(
-        future: token,
+      home: FutureBuilder<String?>(
+        future: readToken(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -66,13 +54,13 @@ class _MainApp extends State<MainApp> {
             case ConnectionState.active:
             case ConnectionState.done:
               if (snapshot.hasData) {
-                String t = snapshot.data!;
-                if (t == "" || isExpired(t)) {
+                String token = snapshot.data!;
+                if (token == "") {
                   return StartScreen();
                 }
                 return UserScreen();
               }
-              return const CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
           }
         },
       ),
