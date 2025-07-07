@@ -89,10 +89,12 @@ class _ScannerScreen extends State<ScannerScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
+                            weight: 500,
                             Symbols.center_focus_strong,
-                            size: 25,
+                            size: 30,
                             color: Colors.black,
                           ),
+                          SizedBox(width: 6),
                           Text(
                             "Scan",
                             style: interFont(
@@ -127,6 +129,7 @@ class _ScannerScreen extends State<ScannerScreen> {
                             itemBuilder: (context, ind) {
                               return foodBox(
                                 history[ind]["portion"],
+                                null,
                                 snapshot2.data![ind],
                                 int.parse(history[ind]["amount"]),
                                 info,

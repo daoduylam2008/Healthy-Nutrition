@@ -5,16 +5,14 @@ import 'package:healthy_nutrition/utils.dart';
 import 'package:healthy_nutrition/widgets/factorsPieChart.dart';
 import 'package:healthy_nutrition/widgets/mineralContainer.dart';
 import 'package:healthy_nutrition/widgets/vitaminContainer.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:healthy_nutrition/request.dart';
 
 // ignore: must_be_immutable
 class FoodSelectionScreen extends StatefulWidget {
   Food food;
   UserInfo info;
-  FoodSelectionScreen({
-    super.key,
-    required this.food,
-    required this.info,
-  });
+  FoodSelectionScreen({super.key, required this.food, required this.info});
 
   @override
   State<FoodSelectionScreen> createState() => _FoodSelectionScreen();
@@ -29,13 +27,22 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
     width = size.width;
     height = size.height;
 
+    bool favorite = isFavorite(widget.info, widget.food);
+    int portion = 0;
+    int amount = 1;
+
     Map<String, dynamic> nutrition = nutritionCalculator(
       [widget.food],
-      [1],
-      [1],
+      [portion],
+      [amount],
     );
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: signatureColor,
+        child: Icon(Icons.add, color: Colors.black),
+      ),
       body: SafeArea(
         bottom: false,
         minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
@@ -66,46 +73,46 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                       ),
                     ),
                   ),
-                  // InkWell(
-                  //   onTap: () async {
-                  //     final can = await Haptics.canVibrate();
-                  //     List data = widget.info.favorite;
-                  //     if (favorite == false) {
-                  //       data.add({
-                  //         "description": widget.food.description,
-                  //         "category": widget.food.category,
-                  //         "name": widget.food.name,
-                  //         "portion": widget.portion,
-                  //       });
-                  //     } else {
-                  //       print({
-                  //         "category": widget.food.category,
-                  //         "description": widget.food.description,
-                  //         "name": widget.food.name,
-                  //         "portion": widget.portion,
-                  //       });
+                  InkWell(
+                    onTap: () async {
+                      final can = await Haptics.canVibrate();
+                      List data = widget.info.favorite;
+                      if (favorite == false) {
+                        data.add({
+                          "description": widget.food.description,
+                          "category": widget.food.category,
+                          "name": widget.food.name,
+                          "portion": portion,
+                        });
+                      } else {
+                        print({
+                          "category": widget.food.category,
+                          "description": widget.food.description,
+                          "name": widget.food.name,
+                          "portion": portion,
+                        });
 
-                  //       data.removeWhere(
-                  //         (item) => item["name"] == widget.food.name,
-                  //       );
-                  //     }
+                        data.removeWhere(
+                          (item) => item["name"] == widget.food.name,
+                        );
+                      }
 
-                  //     print(data);
-                  //     await updateFavoriteList(data);
-                  //     setState(() {
-                  //       favorite = !favorite;
-                  //     });
-                  //     if (!can) return;
-                  //     await Haptics.vibrate(HapticsType.success);
-                  //   },
-                  //   child: CircleAvatar(
-                  //     radius: 30,
-                  //     backgroundColor: boxColor,
-                  //     child: (favorite == true)
-                  //         ? Icon(Icons.favorite, color: Colors.red, size: 30)
-                  //         : Icon(Icons.favorite_border, size: 30),
-                  //   ),
-                  // ),
+                      print(data);
+                      await updateFavoriteList(data);
+                      setState(() {
+                        favorite = !favorite;
+                      });
+                      if (!can) return;
+                      await Haptics.vibrate(HapticsType.success);
+                    },
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: boxColor,
+                      child: (favorite == true)
+                          ? Icon(Icons.favorite, color: Colors.red, size: 30)
+                          : Icon(Icons.favorite_border, size: 30),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 31),
@@ -120,7 +127,7 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                   color: boxColor,
                   borderRadius: BorderRadius.circular(25),
                 ),
-                child: SizedBox()
+                child: SizedBox(),
               ),
               SizedBox(height: 31),
               Text(

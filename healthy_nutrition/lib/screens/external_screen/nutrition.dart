@@ -48,7 +48,6 @@ class _NutritionScreen extends State<NutritionScreen> {
 
     return Scaffold(
       body: SafeArea(
-        bottom: false,
         minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
         child: SingleChildScrollView(
           child: Column(

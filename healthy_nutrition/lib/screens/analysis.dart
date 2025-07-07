@@ -134,7 +134,7 @@ class _AnalysisScreen extends State<AnalysisScreen> {
                     FontWeight.w500,
                   ),
                 ),
-                CircularProgressIndicator(),
+                Center(child: CircularProgressIndicator()),
               ],
             ),
           );

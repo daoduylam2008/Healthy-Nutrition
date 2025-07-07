@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/screens/external_screen/foodSelection.dart';
 import 'package:healthy_nutrition/screens/external_screen/nutrition.dart';
 import 'package:healthy_nutrition/utils.dart';
+import 'package:pie_chart/pie_chart.dart';
 
-Widget foodBox(int? portion, Food food, int? amount, UserInfo info, context) {
+Widget foodBox(
+  int? portion,
+  double? percent,
+  Food food,
+  int? amount,
+  UserInfo info,
+  context,
+) {
   var size = MediaQuery.of(context).size;
   var width = size.width;
   bool favorite = isFavorite(info, food);
+  Color color;
+  if (percent == null) {
+    color = Colors.transparent;
+  } else if (percent >= 80) {
+    color = Colors.green;
+  } else if (percent >= 50) {
+    color = Colors.orange;
+  } else {
+    color = Colors.red;
+  }
   return Column(
     children: [
       InkWell(
@@ -17,7 +36,8 @@ Widget foodBox(int? portion, Food food, int? amount, UserInfo info, context) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => FoodSelectionScreen(food: food, info: info),
+                builder: (context) =>
+                    FoodSelectionScreen(food: food, info: info),
               ),
             );
           } else {
@@ -61,6 +81,7 @@ Widget foodBox(int? portion, Food food, int? amount, UserInfo info, context) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      (percent == null) ? SizedBox() :CircleAvatar(radius: 20, backgroundColor: color, child: Text("${percent.roundNum(1)}", style: interFont(15, white, FontStyle.normal, FontWeight.w500),),),
                       SizedBox(
                         width: width * 0.37,
                         child: Text(
@@ -75,7 +96,7 @@ Widget foodBox(int? portion, Food food, int? amount, UserInfo info, context) {
                         ),
                       ),
                       SizedBox(
-                        width: width * 0.4,
+                        width: width * 0.3,
                         child: Text(
                           food.category,
                           overflow: TextOverflow.ellipsis,

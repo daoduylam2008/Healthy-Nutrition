@@ -50,6 +50,7 @@ Widget historyNutritionView(
           currentScans.add(
             foodBox(
               history[i]["portion"],
+              null,
               data[i],
               int.parse(history[i]["amount"]),
               info,

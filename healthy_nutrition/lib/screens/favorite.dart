@@ -66,6 +66,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                             Food food = snapshot2.data![index];
                             return foodBox(
                               favorites[index]["portion"],
+                              null,
                               food,
                               1,
                               snapshot1.data!,

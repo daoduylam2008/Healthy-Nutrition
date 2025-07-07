@@ -35,7 +35,7 @@ class _ScaningSreen extends State<ScaningSreen>
   bool _isBusy = false;
   bool scan = false;
 
-  List results = [];
+  final Map<String, dynamic> results = {};
 
   CameraController? controller;
 
@@ -94,7 +94,7 @@ class _ScaningSreen extends State<ScaningSreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 40, right: 20, left: 20),
+                        padding: EdgeInsets.only(top: 45, right: 20, left: 20),
                         child: Row(
                           children: [
                             CircleAvatar(
@@ -166,10 +166,10 @@ class _ScaningSreen extends State<ScaningSreen>
     _isBusy = true;
 
     setState(() {
-      results = [];
+      results.clear();
     });
 
-    var _results = [];
+    final _results = {};
     final labels = await imageLabeler.processImage(inputImage);
     List names = [];
     for (final label in labels) {
@@ -179,12 +179,14 @@ class _ScaningSreen extends State<ScaningSreen>
 
       double confidence = (label.confidence * 100).roundNum(1);
       if (confidence > 0) {
-        _results.add({"label": name, "confidence": confidence});
+        _results[name] = confidence;
         names.add(name);
       }
     }
     setState(() {
-      results = _results;
+      for (final name in names) {
+        results[name] = _results[name];
+      }
       scan = true;
     });
     _isBusy = false;
@@ -194,29 +196,19 @@ class _ScaningSreen extends State<ScaningSreen>
       context: context,
       isDismissible: true,
       showDragHandle: false,
-      backgroundColor: boxColor,
+      backgroundColor: backgroundColor,
       isScrollControlled: false,
       builder: (context) {
         return SafeArea(
-          minimum: EdgeInsets.only(top: 10, right: 20, left: 20),
+          minimum: EdgeInsets.only(top: 20, right: 20, left: 20),
           child: FutureBuilder(
             future: fetchNames(names),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Widget> view = [
-                  Text(
-                    "Detected food",
-                    style: interFont(
-                      32,
-                      white,
-                      FontStyle.normal,
-                      FontWeight.w500,
-                    ),
-                  ),
-                ];
+                List<Widget> view = [];
                 for (final food in snapshot.data!) {
                   view.add(
-                    foodBox(null, food, null, widget.info, context)
+                    foodBox(null, results[food.name], food, null, widget.info, context),
                   );
                 }
                 return SizedBox(
