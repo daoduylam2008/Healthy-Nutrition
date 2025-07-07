@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/extension.dart';
 
 Widget vitaminContainer(Map<String, dynamic> data, BuildContext context) {
   List vitamins = [];
@@ -22,13 +23,14 @@ Widget vitaminContainer(Map<String, dynamic> data, BuildContext context) {
 
   return Container(
     width: double.infinity,
-    height: 400,
+    height: 678,
     decoration: BoxDecoration(
       color: boxColor,
       borderRadius: BorderRadius.circular(38),
     ),
     padding: EdgeInsets.only(left: 15, right: 20, top: 15, bottom: 15),
     child: ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       itemCount: vitamins.length,
       itemExtent: 81,
       itemBuilder: (context, index) {
@@ -36,7 +38,6 @@ Widget vitaminContainer(Map<String, dynamic> data, BuildContext context) {
           vitamins[index],
           _vitaminsColors[index],
           data[vitamins[index]],
-          context,
         );
       },
     ),
@@ -47,18 +48,14 @@ Widget _vitaminInfo(
   String name,
   Color color,
   double value,
-  BuildContext context,
 ) {
-  var size = MediaQuery.of(context).size;
-  var width = size.width;
-
   return SizedBox(
     width: double.infinity,
     height: 48,
     child: Row(
       children: [
         CircleAvatar(backgroundColor: color, radius: 24),
-        SizedBox(width: 30),
+        SizedBox(width: 15),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,26 +64,8 @@ Widget _vitaminInfo(
               name,
               style: interFont(16, white, FontStyle.normal, FontWeight.normal),
             ),
-            Stack(
-              children: [
-                Container(
-                  height: 7,
-                  width: width * 0.6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3.5),
-                    color: inactiveColor
-                  ),
-                ),
-                Container(
-                  height: 7,
-                  width: 10,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3.5),
-                    color: color,
-                  ),
-                ),
-              ],
-            ),
+            SizedBox(width: 10),
+            Text("${double.parse("${value / 0.000001}").roundNum(1)} µg", style: interFont(14, white, FontStyle.normal, FontWeight.bold),),
           ],
         ),
       ],

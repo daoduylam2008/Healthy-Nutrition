@@ -1,0 +1,201 @@
+import 'package:flutter/material.dart';
+import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/utils.dart';
+import 'package:healthy_nutrition/widgets/factorsPieChart.dart';
+import 'package:healthy_nutrition/widgets/mineralContainer.dart';
+import 'package:healthy_nutrition/widgets/vitaminContainer.dart';
+
+// ignore: must_be_immutable
+class FoodSelectionScreen extends StatefulWidget {
+  Food food;
+  UserInfo info;
+  FoodSelectionScreen({
+    super.key,
+    required this.food,
+    required this.info,
+  });
+
+  @override
+  State<FoodSelectionScreen> createState() => _FoodSelectionScreen();
+}
+
+class _FoodSelectionScreen extends State<FoodSelectionScreen> {
+  var size, width, height;
+
+  @override
+  Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+    width = size.width;
+    height = size.height;
+
+    Map<String, dynamic> nutrition = nutritionCalculator(
+      [widget.food],
+      [1],
+      [1],
+    );
+
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: boxColor,
+                    child: BackButton(color: white),
+                  ),
+                  SizedBox(
+                    width: width * 0.4,
+                    child: Center(
+                      child: Text(
+                        widget.food.name,
+                        style: interFont(
+                          32,
+                          white,
+                          FontStyle.normal,
+                          FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                  // InkWell(
+                  //   onTap: () async {
+                  //     final can = await Haptics.canVibrate();
+                  //     List data = widget.info.favorite;
+                  //     if (favorite == false) {
+                  //       data.add({
+                  //         "description": widget.food.description,
+                  //         "category": widget.food.category,
+                  //         "name": widget.food.name,
+                  //         "portion": widget.portion,
+                  //       });
+                  //     } else {
+                  //       print({
+                  //         "category": widget.food.category,
+                  //         "description": widget.food.description,
+                  //         "name": widget.food.name,
+                  //         "portion": widget.portion,
+                  //       });
+
+                  //       data.removeWhere(
+                  //         (item) => item["name"] == widget.food.name,
+                  //       );
+                  //     }
+
+                  //     print(data);
+                  //     await updateFavoriteList(data);
+                  //     setState(() {
+                  //       favorite = !favorite;
+                  //     });
+                  //     if (!can) return;
+                  //     await Haptics.vibrate(HapticsType.success);
+                  //   },
+                  //   child: CircleAvatar(
+                  //     radius: 30,
+                  //     backgroundColor: boxColor,
+                  //     child: (favorite == true)
+                  //         ? Icon(Icons.favorite, color: Colors.red, size: 30)
+                  //         : Icon(Icons.favorite_border, size: 30),
+                  //   ),
+                  // ),
+                ],
+              ),
+              SizedBox(height: 31),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 15,
+                  bottom: 15,
+                  left: 30,
+                  right: 100,
+                ),
+                decoration: BoxDecoration(
+                  color: boxColor,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: SizedBox()
+              ),
+              SizedBox(height: 31),
+              Text(
+                "Category",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: signatureColor,
+                  borderRadius: BorderRadius.circular(38),
+                ),
+                child: Text(
+                  widget.food.category,
+                  style: interFont(
+                    14,
+                    Colors.black,
+                    FontStyle.normal,
+                    FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 51),
+              Text(
+                "Description",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: signatureColor,
+                  borderRadius: BorderRadius.circular(38),
+                ),
+                child: Text(
+                  widget.food.description,
+                  style: interFont(
+                    14,
+                    Colors.black,
+                    FontStyle.normal,
+                    FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 50),
+              factorsPieChart(nutrition),
+              SizedBox(height: 60),
+              Text(
+                "Vitamin",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              vitaminContainer(nutrition, context),
+              SizedBox(height: 60),
+              Text(
+                "Mineral",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              mineralContainer(nutrition, context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

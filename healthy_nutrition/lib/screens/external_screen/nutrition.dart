@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/utils.dart';
 import 'package:healthy_nutrition/widgets/factorsPieChart.dart';
 import 'package:healthy_nutrition/widgets/mineralContainer.dart';
 import 'package:healthy_nutrition/widgets/vitaminContainer.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 // ignore: must_be_immutable
 class NutritionScreen extends StatefulWidget {
   Food food;
   int portion;
   int amount;
+  UserInfo info;
   NutritionScreen({
     super.key,
     required this.food,
     required this.portion,
     required this.amount,
+    required this.info,
   });
 
   @override
@@ -30,6 +34,8 @@ class _NutritionScreen extends State<NutritionScreen> {
     size = MediaQuery.of(context).size;
     width = size.width;
     height = size.height;
+
+    bool favorite = isFavorite(widget.info, widget.food);
 
     var portions = widget.food.portion;
     String portion = portions.keys.toList()[widget.portion];
@@ -60,7 +66,7 @@ class _NutritionScreen extends State<NutritionScreen> {
                     width: width * 0.4,
                     child: Center(
                       child: Text(
-                        widget.food.description,
+                        widget.food.name,
                         style: interFont(
                           32,
                           white,
@@ -71,7 +77,46 @@ class _NutritionScreen extends State<NutritionScreen> {
                       ),
                     ),
                   ),
-                  CircleAvatar(radius: 30, backgroundColor: boxColor),
+                  InkWell(
+                    onTap: () async {
+                      final can = await Haptics.canVibrate();
+                      List data = widget.info.favorite;
+                      if (favorite == false) {
+                        data.add({
+                          "description": widget.food.description,
+                          "category": widget.food.category,
+                          "name": widget.food.name,
+                          "portion": widget.portion,
+                        });
+                      } else {
+                        print({
+                          "category": widget.food.category,
+                          "description": widget.food.description,
+                          "name": widget.food.name,
+                          "portion": widget.portion,
+                        });
+
+                        data.removeWhere(
+                          (item) => item["name"] == widget.food.name,
+                        );
+                      }
+
+                      print(data);
+                      await updateFavoriteList(data);
+                      setState(() {
+                        favorite = !favorite;
+                      });
+                      if (!can) return;
+                      await Haptics.vibrate(HapticsType.success);
+                    },
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: boxColor,
+                      child: (favorite == true)
+                          ? Icon(Icons.favorite, color: Colors.red, size: 30)
+                          : Icon(Icons.favorite_border, size: 30),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 31),
@@ -80,7 +125,7 @@ class _NutritionScreen extends State<NutritionScreen> {
                   top: 15,
                   bottom: 15,
                   left: 30,
-                  right: 100
+                  right: 100,
                 ),
                 decoration: BoxDecoration(
                   color: boxColor,
@@ -89,8 +134,24 @@ class _NutritionScreen extends State<NutritionScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(portion, style: interFont(16, white, FontStyle.normal, FontWeight.w500)),
-                    Text("(${portions[portion].toString()}g)", style: interFont(16, inactiveColor, FontStyle.normal, FontWeight.normal)),
+                    Text(
+                      portion,
+                      style: interFont(
+                        16,
+                        white,
+                        FontStyle.normal,
+                        FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      "(${portions[portion].toString()}g)",
+                      style: interFont(
+                        16,
+                        inactiveColor,
+                        FontStyle.normal,
+                        FontWeight.normal,
+                      ),
+                    ),
                   ],
                 ),
               ),

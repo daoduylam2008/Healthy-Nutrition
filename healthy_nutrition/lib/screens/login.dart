@@ -3,7 +3,6 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/main.dart';
 import 'package:healthy_nutrition/request.dart';
-import 'package:healthy_nutrition/screens/user.dart';
 import 'package:healthy_nutrition/token.dart';
 
 class LoginScreen extends StatefulWidget {

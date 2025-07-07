@@ -18,7 +18,7 @@ dependencies:
   google_fonts: ^6.2.1
   table_calendar: ^3.2.0
   haptic_feedback: ^0.5.1+1
-  syncfusion_flutter_gauges: ^29.1.38
+  syncfusion_flutter_gauges: ^30.1.37
   blurrycontainer: ^2.1.0
   google_mlkit_image_labeling: ^0.14.1
   path: ^1.9.1
@@ -32,17 +32,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
     - assets/icons/fire.png
-    - models/Mar 29, 25 - best (YOLOv11)_float16.tflite
-    - models/Mar 29, 25 - best (YOLOv11)_float32.tflite
-    - models/classes.txt
-    - models/model.tflite
+    - models/model_v1.tflite
     - test_models/model_unquant.tflite
     - test_models/my_model.tflite
     - test_models/labels.txt

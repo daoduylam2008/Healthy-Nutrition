@@ -4,15 +4,21 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/main.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:camera/camera.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
+import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/utils.dart';
+import 'package:healthy_nutrition/widgets/foodBox.dart';
 
+// ignore: must_be_immutable
 class ScaningSreen extends StatefulWidget {
-  ScaningSreen({super.key});
+  UserInfo info;
+  ScaningSreen({super.key, required this.info});
 
   @override
   State<ScaningSreen> createState() => _ScaningSreen();
@@ -58,9 +64,12 @@ class _ScaningSreen extends State<ScaningSreen>
   }
 
   init() async {
-    final String path = "test_models/my_model.tflite";
+    final String path = "models/model_v1.tflite";
     final modelPath = await getAssetPath(path);
-    final options = LocalLabelerOptions(modelPath: modelPath);
+    final options = LocalLabelerOptions(
+      modelPath: modelPath,
+      confidenceThreshold: 0,
+    );
     imageLabeler = ImageLabeler(options: options);
 
     _canProcess = true;
@@ -162,12 +171,17 @@ class _ScaningSreen extends State<ScaningSreen>
 
     var _results = [];
     final labels = await imageLabeler.processImage(inputImage);
-    print(labels.first.label.split(" ")[1]);
+    List names = [];
     for (final label in labels) {
-      _results.add({
-        "label": label.label.split(" ")[1],
-        "confidence": label.confidence,
-      });
+      List l = label.label.split(" ");
+      l.removeAt(0);
+      String name = l.join(" ");
+
+      double confidence = (label.confidence * 100).roundNum(1);
+      if (confidence > 0) {
+        _results.add({"label": name, "confidence": confidence});
+        names.add(name);
+      }
     }
     setState(() {
       results = _results;
@@ -175,27 +189,49 @@ class _ScaningSreen extends State<ScaningSreen>
     });
     _isBusy = false;
     controller!.stopImageStream();
-  
+
     showModalBottomSheet(
       context: context,
-      isDismissible: false,
-      showDragHandle: true,
+      isDismissible: true,
+      showDragHandle: false,
       backgroundColor: boxColor,
-      isScrollControlled: true,
+      isScrollControlled: false,
       builder: (context) {
         return SafeArea(
           minimum: EdgeInsets.only(top: 10, right: 20, left: 20),
-          child: SizedBox(
-            height: height * 0.5,
-            width: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("${results.length } categories detected", style: interFont(32, white, FontStyle.normal, FontWeight.w500),)
-                ],
-              ),
-            ),
+          child: FutureBuilder(
+            future: fetchNames(names),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<Widget> view = [
+                  Text(
+                    "Detected food",
+                    style: interFont(
+                      32,
+                      white,
+                      FontStyle.normal,
+                      FontWeight.w500,
+                    ),
+                  ),
+                ];
+                for (final food in snapshot.data!) {
+                  view.add(
+                    foodBox(null, food, null, widget.info, context)
+                  );
+                }
+                return SizedBox(
+                  height: height * 0.5,
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: view,
+                    ),
+                  ),
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            },
           ),
         );
       },

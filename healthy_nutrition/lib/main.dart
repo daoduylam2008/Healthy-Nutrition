@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/screens/start.dart';
 import 'package:healthy_nutrition/screens/user.dart';
-import 'package:healthy_nutrition/screens/login.dart';
 import 'package:healthy_nutrition/token.dart';
-
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 List<CameraDescription> cameras = <CameraDescription>[];

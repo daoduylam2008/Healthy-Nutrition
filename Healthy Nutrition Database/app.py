@@ -1,6 +1,7 @@
 from flask import Flask, request, Response
 from flask_bcrypt import Bcrypt
 from auth_middleware import *
+from pprint import pprint
 
 import models
 import util
@@ -51,7 +52,9 @@ def register():
     password = bcrypt.generate_password_hash(args["password"], 12)
     email = args["email"]
     data = args["data"]
-    
+
+    pprint(data)
+
     new_user = users.create(username, password, email, data)
 
     if new_user is not None:
@@ -124,6 +127,29 @@ def update_user():
         }, 200
     
 
+@app.route("/update_favorite", methods=["POST"])
+@token_required
+def update_favorite():
+    args = request.json
+    username = args["username"]
+    query = args["query"]
+    data = list(args["data"])
+
+    if query not in queries:
+        return {
+            "error": "Your query is not invalid"
+        }, 409
+    elif users.search(username) is None:
+        return {
+            "error": f"Cannot find '{username}'"
+        }, 409
+    else:
+        users.update(username, query, data)
+        return {
+            "message": "Successfully update your user information"
+        }, 200
+
+
 @app.route('/refresh_token', methods=["POST"])
 def refresh_token():
     token = request.headers["Authorization"].split()[-1]
@@ -132,6 +158,41 @@ def refresh_token():
     return {
         "Authorization": str(token)
     }, 200
+
+
+@app.route('/get_name', methods=["POST"])
+def get_name():
+    args = request.json
+    name = args["name"]
+
+    data = foods.search_name(name)
+
+    if data is None:
+        return {
+            "data": None,
+            "error": "Your name request has something wrong or invalid"
+        }
+    return {
+        "data": data
+    }, 200
+
+
+@app.route('/get_names', methods=["POST"])
+def get_names():
+    args = request.json
+    names = args["name"]
+
+    data = foods.search_names(names)
+
+    if data is None or data == []:
+        return {
+            "data": None,
+            "error": "Your foods request has something wrong or invalid value. "
+        }, 409
+    
+    return {
+        "data": data
+        }, 200
 
 
 @app.route('/get_foods', methods=["POST"])

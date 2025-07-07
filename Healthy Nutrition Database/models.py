@@ -21,17 +21,37 @@ class Food:
         data = self.food_col.find({
             "category": category
         })
-        for d in data:
-            del d["_id"]
-            results.append(d)
+        if data != []:
+            for d in data:
+                del d["_id"]
+                results.append(d)
 
         return results
+    
+    def search_name(self, name):
+        data = self.food_col.find_one({
+            "name": name
+        })
+
+        if data is not None:
+            del data["_id"]
+
+        return data
+    
+    def search_names(self, names):
+        results = []
+        for name in names:
+            results.append(self.search_name(name))
+        
+        return results
+        
     
     def search_description(self, description):
         data =  self.food_col.find_one({
             "description": description
         })
-        del data["_id"]
+        if data is not None:
+            del data["_id"]
         return data
     
     def search_foods(self, foods):
@@ -74,7 +94,8 @@ class UserInformation:
     
     def search_by_username(self, username):
         data = self.search(username)
-        del data["_id"]
+        if data is not None:
+            del data["_id"]
         return data
 
     def update(self, username, query, data):
@@ -133,5 +154,6 @@ class Goal:
             "name": name,
             "calorie": calorie
         })
-        del data["_id"]
+        if data is not None:
+            del data["_id"]
         return data

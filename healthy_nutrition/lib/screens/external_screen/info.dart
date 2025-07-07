@@ -26,6 +26,24 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
   bool edit = false;
   var size, width, height;
 
+  late TextEditingController heightController;
+  late TextEditingController weightController;
+
+  @override
+  void initState() {
+    heightController = TextEditingController();
+    weightController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    heightController.dispose();
+    weightController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -120,13 +138,18 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
               ),
               SizedBox(height: 38),
               userMeasurement(),
+              SizedBox(height: 20),
+
               SizedBox(height: 40),
               InkWell(
                 onTap: () async {
                   await writeToken("");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MainApp(), maintainState: false),
+                    MaterialPageRoute(
+                      builder: (context) => const MainApp(),
+                      maintainState: false,
+                    ),
                   );
                   Phoenix.rebirth(context);
                 },
@@ -137,10 +160,14 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                     color: const Color.fromARGB(228, 255, 255, 255),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                child: Center(child: Text("Log out", style: TextStyle(color: Colors.black, fontSize: 20),
-)),
+                  child: Center(
+                    child: Text(
+                      "Log out",
+                      style: TextStyle(color: Colors.black, fontSize: 20),
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -216,9 +243,21 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                   context: context,
                   builder: (context) {
                     if (type == "Height") {
-                      return heightEdit(widget.info, height, context, this);
+                      return heightEdit(
+                        widget.info,
+                        height,
+                        context,
+                        this,
+                        heightController,
+                      );
                     } else if (type == "Weight") {
-                      return weightEdit(widget.info, height, context, this);
+                      return weightEdit(
+                        widget.info,
+                        height,
+                        context,
+                        this,
+                        weightController,
+                      );
                     }
                     return ageEdit(widget.info, height, context);
                   },
@@ -323,9 +362,13 @@ void _showSaveMessage(BuildContext context, Function action) {
   );
 }
 
-Widget heightEdit(UserInfo info, double height, BuildContext context, TickerProvider vsync) {
-  var _tabController = TabController(length: 2, vsync: vsync);
-
+Widget heightEdit(
+  UserInfo info,
+  double height,
+  BuildContext context,
+  TickerProvider vsync,
+  TextEditingController heightController,
+) {
   return SingleChildScrollView(
     child: Container(
       width: double.infinity,
@@ -338,39 +381,22 @@ Widget heightEdit(UserInfo info, double height, BuildContext context, TickerProv
             style: interFont(32, white, FontStyle.normal, FontWeight.w500),
           ),
           SizedBox(height: 40),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(
-                12.0,
-              ),
-            ),
-            height: 35,
-            width: 200,
-            child: TabBar(
-              unselectedLabelStyle: interFont(15, white, FontStyle.normal, FontWeight.w500),
-              dividerHeight: 0,
-              labelStyle: interFont(15, Colors.black, FontStyle.normal, FontWeight.w500),
-              controller: _tabController,
-              indicator: BoxDecoration(
-                color: signatureColor,
-                borderRadius: BorderRadius.circular(12)
-              ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabs: [
-                Tab(text: "cm",),
-                Tab(text: "feet",),
-              ],
-            ),
-          ),
         ],
       ),
     ),
   );
 }
 
-Widget weightEdit(UserInfo info, double height, BuildContext context, TickerProvider vsync) {
-  var _tabController = TabController(length: 2, vsync: vsync);
+Widget weightEdit(
+  UserInfo info,
+  double height,
+  BuildContext context,
+  TickerProvider vsync,
+  TextEditingController weightController,
+) {
+  String weightUnit = "";
+  List unit = ["kg", "pound"];
+
   return SingleChildScrollView(
     child: Container(
       width: double.infinity,
@@ -383,49 +409,58 @@ Widget weightEdit(UserInfo info, double height, BuildContext context, TickerProv
             style: interFont(32, white, FontStyle.normal, FontWeight.w500),
           ),
           SizedBox(height: 40),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(
-                12.0,
-              ),
-            ),
-            height: 35,
-            width: 200,
-            child: TabBar(
-              unselectedLabelStyle: interFont(15, white, FontStyle.normal, FontWeight.w500),
-              dividerHeight: 0,
-              labelStyle: interFont(15, Colors.black, FontStyle.normal, FontWeight.w500),
-              controller: _tabController,
-              indicator: BoxDecoration(
-                color: signatureColor,
-                borderRadius: BorderRadius.circular(12)
-              ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabs: [
-                Tab(text: "kg",),
-                Tab(text: "pound",),
-              ],
-            ),
-          ),
           Expanded(
-            child: Flexible(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 4,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    width: 100,
+                    height: 50,
+                    child: TextField(
+                      cursorColor: white,
+                      controller: weightController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Your weight",
+                      ),
+                      keyboardType: TextInputType.number,
                     ),
                   ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
-                    ),
+                ),
+                Flexible(
+                  child: WheelPicker(
+                    selectedIndexColor: white,
+                    looping: false,
+                    onIndexChanged: (index, interactionType) async {
+                      final can = await Haptics.canVibrate();
+
+                      if (!can) return;
+                      await Haptics.vibrate(HapticsType.light);
+                    },
+                    initialIndex: 1,
+                    itemCount: 2,
+                    style: WheelPickerStyle(itemExtent: 30),
+                    builder: (context, index) {
+                      return Text(
+                        "${unit[index]}",
+                        style: interFont(
+                          20,
+                          inactiveColor,
+                          FontStyle.normal,
+                          FontWeight.w500,
+                        ),
+                      );
+                    },
                   ),
-              ]),
+                ),
+              ],
             ),
           ),
         ],

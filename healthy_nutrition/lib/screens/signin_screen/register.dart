@@ -6,6 +6,7 @@ import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/token.dart';
 import 'package:healthy_nutrition/widgets/processWidget.dart';
 
+// ignore: must_be_immutable
 class RegisterScreen extends StatefulWidget {
   Map<String, dynamic> saveData;
   RegisterScreen({super.key, required this.saveData});

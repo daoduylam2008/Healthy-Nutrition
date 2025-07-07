@@ -94,12 +94,16 @@ class Food {
   final String category;
   final Map<String, dynamic> portion;
   final Map<String, dynamic> nutrients;
+  final String name;
+  final String imageURL;
 
   Food({
     required this.category,
     required this.description,
     required this.nutrients,
     required this.portion,
+    required this.name,
+    required this.imageURL,
   });
 
   factory Food.fromJson(Map<String, dynamic> json) {
@@ -109,12 +113,16 @@ class Food {
         "category": String category,
         "portion": Map<String, dynamic> portion,
         "nutrient_per_100g": Map<String, dynamic> nutrients,
+        "name": String name,
+        "image_url": String imageURL
       } =>
         Food(
+          name: name,
           category: category,
           description: description,
           nutrients: nutrients,
           portion: portion,
+          imageURL: imageURL
         ),
       _ => throw const FormatException('Failed to load food.'),
     };
@@ -151,7 +159,7 @@ class Goal {
           protein: protein,
           fat: fat,
         ),
-        _ => throw const FormatException("Failed to load goal")
+      _ => throw const FormatException("Failed to load goal"),
     };
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/extension.dart';
 
 Widget mineralContainer(Map<String, dynamic> data, BuildContext context) {
   List minerals = [];
@@ -24,13 +25,14 @@ Widget mineralContainer(Map<String, dynamic> data, BuildContext context) {
 
   return Container(
     width: double.infinity,
-    height: 64 * _mineralsColors.length * 1,
+    height: 840,
     decoration: BoxDecoration(
       color: boxColor,
       borderRadius: BorderRadius.circular(38),
     ),
     padding: EdgeInsets.only(left: 15, right: 20, top: 15, bottom: 15),
     child: ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       itemCount: minerals.length,
       itemExtent: 81,
       itemBuilder: (context, index) {
@@ -38,22 +40,19 @@ Widget mineralContainer(Map<String, dynamic> data, BuildContext context) {
           minerals[index],
           _mineralsColors[index],
           data[minerals[index]],
-          context,
         );
       },
     ),
   );
 }
 
-Widget _vitaminInfo(
-  String name,
-  Color color,
-  double value,
-  BuildContext context,
-) {
-  var size = MediaQuery.of(context).size;
-  var width = size.width;
-
+Widget _vitaminInfo(String name, Color color, double value) {
+  double v = double.parse("${value / 0.000001}").roundNum(1);
+  String unit = "µg";
+  if (v > 500) {
+    v = value;
+    unit = "g";
+  }
   return SizedBox(
     width: double.infinity,
     height: 48,
@@ -69,25 +68,10 @@ Widget _vitaminInfo(
               name,
               style: interFont(16, white, FontStyle.normal, FontWeight.normal),
             ),
-            Stack(
-              children: [
-                Container(
-                  height: 7,
-                  width: width * 0.6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3.5),
-                    color: inactiveColor
-                  ),
-                ),
-                Container(
-                  height: 7,
-                  width: 10,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3.5),
-                    color: color,
-                  ),
-                ),
-              ],
+            SizedBox(width: 10),
+            Text(
+              "${v.roundNum(3)}$unit",
+              style: interFont(14, white, FontStyle.normal, FontWeight.bold),
             ),
           ],
         ),

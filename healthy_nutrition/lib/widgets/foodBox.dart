@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
+import 'package:healthy_nutrition/screens/external_screen/foodSelection.dart';
 import 'package:healthy_nutrition/screens/external_screen/nutrition.dart';
+import 'package:healthy_nutrition/utils.dart';
 
-Widget foodBox(int portion, bool favorite, Food food, int amount, context) {
+Widget foodBox(int? portion, Food food, int? amount, UserInfo info, context) {
   var size = MediaQuery.of(context).size;
   var width = size.width;
-
+  bool favorite = isFavorite(info, food);
   return Column(
     children: [
       InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NutritionScreen(food: food, portion: portion, amount: amount,),
-            ),
-          );
+          if (portion == null && amount == null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FoodSelectionScreen(food: food, info: info),
+              ),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NutritionScreen(
+                  food: food,
+                  portion: portion!,
+                  amount: amount!,
+                  info: info,
+                ),
+              ),
+            );
+          }
         },
         child: Container(
           height: 120,
@@ -37,6 +53,8 @@ Widget foodBox(int portion, bool favorite, Food food, int amount, context) {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(34),
                     ),
+                    padding: EdgeInsets.all(8),
+                    child: Image.network(food.imageURL, scale: 1),
                   ),
                   SizedBox(width: 13),
                   Column(
@@ -46,7 +64,7 @@ Widget foodBox(int portion, bool favorite, Food food, int amount, context) {
                       SizedBox(
                         width: width * 0.37,
                         child: Text(
-                          food.description,
+                          food.name,
                           overflow: TextOverflow.ellipsis,
                           style: interFont(
                             18,
@@ -56,13 +74,17 @@ Widget foodBox(int portion, bool favorite, Food food, int amount, context) {
                           ),
                         ),
                       ),
-                      Text(
-                        food.category,
-                        style: interFont(
-                          14,
-                          inactiveColor,
-                          FontStyle.normal,
-                          FontWeight.normal,
+                      SizedBox(
+                        width: width * 0.4,
+                        child: Text(
+                          food.category,
+                          overflow: TextOverflow.ellipsis,
+                          style: interFont(
+                            14,
+                            inactiveColor,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                          ),
                         ),
                       ),
                     ],

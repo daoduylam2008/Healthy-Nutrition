@@ -26,7 +26,7 @@ ThemeData theme = ThemeData(
 );
 
 // const url = "http://localhost:3000";
-const url = "http://10.0.0.77:3000";
+const url = "http://10.0.0.202:3000";
 
 TextStyle interFont(
   double size,

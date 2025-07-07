@@ -3,7 +3,6 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
-import 'package:healthy_nutrition/utils.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
 import 'package:healthy_nutrition/widgets/healthProfileContainer.dart';
 
@@ -51,9 +50,9 @@ Widget historyNutritionView(
           currentScans.add(
             foodBox(
               history[i]["portion"],
-              isFavorite(info, data[i]),
               data[i],
               int.parse(history[i]["amount"]),
+              info,
               context,
             ),
           );

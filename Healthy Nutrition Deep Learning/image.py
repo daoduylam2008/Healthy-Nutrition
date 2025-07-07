@@ -3,7 +3,7 @@ import util
 import rotated_transformation
 
 
-path_base_image = "my_datasets/train/images/"
+path_base_image = "my_datasets/train/Apple"
 path_my_datasets = "datasets/train/"
 
 
@@ -12,8 +12,10 @@ def export_rotation(angle, file, name):
     print(path)
     boxes = rotated_transformation.detected_boxes()
     name = file.split("/")[-1].replace(".jpg", "")
-
-    box = boxes[name]
+    try:
+        box = boxes[name]
+    except:
+        box = ""
     
     for i in box:
         x, y, w, h = rotated_transformation.coordinates_with_angle(angle, (i.center_x * 640, i.center_y * 640), i.w, i.h)
@@ -24,6 +26,9 @@ if __name__ == "__main__":
     all_images = util.load_files_from_dir(path_base_image, ".jpg")
     print(all_images[0])
     for i in range(0, len(all_images)):
+        if ".DS_Store" in all_images[i]:
+            continue
+        print(all_images[i])
         # Original with resizable method
         img = cv2.imread(all_images[i])
 

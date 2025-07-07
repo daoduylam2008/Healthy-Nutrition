@@ -16,22 +16,24 @@ class _SpecificNutrition extends State<SpecificNutrition> {
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              backgroundColor: boxColor,
-              radius: 30,
-              child: BackButton(color: white),
-            ),
-            SizedBox(height: 46),
-            Text(
-              "Vitamins",
-              style: interFont(24, white, FontStyle.normal, FontWeight.w500),
-            ),
-            SizedBox(height: 26),
-            vitaminContainer(widget.data, context),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundColor: boxColor,
+                radius: 30,
+                child: BackButton(color: white),
+              ),
+              SizedBox(height: 46),
+              Text(
+                "Vitamins",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              vitaminContainer(widget.data, context),
+            ],
+          ),
         ),
       ),
     );

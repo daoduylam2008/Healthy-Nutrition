@@ -3,11 +3,11 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/signin_screen/register.dart';
-import 'package:healthy_nutrition/widgets/healthProfileContainer.dart';
 import 'package:healthy_nutrition/widgets/processWidget.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:wheel_picker/wheel_picker.dart';
 
+// ignore: must_be_immutable
 class GoalScreen extends StatefulWidget {
   Map<String, dynamic> saveData;
 

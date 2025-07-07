@@ -20,14 +20,19 @@ Future<String?> login(String username, String password) async {
   return null;
 }
 
-Future<String?> register(String username, String password, String email, Map<String, dynamic> data) async {
+Future<String?> register(
+  String username,
+  String password,
+  String email,
+  Map<String, dynamic> data,
+) async {
   final response = await http.post(
     Uri.parse("$url/register"),
     body: jsonEncode({
       "username": username,
       "password": password,
       "email": email,
-      "data": data
+      "data": data,
     }),
     headers: <String, String>{"content-type": "application/json"},
   );
@@ -72,6 +77,26 @@ Future<List<Food>?> fetchCategory(String category) async {
       d.add(Food.fromJson(data[i]));
     }
 
+    return d;
+  }
+
+  return null;
+}
+
+Future<List<Food>?> fetchNames(List names) async {
+  final response = await http.post(
+    Uri.parse("$url/get_names"),
+    body: jsonEncode({"name": names}),
+    headers: {"content-type": "application/json"},
+  );
+
+  if (response.statusCode == 200) {
+    List<Food> d = [];
+
+    var data = jsonDecode(response.body)["data"];
+    for (final i in data) {
+      d.add(Food.fromJson(i));
+    }
     return d;
   }
 
@@ -181,6 +206,26 @@ Future<void> updateWeight(double weight, String unit) async {
 
   if (response.statusCode == 200) {
     print("Successfully change weight");
+  }
+}
+
+Future<void> updateFavoriteList(List data) async {
+  print(data);
+  String token = await readToken();
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_favorite"),
+    body: jsonEncode({"username": username, "query": "favorite", "data": data}),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("Successfully change favorite list");
   }
 }
 
