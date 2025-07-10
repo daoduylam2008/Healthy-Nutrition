@@ -125,29 +125,7 @@ def update_user():
         return {
             "message": "Successfully update your user information"
         }, 200
-    
 
-@app.route("/update_favorite", methods=["POST"])
-@token_required
-def update_favorite():
-    args = request.json
-    username = args["username"]
-    query = args["query"]
-    data = list(args["data"])
-
-    if query not in queries:
-        return {
-            "error": "Your query is not invalid"
-        }, 409
-    elif users.search(username) is None:
-        return {
-            "error": f"Cannot find '{username}'"
-        }, 409
-    else:
-        users.update(username, query, data)
-        return {
-            "message": "Successfully update your user information"
-        }, 200
 
 
 @app.route('/refresh_token', methods=["POST"])

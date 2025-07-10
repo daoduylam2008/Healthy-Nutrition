@@ -133,6 +133,7 @@ class _ScannerScreen extends State<ScannerScreen> {
                                 snapshot2.data![ind],
                                 int.parse(history[ind]["amount"]),
                                 info,
+                                false,
                                 context,
                               );
                             },

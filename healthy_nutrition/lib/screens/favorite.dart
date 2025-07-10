@@ -3,6 +3,7 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -25,10 +26,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                 "Favorites",
                 style: interFont(32, white, FontStyle.normal, FontWeight.bold),
               ),
-              CircleAvatar(
-                radius: 35,
-                backgroundColor: Colors.transparent,
-              ),
+              CircleAvatar(radius: 35, backgroundColor: Colors.transparent),
             ],
           ),
           SizedBox(height: 30),
@@ -60,19 +58,25 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                   builder: (context, snapshot2) {
                     if (snapshot2.hasData) {
                       return Expanded(
-                        child: ListView.builder(
-                          itemCount: favoriteFoods.length,
-                          itemBuilder: (context, index) {
-                            Food food = snapshot2.data![index];
-                            return foodBox(
-                              favorites[index]["portion"],
-                              null,
-                              food,
-                              1,
-                              snapshot1.data!,
-                              context,
-                            );
+                        child: RefreshIndicator(
+                          onRefresh: () async {
+                            setState(() {});
                           },
+                          child: ListView.builder(
+                            itemCount: favorites.length,
+                            itemBuilder: (context, index) {
+                              Food food = snapshot2.data![index];
+                              return foodBox(
+                                favorites[index]["portion"],
+                                null,
+                                food,
+                                1,
+                                snapshot1.data!,
+                                false,
+                                context,
+                              );
+                            },
+                          ),
                         ),
                       );
                     }

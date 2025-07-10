@@ -210,14 +210,17 @@ Future<void> updateWeight(double weight, String unit) async {
 }
 
 Future<void> updateFavoriteList(List data) async {
-  print(data);
   String token = await readToken();
 
   String username = JwtDecoder.decode(token)["username"];
 
   final response = await http.post(
-    Uri.parse("$url/update_favorite"),
-    body: jsonEncode({"username": username, "query": "favorite", "data": data}),
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({
+      "username": username,
+      "query": "favorite",
+      "data": data,
+    }),
     headers: {
       "content-type": "application/json",
       "Authorization": "Bearer $token",
@@ -225,7 +228,7 @@ Future<void> updateFavoriteList(List data) async {
   );
 
   if (response.statusCode == 200) {
-    print("Successfully change favorite list");
+    print("Successfully change favorite");
   }
 }
 

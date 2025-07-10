@@ -54,6 +54,7 @@ Widget historyNutritionView(
               data[i],
               int.parse(history[i]["amount"]),
               info,
+              true,
               context,
             ),
           );

@@ -28,7 +28,7 @@ Widget factorsPieChart(Map<String, dynamic> data) {
     colorList: colorList,
     chartType: ChartType.ring,
     chartValuesOptions: ChartValuesOptions(
-      showChartValues: false
+      showChartValues: true
     ),
     centerWidget: Column(
       mainAxisAlignment: MainAxisAlignment.center,

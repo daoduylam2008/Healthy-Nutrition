@@ -76,7 +76,7 @@ class _UserScreen extends State<UserScreen> {
               ),
               PersistentBottomNavBarItem(
                 title: "history",
-                icon: Icon(Symbols.history_edu),
+                icon: Icon(Symbols.contract),
                 activeColorPrimary: white,
                 inactiveColorPrimary: inactiveColor,
               ),

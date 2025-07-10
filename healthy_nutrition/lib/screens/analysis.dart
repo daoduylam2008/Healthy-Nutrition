@@ -89,14 +89,14 @@ class _AnalysisScreen extends State<AnalysisScreen> {
                             FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 68),
+                        SizedBox(height: 48),
                         weeklyNutrients(
                           snapshot.data!,
                           datesOfTheWeek,
                           context,
                         ),
-                        SizedBox(height: 89,),
-                        nutrientsDistributionWidget(nutritionData, context),
+                        SizedBox(height: 60,),
+                        nutrientsDistributionWidget(nutritionData),
                         SizedBox(height: 49),
                         Text(
                           "Vitamin",
@@ -108,10 +108,7 @@ class _AnalysisScreen extends State<AnalysisScreen> {
                           ),
                         ),
                         SizedBox(height: 26),
-                        vitaminContainer(nutritionData, context),
-
-                        SizedBox(height: 50),
-                        Text("")
+                        vitaminContainer(nutritionData),
                       ],
                     ),
                   );

@@ -4,11 +4,10 @@ import 'package:pie_chart/pie_chart.dart';
 
 Widget nutrientsDistributionWidget(
   Map<String, dynamic> data,
-  BuildContext context,
 ) {
   final Map<String, double> baseDistributedData = {};
   for (final i in data.keys.toList()) {
-    if (i != "Protein" && i != "Carbs" && i != "Energy" && i != "Fat" && !i.contains("Vitamin") && !i.contains("Water")) {
+    if (i != "Protein" && i != "Carbs" && i != "Energy" && i != "Fat" && !i.contains("Vitamin") && !i.contains("Water") && !i.contains("Total")) {
       baseDistributedData[i] = data[i];
     }
   }

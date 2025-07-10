@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/extension.dart';
 
-Widget mineralContainer(Map<String, dynamic> data, BuildContext context) {
+Widget mineralContainer(Map<String, dynamic> data) {
   List minerals = [];
   List<Color> _mineralsColors = [
     Color(0xFF73FF67),

@@ -28,7 +28,7 @@ dependencies:
   material_dialogs: ^1.1.5
   pie_chart: ^5.4.0
   flutter_phoenix: "^1.0.0"
-
+  flutter_slidable: ^4.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -52,8 +52,8 @@ class _MainApp extends State<MainApp> {
             case ConnectionState.active:
             case ConnectionState.done:
               if (snapshot.hasData) {
-                String token = snapshot.data!;
-                if (token == "") {
+                String? token = snapshot.data;
+                if (token == "" || token == null) {
                   return StartScreen();
                 }
                 return UserScreen();

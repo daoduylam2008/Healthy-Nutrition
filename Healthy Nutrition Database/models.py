@@ -140,10 +140,7 @@ class Users:
             return None
     
     def update(self, username, query, data):
-        old_data = self.search(username)
-        new_data = {"$set": { query: data }}
-        self.user_col.update_one(old_data, new_data)
-
+        self.infos.update(username, query, data)
 
 class Goal:
     def __init__(self):

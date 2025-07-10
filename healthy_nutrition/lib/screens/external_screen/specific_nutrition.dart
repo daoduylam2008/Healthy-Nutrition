@@ -31,7 +31,7 @@ class _SpecificNutrition extends State<SpecificNutrition> {
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
               SizedBox(height: 26),
-              vitaminContainer(widget.data, context),
+              vitaminContainer(widget.data),
             ],
           ),
         ),

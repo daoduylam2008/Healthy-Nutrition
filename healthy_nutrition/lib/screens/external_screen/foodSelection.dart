@@ -20,16 +20,18 @@ class FoodSelectionScreen extends StatefulWidget {
 
 class _FoodSelectionScreen extends State<FoodSelectionScreen> {
   var size, width, height;
+  String? p;
+  int portion = -1;
+  int amount = 1;
 
   @override
   Widget build(BuildContext context) {
+    List<String> portions = widget.food.portion.keys.toList();
     size = MediaQuery.of(context).size;
     width = size.width;
     height = size.height;
 
     bool favorite = isFavorite(widget.info, widget.food);
-    int portion = 0;
-    int amount = 1;
 
     Map<String, dynamic> nutrition = nutritionCalculator(
       [widget.food],
@@ -41,7 +43,7 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: signatureColor,
-        child: Icon(Icons.add, color: Colors.black),
+        child: Icon(Icons.add, color: Colors.black, size: 30),
       ),
       body: SafeArea(
         bottom: false,
@@ -77,6 +79,7 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                     onTap: () async {
                       final can = await Haptics.canVibrate();
                       List data = widget.info.favorite;
+
                       if (favorite == false) {
                         data.add({
                           "description": widget.food.description,
@@ -97,7 +100,6 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                         );
                       }
 
-                      print(data);
                       await updateFavoriteList(data);
                       setState(() {
                         favorite = !favorite;
@@ -116,18 +118,81 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                 ],
               ),
               SizedBox(height: 31),
-              Container(
-                padding: EdgeInsets.only(
-                  top: 15,
-                  bottom: 15,
-                  left: 30,
-                  right: 100,
+              DropdownButtonHideUnderline(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: 15,
+                    bottom: 15,
+                    left: 30,
+                    right: 30,
+                  ),
+                  decoration: BoxDecoration(
+                    color: boxColor,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DropdownButton<String>(
+                        value: p,
+                        hint: Text(
+                          "Choose your portion",
+                          style: interFont(
+                            16,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.w500,
+                          ),
+                        ),
+                        isDense: true,
+                        dropdownColor: boxColor,
+                        borderRadius: BorderRadius.circular(12),
+                        items: portions.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: interFont(
+                                16,
+                                white,
+                                FontStyle.normal,
+                                FontWeight.w500,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            setState(() {
+                              p = value;      
+                              portion = widget.food.portion.keys.toList().indexOf(p!);                        
+                            });
+                          });
+                        },
+                      ),
+                      (p == null)
+                          ? Text(
+                              "No portion",
+                              style: interFont(
+                                16,
+                                inactiveColor,
+                                FontStyle.normal,
+                                FontWeight.normal,
+                              ),
+                            )
+                          : Text(
+                              "${widget.food.portion[p]}gram",
+                              style: interFont(
+                                16,
+                                inactiveColor,
+                                FontStyle.normal,
+                                FontWeight.normal,
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
-                decoration: BoxDecoration(
-                  color: boxColor,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: SizedBox(),
               ),
               SizedBox(height: 31),
               Text(
@@ -191,14 +256,14 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
               SizedBox(height: 26),
-              vitaminContainer(nutrition, context),
+              vitaminContainer(nutrition),
               SizedBox(height: 60),
               Text(
                 "Mineral",
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
               SizedBox(height: 26),
-              mineralContainer(nutrition, context),
+              mineralContainer(nutrition),
             ],
           ),
         ),

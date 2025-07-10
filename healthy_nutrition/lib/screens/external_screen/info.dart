@@ -96,9 +96,8 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                 splashColor: (edit == true) ? null : Colors.transparent,
                 onTap: () async {
                   final can = await Haptics.canVibrate();
-
                   if (edit == true) {
-                    Navigator.pop(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => EditInfoScreen(info: widget.info),

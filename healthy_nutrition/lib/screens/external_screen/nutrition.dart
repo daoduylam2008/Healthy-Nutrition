@@ -4,6 +4,7 @@ import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/utils.dart';
 import 'package:healthy_nutrition/widgets/factorsPieChart.dart';
+import 'package:healthy_nutrition/widgets/fatContainer.dart';
 import 'package:healthy_nutrition/widgets/mineralContainer.dart';
 import 'package:healthy_nutrition/widgets/vitaminContainer.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
@@ -216,14 +217,21 @@ class _NutritionScreen extends State<NutritionScreen> {
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
               SizedBox(height: 26),
-              vitaminContainer(nutrition, context),
+              vitaminContainer(nutrition),
               SizedBox(height: 60),
               Text(
                 "Mineral",
                 style: interFont(24, white, FontStyle.normal, FontWeight.w500),
               ),
               SizedBox(height: 26),
-              mineralContainer(nutrition, context),
+              mineralContainer(nutrition),
+              SizedBox(height: 60),
+              Text(
+                "Fat",
+                style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+              ),
+              SizedBox(height: 26),
+              fatContainer(nutrition, context),
             ],
           ),
         ),

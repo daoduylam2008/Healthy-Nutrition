@@ -208,7 +208,7 @@ class _ScaningSreen extends State<ScaningSreen>
                 List<Widget> view = [];
                 for (final food in snapshot.data!) {
                   view.add(
-                    foodBox(null, results[food.name], food, null, widget.info, context),
+                    foodBox(null, results[food.name], food, null, widget.info, false, context),
                   );
                 }
                 return SizedBox(
