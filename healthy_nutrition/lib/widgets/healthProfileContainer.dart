@@ -12,11 +12,12 @@ double __roundNumber(double value, int r) {
 
 Widget healthProfileContainer(
   UserInfo info,
-  bool history,
-  double width,
   DateTime date,
+  bool touchable,
   context,
 ) {
+  var size = MediaQuery.of(context).size;
+  var width = size.width;
   List todayHistoryFood = info.history[date.dateToString()];
   List todayHistory = [];
   List<int> portions = [];
@@ -40,12 +41,15 @@ Widget healthProfileContainer(
         return InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SpecificNutrition(data: data),
-              ),
-            );
+            if (touchable) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SpecificNutrition(data: data, date: date, info: info,),
+                ),
+              );
+            }
           },
           child: Container(
             padding: EdgeInsets.only(top: 17, bottom: 17, right: 23, left: 23),
@@ -93,7 +97,11 @@ Widget healthProfileContainer(
                   ],
                 ),
                 // SizedBox(height: 16),
-                caloriesBar(data["Energy"], width, 3000),
+                caloriesBar(
+                  data["Energy"],
+                  width,
+                  double.parse(info.goal["calories"]),
+                ),
                 SizedBox(height: 9),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -221,7 +229,7 @@ Widget caloriesBar(double value, double width, double maxValue) {
           Column(
             children: [
               Text(
-                "1000",
+                "${(maxValue / 3).roundNum(1)}",
                 style: interFont(
                   14,
                   (value >= 1000) ? Colors.green : white,
@@ -242,7 +250,7 @@ Widget caloriesBar(double value, double width, double maxValue) {
           Column(
             children: [
               Text(
-                "2000",
+                "${(maxValue * 2 / 3).roundNum(1)}",
                 style: interFont(
                   14,
                   (value >= 2000) ? Colors.green : white,

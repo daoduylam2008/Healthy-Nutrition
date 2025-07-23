@@ -3,6 +3,7 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
+import 'package:healthy_nutrition/screens/external_screen/historyScreen.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
 import 'package:healthy_nutrition/widgets/healthProfileContainer.dart';
 
@@ -66,7 +67,7 @@ Widget historyNutritionView(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 10),
-                      healthProfileContainer(info, true, width, date, context),
+                      healthProfileContainer(info, date, true, context),
                       SizedBox(height: 28),
                       Text(
                         "Food",
@@ -82,6 +83,20 @@ Widget historyNutritionView(
                 : Container(),
             SizedBox(height: 28),
             Column(children: currentScans),
+                  SizedBox(height: 10,),
+            (maxValue != null) ? Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                HistoryScanScreen(date: date, info: info)
+                          ),
+                        );
+                      },
+                      child: Text("more", style: interFont(14, signatureColor, FontStyle.normal, FontWeight.w500),),
+                    ),
+                  ): SizedBox()
           ],
         );
       }

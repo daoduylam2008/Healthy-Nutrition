@@ -57,28 +57,47 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                   future: fetchFoods(favoriteFoods),
                   builder: (context, snapshot2) {
                     if (snapshot2.hasData) {
-                      return Expanded(
-                        child: RefreshIndicator(
-                          onRefresh: () async {
-                            setState(() {});
-                          },
-                          child: ListView.builder(
-                            itemCount: favorites.length,
-                            itemBuilder: (context, index) {
-                              Food food = snapshot2.data![index];
-                              return foodBox(
-                                favorites[index]["portion"],
-                                null,
-                                food,
-                                1,
-                                snapshot1.data!,
-                                false,
-                                context,
-                              );
+                      try {
+                        return Expanded(
+                          child: RefreshIndicator(
+                            color: signatureColor,
+                            elevation: 1,
+                            displacement: 85,
+                            onRefresh: () async {
+                              final can = await Haptics.canVibrate();
+                              List _favorite = [];
+                              _favorite = (await fetchUserInfo())!.favorite;
+
+                              setState(() {
+                                favorites = _favorite;
+                              });
+                              if (!can) return;
+                              await Haptics.vibrate(HapticsType.success);
                             },
+                            child: ListView.builder(
+                              itemCount: favorites.length,
+                              itemBuilder: (context, index) {
+                                try {
+                                  Food food = snapshot2.data![index];
+                                  return foodBox(
+                                    favorites[index]["portion"],
+                                    null,
+                                    food,
+                                    1,
+                                    snapshot1.data!,
+                                    false,
+                                    context,
+                                  );
+                                } catch (e) {
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      } catch (e) {
+                    return Center(child: CircularProgressIndicator());
+                      }
                     }
                     return Center(child: CircularProgressIndicator());
                   },

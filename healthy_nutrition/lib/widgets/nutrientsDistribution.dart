@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-Widget nutrientsDistributionWidget(
-  Map<String, dynamic> data,
-) {
+Widget nutrientsDistributionWidget(Map<String, dynamic> data) {
   final Map<String, double> baseDistributedData = {};
   for (final i in data.keys.toList()) {
-    if (i != "Protein" && i != "Carbs" && i != "Energy" && i != "Fat" && !i.contains("Vitamin") && !i.contains("Water") && !i.contains("Total")) {
+    if (i != "Protein" &&
+        i != "Carbs" &&
+        i != "Energy" &&
+        i != "Fat" &&
+        !i.contains("Vitamin") &&
+        !i.contains("Water") &&
+        !i.contains("Total")) {
       baseDistributedData[i] = data[i];
     }
   }
+
   return Container(
     width: double.infinity,
     height: 350,
@@ -22,18 +27,26 @@ Widget nutrientsDistributionWidget(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Consumption", style: interFont(24, white, FontStyle.normal, FontWeight.w500),),
-        SizedBox(height: 20,),
-        PieChart(
-          legendOptions: LegendOptions(
-            legendTextStyle: interFont(14, white, FontStyle.normal, FontWeight.normal),
-            legendShape: BoxShape.rectangle,
-          ),
-          dataMap: baseDistributedData,
-          chartValuesOptions: ChartValuesOptions(
-            showChartValues: false
-            ),
-          ),
+        Text(
+          "Consumption",
+          style: interFont(24, white, FontStyle.normal, FontWeight.w500),
+        ),
+        SizedBox(height: 20),
+        (baseDistributedData.isEmpty || baseDistributedData == {})
+            ? Center(child: CircularProgressIndicator())
+            : PieChart(
+                legendOptions: LegendOptions(
+                  legendTextStyle: interFont(
+                    14,
+                    white,
+                    FontStyle.normal,
+                    FontWeight.normal,
+                  ),
+                  legendShape: BoxShape.rectangle,
+                ),
+                dataMap: baseDistributedData,
+                chartValuesOptions: ChartValuesOptions(showChartValues: false),
+              ),
       ],
     ),
   );

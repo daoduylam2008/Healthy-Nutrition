@@ -4,7 +4,7 @@ import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/utils.dart';
-import 'package:healthy_nutrition/widgets/nutrientsColumnChart.dart';
+import 'package:healthy_nutrition/widgets/caloriesColumnChart.dart';
 
 const Color _proteinColor = Color(0xFF55BC9E);
 const Color _carbsColor = Color(0xFF2A51A0);
@@ -19,7 +19,7 @@ Widget weeklyNutrients(
   var width = size.width;
 
   return Container(
-    height: 350,
+    height: 370,
     width: double.infinity,
     decoration: BoxDecoration(
       color: boxColor,
@@ -34,7 +34,6 @@ Widget weeklyNutrients(
           "Weekly Nutrients",
           style: interFont(24, white, FontStyle.normal, FontWeight.w500),
         ),
-        nutrientsColumnChart(),
         SizedBox(height: 11),
         Row(
           spacing: 20,
@@ -46,7 +45,7 @@ Widget weeklyNutrients(
         ),
         SizedBox(
           width: width * 0.74,
-          height: 210,
+          height: 250,
           child: Center(
             child: ListView.builder(
               shrinkWrap: true,
@@ -100,6 +99,7 @@ Widget _chartLabel(String unit, Color color) {
 }
 
 Widget _columnChart(UserInfo info, DateTime date) {
+  var maxValue = double.parse(info.goal["carbs"]) + double.parse(info.goal["protein"])+ double.parse(info.goal["fat"]);
   List<Map<String, dynamic>> history = [];
 
   if (info.history[date.dateToString()] != null) {
@@ -137,7 +137,7 @@ Widget _columnChart(UserInfo info, DateTime date) {
                 borderRadius: BorderRadius.circular(5),
               ),
               width: 34,
-              height: data["Protein"] * 208 / 490,
+              height: (data["Protein"] >= double.parse(info.goal["protein"])) ? double.parse(info.goal["protein"]) * 208 / maxValue : data["Protein"] * 208 / maxValue,
             ),
             Container(
               decoration: BoxDecoration(
@@ -145,7 +145,7 @@ Widget _columnChart(UserInfo info, DateTime date) {
                 borderRadius: BorderRadius.circular(5),
               ),
               width: 34,
-              height: data["Carbs"] * 208 / 490,
+              height: (data["Carbs"] >= double.parse(info.goal["carbs"])) ? double.parse(info.goal["carbs"]) * 208 / maxValue : data["Carbs"] * 208 / maxValue,
             ),
             Container(
               decoration: BoxDecoration(
@@ -153,7 +153,7 @@ Widget _columnChart(UserInfo info, DateTime date) {
                 borderRadius: BorderRadius.circular(5),
               ),
               width: 34,
-              height: data["Fat"] * 208 / 490,
+              height: (data["Fat"] >= double.parse(info.goal["fat"])) ? double.parse(info.goal["fat"]) * 208 / maxValue : data["Fat"] * 208 / maxValue,
             ),
           ],
         );

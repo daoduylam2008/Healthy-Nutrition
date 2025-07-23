@@ -3,7 +3,6 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/screens/external_screen/foodSelection.dart';
-import 'package:healthy_nutrition/screens/external_screen/nutrition.dart';
 import 'package:healthy_nutrition/utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
@@ -33,7 +32,6 @@ Widget foodBox(
   return Column(
     children: [
       Slidable(
-
         child: InkWell(
           onTap: () {
             if (portion == null && amount == null) {
@@ -41,14 +39,14 @@ Widget foodBox(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      FoodSelectionScreen(food: food, info: info),
+                      FoodSelectionScreen(food: food, portion: null, amount: null, info: info),
                 ),
               );
             } else {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => NutritionScreen(
+                  builder: (context) => FoodSelectionScreen(
                     food: food,
                     portion: portion!,
                     amount: amount!,

@@ -47,13 +47,14 @@ DateTime stringToDate(String text) {
   return date;
 }
 
-double valueConverter(double value, String unit, double portion) {
+double valueConverter(dynamic value, String unit, double portion) {
+  double v = double.parse(value.toString());
   if (unit == "MG") {
-    return 0.001 * value * portion / 100;
+    return 0.001 * v * portion / 100;
   } else if (unit == "UG") {
-    return 0.000001 * value * portion / 100;
+    return 0.000001 * v * portion / 100;
   } else {
-    return value * portion / 100;
+    return v * portion / 100;
   }
 }
 
@@ -72,9 +73,7 @@ Map<String, dynamic> nutritionCalculator(
       p = foods[i].portion.keys.toList()[portions[i]];
     }
     var nutrients = foods[i].nutrients;
-    double portion = foods[i]
-        .portion[p]
-        .toDouble();
+    double portion = foods[i].portion[p].toDouble();
 
     // Basic nutrition summarization
     nutrition["Energy"] = nutrients["Energy"][0] * portion / 100;

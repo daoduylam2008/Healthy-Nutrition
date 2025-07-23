@@ -216,11 +216,7 @@ Future<void> updateFavoriteList(List data) async {
 
   final response = await http.post(
     Uri.parse("$url/update_info"),
-    body: jsonEncode({
-      "username": username,
-      "query": "favorite",
-      "data": data,
-    }),
+    body: jsonEncode({"username": username, "query": "favorite", "data": data}),
     headers: {
       "content-type": "application/json",
       "Authorization": "Bearer $token",
@@ -229,6 +225,25 @@ Future<void> updateFavoriteList(List data) async {
 
   if (response.statusCode == 200) {
     print("Successfully change favorite");
+  }
+}
+
+Future<void> updateHistory(Map<String, dynamic> data) async {
+  String token = await readToken();
+
+  String username = JwtDecoder.decode(token)["username"];
+
+  final response = await http.post(
+    Uri.parse("$url/update_info"),
+    body: jsonEncode({"username": username, "query": "history", "data": data}),
+    headers: {
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("Successfully change history");
   }
 }
 

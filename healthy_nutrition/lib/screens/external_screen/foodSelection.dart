@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/extension.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/utils.dart';
 import 'package:healthy_nutrition/widgets/factorsPieChart.dart';
@@ -12,7 +13,9 @@ import 'package:healthy_nutrition/request.dart';
 class FoodSelectionScreen extends StatefulWidget {
   Food food;
   UserInfo info;
-  FoodSelectionScreen({super.key, required this.food, required this.info});
+  int? portion;
+  int? amount;
+  FoodSelectionScreen({super.key, required this.food, required this.info, required this.portion, required this.amount});
 
   @override
   State<FoodSelectionScreen> createState() => _FoodSelectionScreen();
@@ -33,6 +36,14 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
 
     bool favorite = isFavorite(widget.info, widget.food);
 
+    if (widget.portion != null) {
+      portion =  widget.portion!;
+    }
+
+    if (widget.amount != null) {
+      amount = widget.amount!;
+    }
+    
     Map<String, dynamic> nutrition = nutritionCalculator(
       [widget.food],
       [portion],
@@ -41,7 +52,24 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          final can = await Haptics.canVibrate();
+          final Map<String, dynamic> data = widget.info.history;
+          if (data[today.dateToString()] == null) {
+            data[today.dateToString()] = [];
+          }
+          data[today.dateToString()].add({
+            "description": widget.food.description,
+            "category": widget.food.category,
+            "portion": portion,
+            "amount": "$amount",
+            "name": widget.food.name,
+          });
+          await updateHistory(data);
+          Navigator.pop(context);
+          if (!can) return;
+          await Haptics.vibrate(HapticsType.success);
+        },
         backgroundColor: signatureColor,
         child: Icon(Icons.add, color: Colors.black, size: 30),
       ),
@@ -118,41 +146,29 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                 ],
               ),
               SizedBox(height: 31),
-              DropdownButtonHideUnderline(
-                child: Container(
-                  padding: EdgeInsets.only(
-                    top: 15,
-                    bottom: 15,
-                    left: 30,
-                    right: 30,
-                  ),
-                  decoration: BoxDecoration(
-                    color: boxColor,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DropdownButton<String>(
-                        value: p,
-                        hint: Text(
-                          "Choose your portion",
-                          style: interFont(
-                            16,
-                            white,
-                            FontStyle.normal,
-                            FontWeight.w500,
-                          ),
-                        ),
-                        isDense: true,
-                        dropdownColor: boxColor,
-                        borderRadius: BorderRadius.circular(12),
-                        items: portions.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  DropdownButtonHideUnderline(
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        top: 15,
+                        bottom: 15,
+                        left: 20,
+                        right: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: boxColor,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DropdownButton<String>(
+                            value: p,
+                            hint: Text(
+                              "Choose your portion",
                               style: interFont(
                                 16,
                                 white,
@@ -160,39 +176,111 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                                 FontWeight.w500,
                               ),
                             ),
-                          );
-                        }).toList(),
-                        onChanged: (String? value) {
-                          setState(() {
-                            setState(() {
-                              p = value;      
-                              portion = widget.food.portion.keys.toList().indexOf(p!);                        
-                            });
-                          });
-                        },
+                            isDense: true,
+                            dropdownColor: boxColor,
+                            borderRadius: BorderRadius.circular(12),
+                            items: portions.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: interFont(
+                                    16,
+                                    white,
+                                    FontStyle.normal,
+                                    FontWeight.w500,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? value) {
+                              setState(() {
+                                setState(() {
+                                  p = value;
+                                  portion = widget.food.portion.keys
+                                      .toList()
+                                      .indexOf(p!);
+                                });
+                              });
+                            },
+                          ),
+                          (p == null)
+                              ? Text(
+                                  "No portion",
+                                  style: interFont(
+                                    16,
+                                    inactiveColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                )
+                              : Text(
+                                  "${widget.food.portion[p]}gram",
+                                  style: interFont(
+                                    16,
+                                    inactiveColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                        ],
                       ),
-                      (p == null)
-                          ? Text(
-                              "No portion",
-                              style: interFont(
-                                16,
-                                inactiveColor,
-                                FontStyle.normal,
-                                FontWeight.normal,
-                              ),
-                            )
-                          : Text(
-                              "${widget.food.portion[p]}gram",
-                              style: interFont(
-                                16,
-                                inactiveColor,
-                                FontStyle.normal,
-                                FontWeight.normal,
-                              ),
-                            ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          final can = await Haptics.canVibrate();
+                          setState(() {
+                            amount -= 1;
+                          });
+                          if (!can) return;
+                          await Haptics.vibrate(HapticsType.light);
+                        },
+                        child: Container(
+                          width: 43,
+                          height: 77,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: boxColor,
+                          ),
+                          child: Icon(Icons.remove, size: 30, color: white),
+                        ),
+                      ),
+                      SizedBox(width: 13),
+                      Text(
+                        "$amount",
+                        style: interFont(
+                          32,
+                          white,
+                          FontStyle.normal,
+                          FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 13),
+                      InkWell(
+                        onTap: () async {
+                          final can = await Haptics.canVibrate();
+                          setState(() {
+                            amount += 1;
+                          });
+                          if (!can) return;
+                          await Haptics.vibrate(HapticsType.light);
+                        },
+                        child: Container(
+                          width: 43,
+                          height: 77,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: boxColor,
+                          ),
+                          child: Icon(Icons.add, size: 30, color: white),
+                        ),
+                      ),
                     ],
                   ),
-                ),
+                ],
               ),
               SizedBox(height: 31),
               Text(

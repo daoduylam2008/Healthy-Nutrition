@@ -3,6 +3,7 @@ import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/scanning_camera.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_nutrition/screens/user.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
@@ -52,6 +53,7 @@ class _ScannerScreen extends State<ScannerScreen> {
               );
             }
             return SafeArea(
+              bottom: false,
               minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -70,9 +72,10 @@ class _ScannerScreen extends State<ScannerScreen> {
                   InkWell(
                     borderRadius: BorderRadius.circular(38),
                     onTap: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ScaningSreen(info: info)),
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                          builder: (context) => ScaningSreen(info: info),
+                        ),
                       );
                       final can = await Haptics.canVibrate();
 
@@ -118,25 +121,58 @@ class _ScannerScreen extends State<ScannerScreen> {
                       FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 63),
+                  SizedBox(height: 40),
                   FutureBuilder(
                     future: fetchFoods(descriptions),
                     builder: (context, snapshot2) {
                       if (snapshot2.hasData) {
                         return Expanded(
-                          child: ListView.builder(
-                            itemCount: descriptions.length,
-                            itemBuilder: (context, ind) {
-                              return foodBox(
-                                history[ind]["portion"],
-                                null,
-                                snapshot2.data![ind],
-                                int.parse(history[ind]["amount"]),
-                                info,
-                                false,
-                                context,
-                              );
+                          child: RefreshIndicator(
+                            color: signatureColor,
+                            elevation: 1,
+                            displacement: 85,
+                            onRefresh: () async {
+                              final can = await Haptics.canVibrate();
+                              info = snapshot.data!;
+                              var history = [];
+                              var descriptions = [];
+
+                              int index = 0;
+
+                              for (final i in info.history.keys.toList()) {
+                                if (index < 10) {
+                                  history.addAll(info.history[i]);
+                                }
+                                index += 1;
+                              }
+
+                              for (final i in history) {
+                                descriptions.add(i["description"]);
+                              }
+                              setState(() {
+                                
+                              });
+                              if (!can) return;
+                              await Haptics.vibrate(HapticsType.success);
                             },
+                            child: ListView.builder(
+                              itemCount: descriptions.length,
+                              itemBuilder: (context, ind) {
+                                try {
+                                  return foodBox(
+                                    history[ind]["portion"],
+                                    null,
+                                    snapshot2.data![ind],
+                                    int.parse(history[ind]["amount"]),
+                                    info,
+                                    false,
+                                    context,
+                                  );
+                                } catch (e) {
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                              },
+                            ),
                           ),
                         );
                       }

@@ -14,6 +14,7 @@ import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/utils.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
+import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class ScaningSreen extends StatefulWidget {
@@ -34,6 +35,8 @@ class _ScaningSreen extends State<ScaningSreen>
   bool _canProcess = false;
   bool _isBusy = false;
   bool scan = false;
+  int mode = 0;
+  bool gallery = true;
 
   final Map<String, dynamic> results = {};
 
@@ -45,6 +48,9 @@ class _ScaningSreen extends State<ScaningSreen>
     DeviceOrientation.portraitDown: 180,
     DeviceOrientation.landscapeRight: 270,
   };
+
+  File? _image;
+  final _picker = ImagePicker();
 
   @override
   void initState() {
@@ -63,7 +69,7 @@ class _ScaningSreen extends State<ScaningSreen>
     super.dispose();
   }
 
-  init() async {
+  Future<void> init() async {
     final String path = "models/model_v1.tflite";
     final modelPath = await getAssetPath(path);
     final options = LocalLabelerOptions(
@@ -75,6 +81,16 @@ class _ScaningSreen extends State<ScaningSreen>
     _canProcess = true;
   }
 
+  pickImage() async {
+    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      _image = File(pickedImage.path);
+
+      galleryProcess(_image!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -83,6 +99,7 @@ class _ScaningSreen extends State<ScaningSreen>
     return Scaffold(
       body: SafeArea(
         bottom: false,
+        top: false,
         child: SizedBox.expand(
           child: FutureBuilder(
             future: controller!.initialize(),
@@ -113,8 +130,12 @@ class _ScaningSreen extends State<ScaningSreen>
                         height: 130,
                         color: const Color.fromARGB(128, 0, 0, 0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [captureButton(controller!)],
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            photoGallery(),
+                            captureButton(controller!),
+                            flashButton(controller!),
+                          ],
                         ),
                       ),
                     ],
@@ -129,12 +150,24 @@ class _ScaningSreen extends State<ScaningSreen>
     );
   }
 
+  Widget photoGallery() {
+    return InkWell(
+      onTap: () async {
+        final can = await Haptics.canVibrate();
+        pickImage();
+        if (!can) return;
+        await Haptics.vibrate(HapticsType.success);
+      },
+      child: Icon(Icons.photo_library, size: 40),
+    );
+  }
+
   Widget captureButton(CameraController controller) {
     return InkResponse(
       onTap: () async {
         final can = await Haptics.canVibrate();
         controller.startImageStream((image) {
-          process(image);
+          cameraProcess(image);
         });
 
         if (!can) return;
@@ -151,7 +184,37 @@ class _ScaningSreen extends State<ScaningSreen>
     );
   }
 
-  void process(CameraImage image) async {
+  Widget flashButton(CameraController controller) {
+    List modes = [FlashMode.off, FlashMode.always, FlashMode.auto];
+    List icons = [Icons.flash_off, Icons.flash_on, Icons.flash_auto];
+    return InkResponse(
+      onTap: () async {
+        final can = await Haptics.canVibrate();
+        setState(() {
+          mode += 1;
+        });
+
+        if (mode > 2) {
+          mode = 0;
+        }
+        await controller.setFlashMode(modes[mode]);
+        if (!can) return;
+        await Haptics.vibrate(HapticsType.success);
+      },
+      child: Icon(icons[mode], size: 40),
+    );
+  }
+
+  void galleryProcess(File file) async {
+    setState(() {
+      gallery = true;
+    });
+    final inputImage = _imageInputFromGallery(file);
+    if (inputImage == null) return;
+    _scanProcess(inputImage);
+  }
+
+  void cameraProcess(CameraImage image) async {
     final inputImage = _imageInputFromCamera(image);
     if (inputImage == null) return;
     _scanProcess(inputImage);
@@ -190,9 +253,12 @@ class _ScaningSreen extends State<ScaningSreen>
       scan = true;
     });
     _isBusy = false;
-    controller!.stopImageStream();
+    if (!gallery) { 
+      await controller!.stopImageStream();
+      await controller!.pausePreview();
+    }
 
-    showModalBottomSheet(
+    var a = showModalBottomSheet(
       context: context,
       isDismissible: true,
       showDragHandle: false,
@@ -208,7 +274,15 @@ class _ScaningSreen extends State<ScaningSreen>
                 List<Widget> view = [];
                 for (final food in snapshot.data!) {
                   view.add(
-                    foodBox(null, results[food.name], food, null, widget.info, false, context),
+                    foodBox(
+                      null,
+                      results[food.name],
+                      food,
+                      null,
+                      widget.info,
+                      false,
+                      context,
+                    ),
                   );
                 }
                 return SizedBox(
@@ -228,6 +302,17 @@ class _ScaningSreen extends State<ScaningSreen>
         );
       },
     );
+    if (!gallery) {
+    a.then((onValue) async {
+      if (onValue == null) {
+        await controller!.resumePreview();
+      }
+    });
+    }
+  }
+
+  InputImage? _imageInputFromGallery(File file) {
+    return InputImage.fromFile(file);
   }
 
   InputImage? _imageInputFromCamera(CameraImage image) {

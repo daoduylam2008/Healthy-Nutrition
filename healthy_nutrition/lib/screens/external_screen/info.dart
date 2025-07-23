@@ -103,6 +103,9 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                         builder: (context) => EditInfoScreen(info: widget.info),
                       ),
                     );
+                    setState(() {
+                      
+                    });
                     if (!can) return;
                     await Haptics.vibrate(HapticsType.success);
                   } else {
@@ -236,31 +239,45 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
 
               if (edit == true) {
                 showModalBottomSheet(
+                  useRootNavigator: true,
                   isScrollControlled: true,
                   showDragHandle: true,
                   backgroundColor: boxColor,
                   context: context,
                   builder: (context) {
                     if (type == "Height") {
-                      return heightEdit(
-                        widget.info,
-                        height,
-                        context,
-                        this,
-                        heightController,
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                        ),
+                        child: heightEdit(
+                          widget.info,
+                          height,
+                          context,
+                          this,
+                          heightController,
+                        ),
                       );
                     } else if (type == "Weight") {
-                      return weightEdit(
-                        widget.info,
-                        height,
-                        context,
-                        this,
-                        weightController,
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                        ),
+                        child: weightEdit(
+                          widget.info,
+                          height,
+                          context,
+                          this,
+                          weightController,
+                        ),
                       );
                     }
                     return ageEdit(widget.info, height, context);
                   },
                 );
+                setState(() {
+                  
+                });
                 if (!can) return;
                 await Haptics.vibrate(HapticsType.success);
               } else {
@@ -331,6 +348,7 @@ void _showSaveMessage(BuildContext context, Function action) {
     title: "Save",
     msg: "Are you sure to make this change?",
     actionsBuilder: (context) {
+      print(123);
       return [
         IconsOutlineButton(
           onPressed: () {
@@ -345,7 +363,6 @@ void _showSaveMessage(BuildContext context, Function action) {
           onPressed: () async {
             Navigator.pop(context);
             final can = await Haptics.canVibrate();
-
             action();
             if (!can) return;
             await Haptics.vibrate(HapticsType.success);
@@ -439,7 +456,7 @@ Widget weightEdit(
                     looping: false,
                     onIndexChanged: (index, interactionType) async {
                       final can = await Haptics.canVibrate();
-
+                      weightUnit = unit[index];
                       if (!can) return;
                       await Haptics.vibrate(HapticsType.light);
                     },
@@ -457,6 +474,36 @@ Widget weightEdit(
                         ),
                       );
                     },
+                  ),
+                ),
+                SizedBox(height: 60),
+                InkWell(
+                  onTap: () async {
+                    final can = await Haptics.canVibrate();
+
+                    _showSaveMessage(context, () async {});
+                    Navigator.pop(context);
+                    if (!can) return;
+                    await Haptics.vibrate(HapticsType.success);
+                  },
+                  child: Container(
+                    height: 77,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: inactiveColor,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Save",
+                        style: interFont(
+                          18,
+                          Colors.black,
+                          FontStyle.normal,
+                          FontWeight.w500,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -493,7 +540,6 @@ Widget ageEdit(UserInfo info, double height, BuildContext context) {
                       final can = await Haptics.canVibrate();
 
                       age = index + 1;
-                      print(age);
 
                       if (!can) return;
                       await Haptics.vibrate(HapticsType.light);
@@ -537,7 +583,6 @@ Widget ageEdit(UserInfo info, double height, BuildContext context) {
               _showSaveMessage(context, () async {
                 updateAge(age);
               });
-              Navigator.pop(context);
               if (!can) return;
               await Haptics.vibrate(HapticsType.success);
             },

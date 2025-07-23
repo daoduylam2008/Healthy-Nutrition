@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-Widget nutrientsColumnChart() {
+Widget caloriesColumn() {
   return Container();
 }

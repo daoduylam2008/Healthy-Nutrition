@@ -17,7 +17,6 @@ const femaleColor = Color.fromARGB(255, 255, 76, 76);
 
 // Date constants
 DateTime today = DateTime.now();
-DateTime todayTest = DateTime(2025, 5, 28);
 
 ThemeData theme = ThemeData(
   useMaterial3: true,
@@ -26,7 +25,7 @@ ThemeData theme = ThemeData(
 );
 
 // const url = "http://localhost:3000";
-const url = "http://10.0.0.202:3000";
+const url = "http://10.0.0.222:3000";
 
 TextStyle interFont(
   double size,
