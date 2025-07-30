@@ -1,7 +1,8 @@
-year = int(input())
+import os, sys
 
-while True:
-    year += 1
-    if year % 4 == 0:
-        print()
-        break
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from app import app
+
+if __name__ == "__main__":
+    app.run()
