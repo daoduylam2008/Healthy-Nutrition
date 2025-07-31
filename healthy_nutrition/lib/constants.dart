@@ -23,9 +23,9 @@ ThemeData theme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: foregroundColor,
 );
-
+// ngGzoao5juXnWBgl
 // const url = "http://localhost:3000";
-const url = "http://10.0.0.222:3000";
+const url = "https://healthy-nutrition-database.vercel.app";
 
 TextStyle interFont(
   double size,
@@ -40,3 +40,4 @@ TextStyle interFont(
     fontWeight: weight,
   );
 }
+
