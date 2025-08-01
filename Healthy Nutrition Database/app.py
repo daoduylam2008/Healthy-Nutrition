@@ -261,4 +261,4 @@ def get_goals_by_name_and_calorie():
 
 
 if __name__ == "__main__": 
-    app.run()
+    app.run(host="0.0.0.0", port=3000)

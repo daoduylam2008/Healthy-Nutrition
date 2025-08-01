@@ -2,7 +2,7 @@ flask
 flask_bcrypt
 pyjwt
 python-dotenv
-pymongo
+pymongo=4.7.0
 pandas
 gunicorn
 certifi

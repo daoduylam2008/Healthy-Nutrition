@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from pymongo.server_api import ServerApi
 
 import os, pymongo
 import util
@@ -8,7 +9,7 @@ load_dotenv()
 
 
 url = os.environ.get("MONGODB_CONNECT")
-client = pymongo.MongoClient(url)
+client = pymongo.MongoClient(url, server_api=ServerApi('1'))
 database = client["healthy_nutrition"]
 
 
