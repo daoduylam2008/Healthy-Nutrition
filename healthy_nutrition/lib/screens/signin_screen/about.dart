@@ -3,6 +3,8 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/screens/signin_screen/goal.dart';
 import 'package:healthy_nutrition/widgets/processWidget.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:wheel_picker/wheel_picker.dart';
+import 'package:auto_hide_keyboard/auto_hide_keyboard.dart';
 
 class AboutScreen extends StatefulWidget {
   @override
@@ -45,9 +47,9 @@ class _AboutScreen extends State<AboutScreen> {
     lastNameController.dispose();
     firstNameController.dispose();
     ageController.dispose();
-    heightController.dispose(); 
+    heightController.dispose();
     weightController.dispose();
-    
+
     super.dispose();
   }
 
@@ -97,12 +99,14 @@ class _AboutScreen extends State<AboutScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
-                      child: TextField(
-                        cursorColor: white,
-                        controller: firstNameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "First name",
+                      child: AutoHideKeyboard(
+                        child: TextField(
+                          cursorColor: white,
+                          controller: firstNameController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "First name",
+                          ),
                         ),
                       ),
                     ),
@@ -117,12 +121,14 @@ class _AboutScreen extends State<AboutScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
-                      child: TextField(
-                        cursorColor: white,
-                        controller: lastNameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Last name",
+                      child: AutoHideKeyboard(
+                        child: TextField(
+                          cursorColor: white,
+                          controller: lastNameController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Last name",
+                          ),
                         ),
                       ),
                     ),
@@ -252,7 +258,7 @@ class _AboutScreen extends State<AboutScreen> {
                                 ),
                                 SizedBox(width: 27),
                                 Text(
-                                  "Height (cm)",
+                                  "Height",
                                   style: interFont(
                                     16,
                                     white,
@@ -262,22 +268,199 @@ class _AboutScreen extends State<AboutScreen> {
                                 ),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              width: 100,
-                              height: 50,
-                              child: TextField(
-                                cursorColor: white,
-                                controller: heightController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Your height",
+                            InkWell(
+                              onTap: () {
+                                String heightUnit = "";
+                                List unit = ["cm", "ft"];
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  showDragHandle: true,
+                                  useRootNavigator: true,
+
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(
+                                          context,
+                                        ).viewInsets.bottom,
+                                      ),
+                                      child: SingleChildScrollView(
+                                        child: Container(
+                                          width: double.infinity,
+                                          padding: EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                            bottom: 20,
+                                          ),
+                                          height: height * 0.4,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Weight",
+                                                style: interFont(
+                                                  32,
+                                                  white,
+                                                  FontStyle.normal,
+                                                  FontWeight.w500,
+                                                ),
+                                              ),
+                                              SizedBox(height: 40),
+                                              Expanded(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Flexible(
+                                                      flex: 4,
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(
+                                                          10,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.black,
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                12,
+                                                              ),
+                                                        ),
+                                                        width: 100,
+                                                        height: 50,
+                                                        child: AutoHideKeyboard(
+                                                          safePadding:
+                                                              EdgeInsets.all(0),
+                                                          child: TextField(
+                                                            cursorColor: white,
+                                                            controller:
+                                                                heightController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                                  border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                  hintText:
+                                                                      "Your height",
+                                                                ),
+                                                            keyboardType:
+                                                                TextInputType.numberWithOptions(
+                                                                  decimal: true,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: WheelPicker(
+                                                        selectedIndexColor:
+                                                            white,
+                                                        looping: false,
+                                                        onIndexChanged:
+                                                            (
+                                                              index,
+                                                              interactionType,
+                                                            ) async {
+                                                              final can =
+                                                                  await Haptics.canVibrate();
+                                                              heightUnit =
+                                                                  unit[index];
+                                                              if (!can) return;
+                                                              await Haptics.vibrate(
+                                                                HapticsType
+                                                                    .light,
+                                                              );
+                                                            },
+                                                        initialIndex: 1,
+                                                        itemCount: 2,
+                                                        style: WheelPickerStyle(
+                                                          itemExtent: 30,
+                                                        ),
+                                                        builder:
+                                                            (context, index) {
+                                                              return Text(
+                                                                "${unit[index]}",
+                                                                style: interFont(
+                                                                  20,
+                                                                  inactiveColor,
+                                                                  FontStyle
+                                                                      .normal,
+                                                                  FontWeight
+                                                                      .w500,
+                                                                ),
+                                                              );
+                                                            },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(height: 60),
+                                              InkWell(
+                                                onTap: () async {
+                                                  final can =
+                                                      await Haptics.canVibrate();
+
+                                                  saveData["height"] = [
+                                                    heightController.text,
+                                                    heightUnit,
+                                                  ];
+                                                  Navigator.pop(context);
+                                                  if (!can) return;
+                                                  await Haptics.vibrate(
+                                                    HapticsType.success,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  height: 77,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: signatureColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          25,
+                                                        ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Save",
+                                                      style: interFont(
+                                                        18,
+                                                        Colors.black,
+                                                        FontStyle.normal,
+                                                        FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                keyboardType: TextInputType.number,
+                                width: 100,
+                                height: 50,
+                                child: SizedBox(
+                                  width: 100,
+                                  child: Center(
+                                    child: Text(
+                                      (saveData["height"] == [] ||
+                                              saveData["height"].toString() ==
+                                                  "[]")
+                                          ? "Your height"
+                                          : saveData["height"][0],
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -293,7 +476,7 @@ class _AboutScreen extends State<AboutScreen> {
                                 ),
                                 SizedBox(width: 27),
                                 Text(
-                                  "Weight (kg)",
+                                  "Weight",
                                   style: interFont(
                                     16,
                                     white,
@@ -303,22 +486,199 @@ class _AboutScreen extends State<AboutScreen> {
                                 ),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              width: 100,
-                              height: 50,
-                              child: TextField(
-                                cursorColor: white,
-                                controller: weightController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Your weight",
+                            InkWell(
+                              onTap: () {
+                                String weightUnit = "";
+                                List unit = ["kg", "lbs"];
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  showDragHandle: true,
+                                  useRootNavigator: true,
+
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(
+                                          context,
+                                        ).viewInsets.bottom,
+                                      ),
+                                      child: SingleChildScrollView(
+                                        child: Container(
+                                          width: double.infinity,
+                                          padding: EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                            bottom: 20,
+                                          ),
+                                          height: height * 0.4,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Weight",
+                                                style: interFont(
+                                                  32,
+                                                  white,
+                                                  FontStyle.normal,
+                                                  FontWeight.w500,
+                                                ),
+                                              ),
+                                              SizedBox(height: 40),
+                                              Expanded(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Flexible(
+                                                      flex: 4,
+                                                      child: Container(
+                                                        padding: EdgeInsets.all(
+                                                          10,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.black,
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                12,
+                                                              ),
+                                                        ),
+                                                        width: 100,
+                                                        height: 50,
+                                                        child: AutoHideKeyboard(
+                                                          safePadding:
+                                                              EdgeInsets.all(0),
+                                                          child: TextField(
+                                                            cursorColor: white,
+                                                            controller:
+                                                                weightController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                                  border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                  hintText:
+                                                                      "Your weight",
+                                                                ),
+                                                            keyboardType:
+                                                                TextInputType.numberWithOptions(
+                                                                  decimal: true,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: WheelPicker(
+                                                        selectedIndexColor:
+                                                            white,
+                                                        looping: false,
+                                                        onIndexChanged:
+                                                            (
+                                                              index,
+                                                              interactionType,
+                                                            ) async {
+                                                              final can =
+                                                                  await Haptics.canVibrate();
+                                                              weightUnit =
+                                                                  unit[index];
+                                                              if (!can) return;
+                                                              await Haptics.vibrate(
+                                                                HapticsType
+                                                                    .light,
+                                                              );
+                                                            },
+                                                        initialIndex: 1,
+                                                        itemCount: 2,
+                                                        style: WheelPickerStyle(
+                                                          itemExtent: 30,
+                                                        ),
+                                                        builder:
+                                                            (context, index) {
+                                                              return Text(
+                                                                "${unit[index]}",
+                                                                style: interFont(
+                                                                  20,
+                                                                  inactiveColor,
+                                                                  FontStyle
+                                                                      .normal,
+                                                                  FontWeight
+                                                                      .w500,
+                                                                ),
+                                                              );
+                                                            },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(height: 60),
+                                              InkWell(
+                                                onTap: () async {
+                                                  final can =
+                                                      await Haptics.canVibrate();
+
+                                                  saveData["weight"] = [
+                                                    weightController.text,
+                                                    weightUnit,
+                                                  ];
+                                                  Navigator.pop(context);
+                                                  if (!can) return;
+                                                  await Haptics.vibrate(
+                                                    HapticsType.success,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  height: 77,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: signatureColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          25,
+                                                        ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Save",
+                                                      style: interFont(
+                                                        18,
+                                                        Colors.black,
+                                                        FontStyle.normal,
+                                                        FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                keyboardType: TextInputType.number,
+                                width: 100,
+                                height: 50,
+                                child: SizedBox(
+                                  width: 100,
+                                  child: Center(
+                                    child: Text(
+                                      (saveData["weight"] == [] ||
+                                              saveData["weight"].toString() ==
+                                                  "[]")
+                                          ? "Your weight"
+                                          : saveData["weight"][0],
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],

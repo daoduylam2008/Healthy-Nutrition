@@ -25,7 +25,7 @@ ThemeData theme = ThemeData(
 );
 // ngGzoao5juXnWBgl
 // const url = "http://localhost:3000";
-const url = "https://healthy-nutrition-database.vercel.app";
+const url = "https://healthy-nutrition-ashy.vercel.app";
 
 TextStyle interFont(
   double size,

@@ -30,6 +30,8 @@ dependencies:
   flutter_phoenix: "^1.0.0"
   flutter_slidable: ^4.0.0
   image_picker: ^1.1.2
+  auto_hide_keyboard: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

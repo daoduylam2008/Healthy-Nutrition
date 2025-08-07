@@ -1,9 +1,8 @@
-import jwt, models, util
+import models, util
 from dotenv import load_dotenv
 from flask import request
 from functools import wraps
 from datetime import datetime, date
-
 
 
 load_dotenv()
@@ -14,11 +13,8 @@ users = models.Users()
 def isExpired(text):
     expiration_date = datetime.strptime(text, "%d/%m/%Y").date()
     today = date.today()
+    return not expiration_date < today
 
-    if expiration_date >= today:
-        return False
-    else:
-        return True
 
 def token_required(f):
     @wraps(f)

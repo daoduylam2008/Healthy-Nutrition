@@ -5,6 +5,7 @@ import 'package:healthy_nutrition/main.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/token.dart';
 import 'package:healthy_nutrition/widgets/processWidget.dart';
+import 'package:auto_hide_keyboard/auto_hide_keyboard.dart';
 
 // ignore: must_be_immutable
 class RegisterScreen extends StatefulWidget {
@@ -92,12 +93,14 @@ class _RegisterScreen extends State<RegisterScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
-                    child: TextField(
-                      cursorColor: white,
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "username",
+                    child: AutoHideKeyboard(
+                      child: TextField(
+                        cursorColor: white,
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "username",
+                        ),
                       ),
                     ),
                   ),
@@ -112,12 +115,14 @@ class _RegisterScreen extends State<RegisterScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
-                    child: TextField(
-                      cursorColor: white,
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "email",
+                    child: AutoHideKeyboard(
+                      child: TextField(
+                        cursorColor: white,
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "email",
+                        ),
                       ),
                     ),
                   ),
@@ -132,22 +137,24 @@ class _RegisterScreen extends State<RegisterScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
-                    child: TextField(
-                      obscureText: !showPassword,
-                      cursorColor: white,
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "password",
-                        suffixIcon: GestureDetector(
-                          child: (showPassword)
-                              ? Icon(Icons.visibility)
-                              : Icon(Icons.visibility_off),
-                          onTap: () {
-                            setState(() {
-                              showPassword = !showPassword;
-                            });
-                          },
+                    child: AutoHideKeyboard(
+                      child: TextField(
+                        obscureText: !showPassword,
+                        cursorColor: white,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "password",
+                          suffixIcon: GestureDetector(
+                            child: (showPassword)
+                                ? Icon(Icons.visibility)
+                                : Icon(Icons.visibility_off),
+                            onTap: () {
+                              setState(() {
+                                showPassword = !showPassword;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -174,7 +181,6 @@ class _RegisterScreen extends State<RegisterScreen> {
                     errorString = "Please fill the information";
                   });
                 } else {
-                  print(widget.saveData);
                   var token = await register(
                     usernameController.text,
                     passwordController.text,

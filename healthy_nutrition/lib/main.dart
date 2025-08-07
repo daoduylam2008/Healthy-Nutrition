@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:healthy_nutrition/constants.dart';
+import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/start.dart';
 import 'package:healthy_nutrition/screens/user.dart';
 import 'package:healthy_nutrition/token.dart';
@@ -54,7 +55,16 @@ class _MainApp extends State<MainApp> {
               if (snapshot.hasData) {
                 String? token = snapshot.data;
                 if (token == "" || token == null) {
-                  return StartScreen();
+                      return StartScreen();
+                } else if (isExpired(snapshot.data!)) {
+                  refreshToken(token).then((value) async {
+                    if (value != null) {
+                      await writeToken(value);
+                      Phoenix.rebirth(context);
+                    } else {
+                      return StartScreen();
+                    }
+                  });
                 }
                 return UserScreen();
               }

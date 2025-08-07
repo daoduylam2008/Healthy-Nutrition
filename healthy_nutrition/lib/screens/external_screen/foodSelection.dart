@@ -214,15 +214,17 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                                     FontWeight.normal,
                                   ),
                                 )
-                              : Text(
-                                  "${widget.food.portion[p]}gram",
-                                  style: interFont(
-                                    16,
-                                    inactiveColor,
-                                    FontStyle.normal,
-                                    FontWeight.normal,
+                              : FittedBox(
+                                child: Text(
+                                    "${widget.food.portion[p]}gram",
+                                    style: interFont(
+                                      16,
+                                      inactiveColor,
+                                      FontStyle.normal,
+                                      FontWeight.normal,
+                                    ),
                                   ),
-                                ),
+                              ),
                         ],
                       ),
                     ),
@@ -359,3 +361,12 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
     );
   }
 }
+// TextField(
+//                                 cursorColor: white,
+//                                 controller: heightController,
+//                                 decoration: InputDecoration(
+//                                   border: InputBorder.none,
+//                                   hintText: "Your height",
+//                                 ),
+//                                 keyboardType: TextInputType.number,
+//                               ),

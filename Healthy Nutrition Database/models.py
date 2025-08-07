@@ -12,7 +12,8 @@ load_dotenv()
 
 
 url = os.environ.get("MONGODB_CONNECT")
-client = pymongo.MongoClient(url, server_api=ServerApi('1'), tlsCAFile=ca)
+client = pymongo.MongoClient(url, server_api=ServerApi('1'), 
+                             tlsCAFile=ca)
 database = client["healthy_nutrition"]
 
 

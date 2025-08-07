@@ -42,6 +42,20 @@ Future<String?> register(
   return null;
 }
 
+Future<String?> refreshToken(String token) async {
+  final response = await http.post(
+    Uri.parse("$url/register"),
+    headers: <String, String>{
+      "content-type": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body)["Authorization"];
+  }
+}
+
 Future<UserInfo?> fetchUserInfo() async {
   String token = await readToken();
 

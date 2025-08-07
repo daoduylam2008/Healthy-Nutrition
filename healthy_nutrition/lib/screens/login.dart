@@ -4,7 +4,7 @@ import 'package:healthy_nutrition/constants.dart';
 import 'package:healthy_nutrition/main.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/token.dart';
-
+import 'package:auto_hide_keyboard/auto_hide_keyboard.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -89,12 +89,14 @@ class _LoginScreen extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 padding: EdgeInsets.all(20),
-                child: TextField(
-                  controller: username,
-                  cursorColor: white,
-                  decoration: InputDecoration(
-                    hintText: "username/email",
-                    border: InputBorder.none,
+                child: AutoHideKeyboard(
+                  child: TextField(
+                    controller: username,
+                    cursorColor: white,
+                    decoration: InputDecoration(
+                      hintText: "username/email",
+                      border: InputBorder.none,
+                    ),
                   ),
                 ),
               ),
@@ -109,23 +111,25 @@ class _LoginScreen extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 padding: EdgeInsets.all(20),
-                child: TextField(
-                  obscureText: !showPassword,
-                  controller: password,
-                  cursorColor: white,
-                  decoration: InputDecoration(
-                    suffixIcon: GestureDetector(
-                      child: (showPassword)
-                          ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off),
-                      onTap: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
-                      },
+                child: AutoHideKeyboard(
+                  child: TextField(
+                    obscureText: !showPassword,
+                    controller: password,
+                    cursorColor: white,
+                    decoration: InputDecoration(
+                      suffixIcon: GestureDetector(
+                        child: (showPassword)
+                            ? Icon(Icons.visibility)
+                            : Icon(Icons.visibility_off),
+                        onTap: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                      ),
+                      hintText: "Password",
+                      border: InputBorder.none,
                     ),
-                    hintText: "Password",
-                    border: InputBorder.none,
                   ),
                 ),
               ),

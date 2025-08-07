@@ -12,6 +12,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:wheel_picker/wheel_picker.dart';
 import 'package:material_dialogs/material_dialogs.dart';
+import 'package:auto_hide_keyboard/auto_hide_keyboard.dart';
 
 // ignore: must_be_immutable
 class InfoPage extends StatefulWidget {
@@ -103,9 +104,7 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                         builder: (context) => EditInfoScreen(info: widget.info),
                       ),
                     );
-                    setState(() {
-                      
-                    });
+                    setState(() {});
                     if (!can) return;
                     await Haptics.vibrate(HapticsType.success);
                   } else {
@@ -141,7 +140,6 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
               SizedBox(height: 38),
               userMeasurement(),
               SizedBox(height: 20),
-
               SizedBox(height: 40),
               InkWell(
                 onTap: () async {
@@ -179,7 +177,7 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
 
   Widget userMeasurement() {
     return Container(
-      padding: EdgeInsets.only(right: 30, left: 30),
+      // padding: EdgeInsets.only(right: 30, left: 30),
       height: 116,
       decoration: BoxDecoration(
         color: boxColor,
@@ -215,6 +213,9 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
     String unit,
     double width,
   ) {
+    if (unit == "pound") {
+      unit = "lbs";
+    }
     return SizedBox(
       width: width * 0.21,
       height: double.infinity,
@@ -275,9 +276,7 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                     return ageEdit(widget.info, height, context);
                   },
                 );
-                setState(() {
-                  
-                });
+                setState(() {});
                 if (!can) return;
                 await Haptics.vibrate(HapticsType.success);
               } else {
@@ -296,8 +295,9 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                 children: [
                   Text(
                     data,
+                    overflow: TextOverflow.fade,
                     style: interFont(
-                      26,
+                       26,
                       white,
                       FontStyle.normal,
                       FontWeight.w500,
@@ -385,6 +385,9 @@ Widget heightEdit(
   TickerProvider vsync,
   TextEditingController heightController,
 ) {
+  String heightUnit = "";
+  List unit = ["cm", "ft"];
+
   return SingleChildScrollView(
     child: Container(
       width: double.infinity,
@@ -393,10 +396,100 @@ Widget heightEdit(
       child: Column(
         children: [
           Text(
-            "Height",
+            "Weight",
             style: interFont(32, white, FontStyle.normal, FontWeight.w500),
           ),
           SizedBox(height: 40),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 4,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 218, 194, 194),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    width: 100,
+                    height: 50,
+                    child: AutoHideKeyboard(
+                      child: TextField(
+                        cursorColor: white,
+                        controller: heightController,
+                        decoration: InputDecoration(
+                          border: InputBorder .none,
+                          hintText: "Your height",
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: WheelPicker(
+                    selectedIndexColor: white,
+                    looping: false,
+                    onIndexChanged: (index, interactionType) async {
+                      final can = await Haptics.canVibrate();
+                      heightUnit = unit[index];
+                      if (!can) return;
+                      await Haptics.vibrate(HapticsType.light);
+                    },
+                    initialIndex: 1,
+                    itemCount: 2,
+                    style: WheelPickerStyle(itemExtent: 30),
+                    builder: (context, index) {
+                      return Text(
+                        "${unit[index]}",
+                        style: interFont(
+                          20,
+                          inactiveColor,
+                          FontStyle.normal,
+                          FontWeight.w500,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 60),
+          InkWell(
+            onTap: () async {
+              final can = await Haptics.canVibrate();
+
+              _showSaveMessage(context, () async {
+                await updateHeight(
+                  double.parse(heightController.text),
+                  heightUnit,
+                );
+              });
+              if (!can) return;
+              await Haptics.vibrate(HapticsType.success);
+            },
+            child: Container(
+              height: 77,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: signatureColor,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Center(
+                child: Text(
+                  "Save",
+                  style: interFont(
+                    18,
+                    Colors.black,
+                    FontStyle.normal,
+                    FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     ),
@@ -439,14 +532,16 @@ Widget weightEdit(
                     ),
                     width: 100,
                     height: 50,
-                    child: TextField(
-                      cursorColor: white,
-                      controller: weightController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Your weight",
+                    child: AutoHideKeyboard(
+                      child: TextField(
+                        cursorColor: white,
+                        controller: weightController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Your weight",
+                        ),
+                        keyboardType: TextInputType.number,
                       ),
-                      keyboardType: TextInputType.number,
                     ),
                   ),
                 ),
@@ -476,37 +571,41 @@ Widget weightEdit(
                     },
                   ),
                 ),
-                SizedBox(height: 60),
-                InkWell(
-                  onTap: () async {
-                    final can = await Haptics.canVibrate();
+              ],
+            ),
+          ),
+          SizedBox(height: 60),
+          InkWell(
+            onTap: () async {
+              final can = await Haptics.canVibrate();
 
-                    _showSaveMessage(context, () async {});
-                    Navigator.pop(context);
-                    if (!can) return;
-                    await Haptics.vibrate(HapticsType.success);
-                  },
-                  child: Container(
-                    height: 77,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: inactiveColor,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Save",
-                        style: interFont(
-                          18,
-                          Colors.black,
-                          FontStyle.normal,
-                          FontWeight.w500,
-                        ),
-                      ),
-                    ),
+              _showSaveMessage(context, () async {
+                await updateWeight(
+                  double.parse(weightController.text),
+                  weightUnit,
+                );
+              });
+              if (!can) return;
+              await Haptics.vibrate(HapticsType.success);
+            },
+            child: Container(
+              height: 77,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: signatureColor,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Center(
+                child: Text(
+                  "Save",
+                  style: interFont(
+                    18,
+                    Colors.black,
+                    FontStyle.normal,
+                    FontWeight.w500,
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],

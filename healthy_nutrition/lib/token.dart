@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 bool isExpired(String token) {
   Map<String, dynamic> payload = JwtDecoder.decode(token);
+
   List<String> date = payload["expiration date"].split('/');
   final now = DateTime.now();
   final expirationDate = DateTime(
@@ -10,7 +11,10 @@ bool isExpired(String token) {
     int.parse(date[1]),
     int.parse(date[0]),
   );
+
+  print(expirationDate);
   final bool isExpired = expirationDate.isBefore(now);
+
   return isExpired;
 }
 
