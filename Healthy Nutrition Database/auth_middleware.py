@@ -13,7 +13,7 @@ users = models.Users()
 def isExpired(text):
     expiration_date = datetime.strptime(text, "%d/%m/%Y").date()
     today = date.today()
-    return not expiration_date < today
+    return expiration_date < today
 
 
 def token_required(f):
