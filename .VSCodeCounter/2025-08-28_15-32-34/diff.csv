@@ -1,0 +1,18 @@
+"filename", "language", "CMake", "C++", "Dart", "YAML", "Swift", "comment", "blank", "total"
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/constants.dart", "Dart", 0, 0, 2, 0, 0, 0, -1, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/foodSelection.dart", "Dart", 0, 0, 24, 0, 0, -9, 1, 16
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/goal_edit.dart", "Dart", 0, 0, 29, 0, 0, 0, 4, 33
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/info.dart", "Dart", 0, 0, 100, 0, 0, 0, 0, 100
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/scanning_camera.dart", "Dart", 0, 0, 1, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/favorite.dart", "Dart", 0, 0, 1, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/history.dart", "Dart", 0, 0, 13, 0, 0, 0, 0, 13
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/home.dart", "Dart", 0, 0, 2, 0, 0, 0, 0, 2
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/utils.dart", "Dart", 0, 0, 9, 0, 0, 1, 0, 10
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/historyNutritionView.dart", "Dart", 0, 0, 1, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugin_registrant.cc", "C++", 0, 4, 0, 0, 0, 0, 0, 4
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugins.cmake", "CMake", 1, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Flutter/GeneratedPluginRegistrant.swift", "Swift", 0, 0, 0, 0, 2, 0, 0, 2
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/pubspec.yaml", "YAML", 0, 0, 0, 1, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugin_registrant.cc", "C++", 0, 3, 0, 0, 0, 0, 0, 3
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugins.cmake", "CMake", 1, 0, 0, 0, 0, 0, 0, 1
+"Total", "-", 2, 7, 182, 1, 2, -8, 4, 190

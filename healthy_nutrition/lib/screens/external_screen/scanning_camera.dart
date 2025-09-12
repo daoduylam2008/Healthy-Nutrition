@@ -281,6 +281,7 @@ class _ScaningSreen extends State<ScaningSreen>
                       null,
                       widget.info,
                       false,
+                      true,
                       context,
                     ),
                   );

@@ -15,7 +15,15 @@ class FoodSelectionScreen extends StatefulWidget {
   UserInfo info;
   int? portion;
   int? amount;
-  FoodSelectionScreen({super.key, required this.food, required this.info, required this.portion, required this.amount});
+  bool editable;
+  FoodSelectionScreen({
+    super.key,
+    required this.food,
+    required this.info,
+    required this.portion,
+    required this.amount,
+    required this.editable
+  });
 
   @override
   State<FoodSelectionScreen> createState() => _FoodSelectionScreen();
@@ -25,7 +33,7 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
   var size, width, height;
   String? p;
   int portion = -1;
-  int amount = 1;
+  int amount = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +45,13 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
     bool favorite = isFavorite(widget.info, widget.food);
 
     if (widget.portion != null) {
-      portion =  widget.portion!;
+      portion = widget.portion!;
     }
 
-    if (widget.amount != null) {
+    if (widget.amount != null && amount < 0) {
       amount = widget.amount!;
     }
-    
+
     Map<String, dynamic> nutrition = nutritionCalculator(
       [widget.food],
       [portion],
@@ -51,27 +59,30 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
     );
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final can = await Haptics.canVibrate();
-          final Map<String, dynamic> data = widget.info.history;
-          if (data[today.dateToString()] == null) {
-            data[today.dateToString()] = [];
-          }
-          data[today.dateToString()].add({
-            "description": widget.food.description,
-            "category": widget.food.category,
-            "portion": portion,
-            "amount": "$amount",
-            "name": widget.food.name,
-          });
-          await updateHistory(data);
-          Navigator.pop(context);
-          if (!can) return;
-          await Haptics.vibrate(HapticsType.success);
-        },
-        backgroundColor: signatureColor,
-        child: Icon(Icons.add, color: Colors.black, size: 30),
+      floatingActionButton: Visibility(
+        visible: widget.editable,
+        child: FloatingActionButton(
+          onPressed: () async {
+            final can = await Haptics.canVibrate();
+            final Map<String, dynamic> data = widget.info.history;
+            if (data[today.dateToString()] == null) {
+              data[today.dateToString()] = [];
+            }
+            data[today.dateToString()].add({
+              "description": widget.food.description,
+              "category": widget.food.category,
+              "portion": portion,
+              "amount": "$amount",
+              "name": widget.food.name,
+            });
+            await updateHistory(data);
+            Navigator.pop(context);
+            if (!can) return;
+            await Haptics.vibrate(HapticsType.success);
+          },
+          backgroundColor: signatureColor,
+          child: Icon(Icons.add, color: Colors.black, size: 30),
+        ),
       ),
       body: SafeArea(
         bottom: false,
@@ -157,6 +168,7 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                         left: 20,
                         right: 5,
                       ),
+                      width: width * 0.55,
                       decoration: BoxDecoration(
                         color: boxColor,
                         borderRadius: BorderRadius.circular(25),
@@ -182,13 +194,17 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                             items: portions.map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
-                                child: Text(
-                                  value,
-                                  style: interFont(
-                                    16,
-                                    white,
-                                    FontStyle.normal,
-                                    FontWeight.w500,
+                                child: SizedBox(
+                                  width: width * 0.35,
+                                  child: Text(
+                                    value,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: interFont(
+                                      16,
+                                      white,
+                                      FontStyle.normal,
+                                      FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               );
@@ -214,73 +230,85 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
                                     FontWeight.normal,
                                   ),
                                 )
-                              : FittedBox(
-                                child: Text(
-                                    "${widget.food.portion[p]}gram",
-                                    style: interFont(
-                                      16,
-                                      inactiveColor,
-                                      FontStyle.normal,
-                                      FontWeight.normal,
-                                    ),
+                              : Text(
+                                  "${widget.food.portion[p]}gram",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: interFont(
+                                    16,
+                                    inactiveColor,
+                                    FontStyle.normal,
+                                    FontWeight.normal,
                                   ),
-                              ),
+                                ),
                         ],
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          final can = await Haptics.canVibrate();
-                          setState(() {
-                            amount -= 1;
-                          });
-                          if (!can) return;
-                          await Haptics.vibrate(HapticsType.light);
-                        },
-                        child: Container(
-                          width: 43,
-                          height: 77,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: boxColor,
+                  Visibility(
+                    visible: widget.editable,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            final can = await Haptics.canVibrate();
+                            setState(() {
+                              amount -= 1;
+                              nutrition = nutritionCalculator(
+                                [widget.food],
+                                [portion],
+                                [amount],
+                              );
+                            });
+                            if (!can) return;
+                            await Haptics.vibrate(HapticsType.light);
+                          },
+                          child: Container(
+                            width: 43,
+                            height: 77,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: boxColor,
+                            ),
+                            child: Icon(Icons.remove, size: 30, color: white),
                           ),
-                          child: Icon(Icons.remove, size: 30, color: white),
                         ),
-                      ),
-                      SizedBox(width: 13),
-                      Text(
-                        "$amount",
-                        style: interFont(
-                          32,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 13),
-                      InkWell(
-                        onTap: () async {
-                          final can = await Haptics.canVibrate();
-                          setState(() {
-                            amount += 1;
-                          });
-                          if (!can) return;
-                          await Haptics.vibrate(HapticsType.light);
-                        },
-                        child: Container(
-                          width: 43,
-                          height: 77,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: boxColor,
+                        SizedBox(width: 13),
+                        Text(
+                          "$amount",
+                          style: interFont(
+                            32,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.bold,
                           ),
-                          child: Icon(Icons.add, size: 30, color: white),
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 13),
+                        InkWell(
+                          onTap: () async {
+                            final can = await Haptics.canVibrate();
+                            setState(() {
+                              amount += 1;
+                              nutrition = nutritionCalculator(
+                                [widget.food],
+                                [portion],
+                                [amount],
+                              );
+                            });
+                            if (!can) return;
+                            await Haptics.vibrate(HapticsType.light);
+                          },
+                          child: Container(
+                            width: 43,
+                            height: 77,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: boxColor,
+                            ),
+                            child: Icon(Icons.add, size: 30, color: white),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -361,12 +389,3 @@ class _FoodSelectionScreen extends State<FoodSelectionScreen> {
     );
   }
 }
-// TextField(
-//                                 cursorColor: white,
-//                                 controller: heightController,
-//                                 decoration: InputDecoration(
-//                                   border: InputBorder.none,
-//                                   hintText: "Your height",
-//                                 ),
-//                                 keyboardType: TextInputType.number,
-//                               ),

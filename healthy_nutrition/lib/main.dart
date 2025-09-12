@@ -55,11 +55,14 @@ class _MainApp extends State<MainApp> {
               if (snapshot.hasData) {
                 String? token = snapshot.data;
                 if (token == "" || token == null) {
-                      return StartScreen();
+                  return StartScreen();
                 } else if (isExpired(snapshot.data!)) {
-                  refreshToken(token).then((value) async {
-                    if (value != null) {
-                      await writeToken(value);
+                  print(isExpired(snapshot.data!));
+
+                  refreshToken(token).then((newToken) async {
+                    if (newToken != null) {
+                      await writeToken(newToken);
+                      setState(() {});
                       Phoenix.rebirth(context);
                     } else {
                       return StartScreen();

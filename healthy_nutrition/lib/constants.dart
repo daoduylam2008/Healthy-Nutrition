@@ -16,17 +16,18 @@ const maleColor = Color.fromARGB(255, 76, 228, 255);
 const femaleColor = Color.fromARGB(255, 255, 76, 76);
 
 // Date constants
-DateTime today = DateTime.now();
+DateTime today = DateTime(2025, 5, 28);
 
 ThemeData theme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
   primaryColor: foregroundColor,
 );
-// ngGzoao5juXnWBgl
-// const url = "http://localhost:3000";
-const url = "https://healthy-nutrition-ashy.vercel.app";
 
+const url = "https://healthy-nutrition-ashy.vercel.app";
+const termsUrl =
+    "https://www.termsfeed.com/live/0294473c-f4f4-4fb7-877f-cde48c6cf714";
+    
 TextStyle interFont(
   double size,
   Color color,
@@ -40,4 +41,3 @@ TextStyle interFont(
     fontWeight: weight,
   );
 }
-

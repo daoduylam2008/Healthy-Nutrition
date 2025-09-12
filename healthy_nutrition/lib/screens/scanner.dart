@@ -3,7 +3,6 @@ import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/scanning_camera.dart';
 import 'package:flutter/material.dart';
-import 'package:healthy_nutrition/screens/user.dart';
 import 'package:healthy_nutrition/widgets/foodBox.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
@@ -166,6 +165,7 @@ class _ScannerScreen extends State<ScannerScreen> {
                                     int.parse(history[ind]["amount"]),
                                     info,
                                     false,
+                                    true,
                                     context,
                                   );
                                 } catch (e) {

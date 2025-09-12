@@ -126,52 +126,54 @@ class _HomeScreen extends State<HomeScreen> {
               child: Stack(
                 children: [
                   ListView(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Today",
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Today",
+                              style: interFont(
+                                32,
+                                white,
+                                FontStyle.normal,
+                                FontWeight.w600,
+                              ),
+                            ),
+                            profileButton(info),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Click the below menu to see detail!",
                             style: interFont(
-                              32,
-                              white,
+                              14,
+                              inactiveColor,
                               FontStyle.normal,
                               FontWeight.w600,
                             ),
                           ),
-                          profileButton(info),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Click the below menu to see detail!",
+                        ),
+                        SizedBox(height: 5),
+                        healthProfileContainer(info, today, true, context),
+                        SizedBox(height: 33),
+                        Text(
+                          "Food",
                           style: interFont(
-                            14,
-                            inactiveColor,
+                            32,
+                            white,
                             FontStyle.normal,
-                            FontWeight.w600,
+                            FontWeight.w500,
                           ),
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      healthProfileContainer(info, today, true, context),
-                      SizedBox(height: 33),
-                      Text(
-                        "Food",
-                        style: interFont(
-                          32,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.w500,
-                        ),
-                      ),
-                      boxes(),
-                    ],
+                        boxes(),
+                      ],
+                    ),
                   ),
                 ],
               ),

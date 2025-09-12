@@ -49,6 +49,19 @@ class _HistoryScreen extends State<HistoryScreen> {
                     headerStyle: HeaderStyle(
                       titleCentered: true,
                       formatButtonVisible: false,
+                      titleTextStyle: interFont(20, white, FontStyle.normal, FontWeight.bold),
+                      leftChevronIcon: Icon(
+                        Icons.chevron_left,
+                        color: white,
+                        size: 28,
+                        weight: 1,
+                      ),
+                      rightChevronIcon: Icon(
+                        Icons.chevron_right,
+                        color: white,
+                        size: 28,
+                        weight: 1,
+                      )
                     ),
                     calendarStyle: CalendarStyle(
                       weekendTextStyle: TextStyle(fontSize: 16),

@@ -86,6 +86,7 @@ class _FavoriteScreen extends State<FavoriteScreen> {
                                     1,
                                     snapshot1.data!,
                                     false,
+                                    false,
                                     context,
                                   );
                                 } catch (e) {

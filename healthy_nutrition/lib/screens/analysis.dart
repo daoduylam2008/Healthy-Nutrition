@@ -96,55 +96,77 @@ class _AnalysisScreen extends State<AnalysisScreen> {
             );
           }
     
-          return FutureBuilder(
-            future: fetchFoods(descriptions),
-            builder: (context, asyncSnapshot) {
-              if (snapshot.hasData) {
-                Map<String, dynamic> nutritionData = nutritionCalculator(
-                  asyncSnapshot.data ?? [],
-                  portions,
-                  amounts,
-                );
-                return SafeArea(
-                  minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Analysis",
-                        style: interFont(
-                          32,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.w500,
-                        ),
+          return RefreshIndicator(
+            color: signatureColor,
+            elevation: 1,
+            displacement: 85,
+            onRefresh: () async {
+                  final can = await Haptics.canVibrate();
+                  UserInfo _info;
+                  _info = (await fetchUserInfo())!;
+
+                  setState(() {
+                    info = _info;
+                  }) ;
+                  if (!can) return;
+                  await Haptics.vibrate(HapticsType.success);
+                },
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (context, index) => FutureBuilder(
+                future: fetchFoods(descriptions),
+                builder: (context, asyncSnapshot) {
+                  if (snapshot.hasData) {
+                    Map<String, dynamic> nutritionData = nutritionCalculator(
+                      asyncSnapshot.data ?? [],
+                      portions,
+                      amounts,
+                    );
+                    try {return SafeArea(
+                      minimum: EdgeInsets.only(top: 80, right: 20, left: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Analysis",
+                            style: interFont(
+                              32,
+                              white,
+                              FontStyle.normal,
+                              FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 48),
+                          weeklyNutrients(
+                            snapshot.data!,
+                            datesOfTheWeek,
+                            context,
+                          ),
+                          SizedBox(height: 60),
+                          nutrientsDistributionWidget(nutritionData),
+                          SizedBox(height: 49),
+                          Text(
+                            "Vitamin",
+                            style: interFont(
+                              24,
+                              white,
+                              FontStyle.normal,
+                              FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 26),
+                          vitaminContainer(nutritionData),
+                        ],
                       ),
-                      SizedBox(height: 48),
-                      weeklyNutrients(
-                        snapshot.data!,
-                        datesOfTheWeek,
-                        context,
-                      ),
-                      SizedBox(height: 60),
-                      nutrientsDistributionWidget(nutritionData),
-                      SizedBox(height: 49),
-                      Text(
-                        "Vitamin",
-                        style: interFont(
-                          24,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 26),
-                      vitaminContainer(nutritionData),
-                    ],
-                  ),
-                );
-              }
-              return Center(child: CircularProgressIndicator());
-            },
+                    );
+                    } catch (e) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
           );
         }
         return SafeArea(

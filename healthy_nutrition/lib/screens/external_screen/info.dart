@@ -5,7 +5,9 @@ import 'package:healthy_nutrition/main.dart';
 import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/request.dart';
 import 'package:healthy_nutrition/screens/external_screen/edit_info.dart';
+import 'package:healthy_nutrition/screens/external_screen/goal_edit.dart';
 import 'package:healthy_nutrition/token.dart';
+import 'package:healthy_nutrition/utils.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -140,6 +142,102 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
               SizedBox(height: 38),
               userMeasurement(),
               SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: boxColor,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              SizedBox(height: 20),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => GoalEditScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 65,
+                  width: double.infinity,
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: boxColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.black,
+                            radius: 20,
+                            child: Icon(Symbols.trophy, color: white),
+                          ),
+                          SizedBox(width: 20),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Goal",
+                              style: interFont(
+                                18,
+                                white,
+                                FontStyle.normal,
+                                FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Icon(Icons.chevron_right, size: 30, color: white),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              InkWell(
+                onTap: () async {
+                  await launchExternalUrl(termsUrl);
+                },
+                child: Container(
+                  height: 65,
+                  width: double.infinity,
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: boxColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.black,
+                            radius: 20,
+                            child: Icon(Symbols.order_approve, color: white),
+                          ),
+                          SizedBox(width: 20),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Terms of Service",
+                              style: interFont(
+                                18,
+                                white,
+                                FontStyle.normal,
+                                FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Icon(Icons.chevron_right, size: 30, color: white),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(height: 40),
               InkWell(
                 onTap: () async {
@@ -185,23 +283,26 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          measurementCustomText(
-            "Height",
-            widget.info.height[0],
-            widget.info.height[1],
-            width,
+          Center(
+            child: measurementCustomText(
+              "Height",
+              widget.info.height[0],
+              widget.info.height[1],
+              width,
+            ),
           ),
-          verticalDivider(62),
-          measurementCustomText(
-            "Weight",
-            widget.info.weight[0],
-            widget.info.weight[1],
-            width,
+          Center(
+            child: measurementCustomText(
+              "Weight",
+              widget.info.weight[0],
+              widget.info.weight[1],
+              width,
+            ),
           ),
-          verticalDivider(62),
-          measurementCustomText("Age", widget.info.age, "", width),
+          Center(
+            child: measurementCustomText("Age", widget.info.age, "", width),
+          ),
         ],
       ),
     );
@@ -217,7 +318,6 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
       unit = "lbs";
     }
     return SizedBox(
-      width: width * 0.21,
       height: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -293,26 +393,30 @@ class _InfoPage extends State<InfoPage> with TickerProviderStateMixin {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    data,
-                    overflow: TextOverflow.fade,
-                    style: interFont(
-                       26,
-                      white,
-                      FontStyle.normal,
-                      FontWeight.w500,
+                  FittedBox(
+                    child: Text(
+                      data,
+                      overflow: TextOverflow.fade,
+                      style: interFont(
+                        26,
+                        white,
+                        FontStyle.normal,
+                        FontWeight.w500,
+                      ),
                     ),
                   ),
                   SizedBox(width: 3),
                   Column(
                     children: [
-                      Text(
-                        unit,
-                        style: interFont(
-                          18,
-                          white,
-                          FontStyle.normal,
-                          FontWeight.normal,
+                      FittedBox(
+                        child: Text(
+                          unit,
+                          style: interFont(
+                            18,
+                            white,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                          ),
                         ),
                       ),
                       SizedBox(height: 2),
@@ -419,7 +523,7 @@ Widget heightEdit(
                         cursorColor: white,
                         controller: heightController,
                         decoration: InputDecoration(
-                          border: InputBorder .none,
+                          border: InputBorder.none,
                           hintText: "Your height",
                         ),
                         keyboardType: TextInputType.number,

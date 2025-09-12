@@ -5,7 +5,6 @@ import 'package:healthy_nutrition/models.dart';
 import 'package:healthy_nutrition/screens/external_screen/foodSelection.dart';
 import 'package:healthy_nutrition/utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:haptic_feedback/haptic_feedback.dart';
 
 Widget foodBox(
   int? portion,
@@ -14,6 +13,7 @@ Widget foodBox(
   int? amount,
   UserInfo info,
   bool deletable,
+  bool editable,
   context,
 ) {
   var size = MediaQuery.of(context).size;
@@ -39,7 +39,7 @@ Widget foodBox(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      FoodSelectionScreen(food: food, portion: null, amount: null, info: info),
+                      FoodSelectionScreen(food: food, portion: null, amount: null, info: info, editable: editable,),
                 ),
               );
             } else {
@@ -50,7 +50,7 @@ Widget foodBox(
                     food: food,
                     portion: portion!,
                     amount: amount!,
-                    info: info,
+                    info: info, editable: editable,
                   ),
                 ),
               );

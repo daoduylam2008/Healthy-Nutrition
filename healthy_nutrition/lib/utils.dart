@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<String> getAssetPath(String asset) async {
   final path = await getLocalPath(asset);
@@ -238,4 +239,14 @@ List<DateTime> getDaysInTheWeek(DateTime date) {
     results.add(firstDayOfWeek.add(Duration(days: i)));
   }
   return results;
+}
+
+Future<void> launchExternalUrl(String urlString) async {
+  final Uri url = Uri.parse(urlString);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url, mode: LaunchMode.externalApplication);
+  } else {
+    // Handle the case where the URL cannot be launched
+    throw 'Could not launch $urlString';
+  }
 }

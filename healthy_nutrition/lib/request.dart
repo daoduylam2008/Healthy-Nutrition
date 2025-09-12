@@ -44,16 +44,17 @@ Future<String?> register(
 
 Future<String?> refreshToken(String token) async {
   final response = await http.post(
-    Uri.parse("$url/register"),
+    Uri.parse("$url/refresh_token"),
     headers: <String, String>{
       "content-type": "application/json",
       "Authorization": "Bearer $token",
     },
   );
-
+  print(response.body);
   if (response.statusCode == 200) {
     return jsonDecode(response.body)["Authorization"];
   }
+  return null;
 }
 
 Future<UserInfo?> fetchUserInfo() async {

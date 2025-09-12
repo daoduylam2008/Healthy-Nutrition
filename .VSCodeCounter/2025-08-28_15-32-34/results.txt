@@ -1,0 +1,311 @@
+Date : 2025-08-28 15:32:34
+Directory : /Users/daoduyluu/Healthy Nutrition
+Total : 177 files,  501710 codes, 311 comments, 3190 blanks, all 505211 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| XML                |         25 |    471,698 |         55 |      1,769 |    473,522 |
+| JSON               |         26 |     15,700 |          0 |         13 |     15,713 |
+| Dart               |         39 |      6,198 |         33 |        404 |      6,635 |
+| JavaScript         |          3 |      4,329 |         11 |         14 |      4,354 |
+| YAML               |         14 |        977 |         17 |         24 |      1,018 |
+| Python             |         16 |        800 |         18 |        261 |      1,079 |
+| C++                |         16 |        561 |        131 |        189 |        881 |
+| CMake              |          8 |        467 |          0 |         92 |        559 |
+| JSON with Comments |          2 |        371 |          5 |        327 |        703 |
+| CSV                |          3 |        352 |          0 |          3 |        355 |
+| Ruby               |          2 |         63 |          4 |         20 |         87 |
+| Swift              |          6 |         61 |          7 |         21 |         89 |
+| Markdown           |          4 |         50 |          0 |         30 |         80 |
+| HTML               |          2 |         30 |         15 |          6 |         51 |
+| pip requirements   |          2 |         14 |          0 |          0 |         14 |
+| TypeScript         |          3 |         11 |          8 |          5 |         24 |
+| Properties         |          3 |         10 |          2 |          2 |         14 |
+| Docker             |          1 |          7 |          3 |          5 |         15 |
+| Ignore             |          1 |          6 |          2 |          2 |         10 |
+| PostCSS            |          1 |          5 |          0 |          3 |          8 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                            | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                               |        177 |    501,710 |        311 |      3,190 |    505,211 |
+| . (Files)                                                                                                                       |          1 |         28 |          0 |          2 |         30 |
+| .dart_tool                                                                                                                      |          4 |      1,462 |          0 |         12 |      1,474 |
+| .dart_tool (Files)                                                                                                              |          2 |      1,440 |          0 |          1 |      1,441 |
+| .dart_tool/extension_discovery                                                                                                  |          2 |         22 |          0 |         11 |         33 |
+| Healthy Nutrition Database                                                                                                      |         22 |     16,459 |         16 |        168 |     16,643 |
+| Healthy Nutrition Database (Files)                                                                                              |         20 |     11,837 |         10 |        159 |     12,006 |
+| Healthy Nutrition Database/assets                                                                                               |          1 |        336 |          0 |          1 |        337 |
+| Healthy Nutrition Database/mongodb                                                                                              |          1 |      4,286 |          6 |          8 |      4,300 |
+| Healthy Nutrition Database/mongodb/initdb.d                                                                                     |          1 |      4,286 |          6 |          8 |      4,300 |
+| Healthy Nutrition Deep Learning                                                                                                 |         39 |    440,888 |         13 |      1,741 |    442,642 |
+| Healthy Nutrition Deep Learning (Files)                                                                                         |         14 |     38,984 |         13 |        289 |     39,286 |
+| Healthy Nutrition Deep Learning/datasets                                                                                        |          1 |         37 |          0 |          0 |         37 |
+| Healthy Nutrition Deep Learning/datasets copy                                                                                   |          1 |         37 |          0 |          0 |         37 |
+| Healthy Nutrition Deep Learning/exp10-new                                                                                       |          2 |        214 |          0 |          2 |        216 |
+| Healthy Nutrition Deep Learning/exp10-new/yolov8n-c3k2-6                                                                        |          1 |        107 |          0 |          1 |        108 |
+| Healthy Nutrition Deep Learning/exp10-new/yolov8n-c3k2-62                                                                       |          1 |        107 |          0 |          1 |        108 |
+| Healthy Nutrition Deep Learning/models                                                                                          |          9 |    262,741 |          0 |        858 |    263,599 |
+| Healthy Nutrition Deep Learning/models (Files)                                                                                  |          8 |    262,716 |          0 |        857 |    263,573 |
+| Healthy Nutrition Deep Learning/models/Mar 29, 25 - best (YOLOv11)_saved_model                                                  |          1 |         25 |          0 |          1 |         26 |
+| Healthy Nutrition Deep Learning/runs                                                                                            |         12 |    138,875 |          0 |        592 |    139,467 |
+| Healthy Nutrition Deep Learning/runs/detect                                                                                     |         12 |    138,875 |          0 |        592 |    139,467 |
+| Healthy Nutrition Deep Learning/runs/detect/train                                                                               |          1 |        107 |          0 |          1 |        108 |
+| Healthy Nutrition Deep Learning/runs/detect/train2                                                                              |          1 |        107 |          0 |          1 |        108 |
+| Healthy Nutrition Deep Learning/runs/detect/train3                                                                              |          1 |        107 |          0 |          1 |        108 |
+| Healthy Nutrition Deep Learning/runs/detect/train4                                                                              |          1 |        107 |          0 |          1 |        108 |
+| Healthy Nutrition Deep Learning/runs/detect/train5                                                                              |          4 |     69,752 |          0 |        306 |     70,058 |
+| Healthy Nutrition Deep Learning/runs/detect/train5 (Files)                                                                      |          2 |        118 |          0 |          2 |        120 |
+| Healthy Nutrition Deep Learning/runs/detect/train5/weights                                                                      |          2 |     69,634 |          0 |        304 |     69,938 |
+| Healthy Nutrition Deep Learning/runs/detect/train6                                                                              |          4 |     68,695 |          0 |        282 |     68,977 |
+| Healthy Nutrition Deep Learning/runs/detect/train6 (Files)                                                                      |          2 |        111 |          0 |          2 |        113 |
+| Healthy Nutrition Deep Learning/runs/detect/train6/weights                                                                      |          2 |     68,584 |          0 |        280 |     68,864 |
+| healthy_nutrition                                                                                                               |         97 |     42,348 |        262 |        906 |     43,516 |
+| healthy_nutrition (Files)                                                                                                       |          4 |         60 |         17 |         13 |         90 |
+| healthy_nutrition/.fvm                                                                                                          |          1 |          3 |          0 |          0 |          3 |
+| healthy_nutrition/android                                                                                                       |          9 |         83 |         53 |         13 |        149 |
+| healthy_nutrition/android (Files)                                                                                               |          1 |          3 |          0 |          1 |          4 |
+| healthy_nutrition/android/app                                                                                                   |          7 |         75 |         53 |         11 |        139 |
+| healthy_nutrition/android/app/src                                                                                               |          7 |         75 |         53 |         11 |        139 |
+| healthy_nutrition/android/app/src/debug                                                                                         |          1 |          3 |          4 |          1 |          8 |
+| healthy_nutrition/android/app/src/main                                                                                          |          5 |         69 |         45 |          9 |        123 |
+| healthy_nutrition/android/app/src/main (Files)                                                                                  |          1 |         43 |         13 |          3 |         59 |
+| healthy_nutrition/android/app/src/main/res                                                                                      |          4 |         26 |         32 |          6 |         64 |
+| healthy_nutrition/android/app/src/main/res/drawable                                                                             |          1 |          4 |          7 |          2 |         13 |
+| healthy_nutrition/android/app/src/main/res/drawable-v21                                                                         |          1 |          4 |          7 |          2 |         13 |
+| healthy_nutrition/android/app/src/main/res/values                                                                               |          1 |          9 |          9 |          1 |         19 |
+| healthy_nutrition/android/app/src/main/res/values-night                                                                         |          1 |          9 |          9 |          1 |         19 |
+| healthy_nutrition/android/app/src/profile                                                                                       |          1 |          3 |          4 |          1 |          8 |
+| healthy_nutrition/android/gradle                                                                                                |          1 |          5 |          0 |          1 |          6 |
+| healthy_nutrition/android/gradle/wrapper                                                                                        |          1 |          5 |          0 |          1 |          6 |
+| healthy_nutrition/assets                                                                                                        |          2 |     34,293 |          0 |        140 |     34,433 |
+| healthy_nutrition/ios                                                                                                           |          9 |        139 |          7 |         22 |        168 |
+| healthy_nutrition/ios (Files)                                                                                                   |          1 |         31 |          3 |         10 |         44 |
+| healthy_nutrition/ios/Runner                                                                                                    |          7 |        101 |          2 |          8 |        111 |
+| healthy_nutrition/ios/Runner (Files)                                                                                            |          2 |         13 |          0 |          3 |         16 |
+| healthy_nutrition/ios/Runner/Assets.xcassets                                                                                    |          3 |         27 |          0 |          3 |         30 |
+| healthy_nutrition/ios/Runner/Assets.xcassets/AppIcon.appiconset                                                                 |          1 |          1 |          0 |          0 |          1 |
+| healthy_nutrition/ios/Runner/Assets.xcassets/LaunchImage.imageset                                                               |          2 |         26 |          0 |          3 |         29 |
+| healthy_nutrition/ios/Runner/Base.lproj                                                                                         |          2 |         61 |          2 |          2 |         65 |
+| healthy_nutrition/ios/RunnerTests                                                                                               |          1 |          7 |          2 |          4 |         13 |
+| healthy_nutrition/lib                                                                                                           |         39 |      6,198 |         33 |        404 |      6,635 |
+| healthy_nutrition/lib (Files)                                                                                                   |          9 |        832 |         14 |        134 |        980 |
+| healthy_nutrition/lib/screens                                                                                                   |         18 |      4,313 |         18 |        214 |      4,545 |
+| healthy_nutrition/lib/screens (Files)                                                                                           |          8 |      1,104 |          5 |         72 |      1,181 |
+| healthy_nutrition/lib/screens/external_screen                                                                                   |          7 |      1,808 |         11 |        100 |      1,919 |
+| healthy_nutrition/lib/screens/signin_screen                                                                                     |          3 |      1,401 |          2 |         42 |      1,445 |
+| healthy_nutrition/lib/widgets                                                                                                   |         12 |      1,053 |          1 |         56 |      1,110 |
+| healthy_nutrition/linux                                                                                                         |          9 |        340 |         37 |         92 |        469 |
+| healthy_nutrition/linux (Files)                                                                                                 |          1 |        104 |          0 |         25 |        129 |
+| healthy_nutrition/linux/flutter                                                                                                 |          4 |        120 |          9 |         27 |        156 |
+| healthy_nutrition/linux/runner                                                                                                  |          4 |        116 |         28 |         40 |        184 |
+| healthy_nutrition/macos                                                                                                         |          7 |        485 |          6 |         27 |        518 |
+| healthy_nutrition/macos (Files)                                                                                                 |          1 |         32 |          1 |         10 |         43 |
+| healthy_nutrition/macos/Flutter                                                                                                 |          1 |         12 |          3 |          4 |         19 |
+| healthy_nutrition/macos/Runner                                                                                                  |          4 |        434 |          0 |          9 |        443 |
+| healthy_nutrition/macos/Runner (Files)                                                                                          |          2 |         23 |          0 |          7 |         30 |
+| healthy_nutrition/macos/Runner/Assets.xcassets                                                                                  |          1 |         68 |          0 |          1 |         69 |
+| healthy_nutrition/macos/Runner/Assets.xcassets/AppIcon.appiconset                                                               |          1 |         68 |          0 |          1 |         69 |
+| healthy_nutrition/macos/Runner/Base.lproj                                                                                       |          1 |        343 |          0 |          1 |        344 |
+| healthy_nutrition/macos/RunnerTests                                                                                             |          1 |          7 |          2 |          4 |         13 |
+| healthy_nutrition/web                                                                                                           |          3 |         60 |         15 |          7 |         82 |
+| healthy_nutrition/windows                                                                                                       |         14 |        687 |         94 |        188 |        969 |
+| healthy_nutrition/windows (Files)                                                                                               |          1 |         89 |          0 |         20 |        109 |
+| healthy_nutrition/windows/flutter                                                                                               |          4 |        136 |          9 |         29 |        174 |
+| healthy_nutrition/windows/runner                                                                                                |          9 |        462 |         85 |        139 |        686 |
+| web                                                                                                                             |         14 |        525 |         20 |        361 |        906 |
+| web (Files)                                                                                                                     |          9 |        503 |         12 |        354 |        869 |
+| web/src                                                                                                                         |          5 |         22 |          8 |          7 |         37 |
+| web/src (Files)                                                                                                                 |          3 |         21 |          7 |          6 |         34 |
+| web/src/lib                                                                                                                     |          2 |          1 |          1 |          1 |          3 |
+| web/src/lib (Files)                                                                                                             |          1 |          0 |          1 |          1 |          2 |
+| web/src/lib/assets                                                                                                              |          1 |          1 |          0 |          0 |          1 |
++---------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                                        | language           | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/daoduyluu/Healthy Nutrition/.dart_tool/extension_discovery/README.md                                                     | Markdown           |         21 |          0 |         11 |         32 |
+| /Users/daoduyluu/Healthy Nutrition/.dart_tool/extension_discovery/vs_code.json                                                  | JSON               |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/.dart_tool/package_config.json                                                               | JSON               |        592 |          0 |          1 |        593 |
+| /Users/daoduyluu/Healthy Nutrition/.dart_tool/package_graph.json                                                                | JSON               |        848 |          0 |          0 |        848 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/.env                                                              | Properties         |          2 |          2 |          0 |          4 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/Dockerfile                                                        | Docker             |          7 |          3 |          5 |         15 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/app.py                                                            | Python             |        209 |          0 |         64 |        273 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/application.py                                                    | Python             |          2 |          5 |          2 |          9 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/assets/nutrients_csvfile.csv                                      | CSV                |        336 |          0 |          1 |        337 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/auth_middleware.py                                                | Python             |         51 |          0 |         13 |         64 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/clean_data.ipynb                                                  | JSON               |        183 |          0 |          1 |        184 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/database.json                                                     | JSON               |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/dataset.json                                                      | JSON               |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/diet_chart.json                                                   | JSON               |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/export_database.ipynb                                             | JSON               |      1,381 |          0 |          1 |      1,382 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/goal_generator.ipynb                                              | JSON               |      1,362 |          0 |          1 |      1,363 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/healthy_nutrition.foods.json                                      | JSON               |      4,210 |          0 |          0 |      4,210 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/healthy_nutrition.json                                            | JSON               |      4,210 |          0 |          0 |      4,210 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/models.py                                                         | Python             |        122 |          0 |         40 |        162 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/mongo-init.py                                                     | Python             |          6 |          0 |          4 |         10 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/mongodb/initdb.d/mongo-init.js                                    | JavaScript         |      4,286 |          6 |          8 |      4,300 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/requirements.txt                                                  | pip requirements   |          8 |          0 |          0 |          8 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/test.py                                                           | Python             |         13 |          0 |          6 |         19 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/util.py                                                           | Python             |         49 |          0 |         19 |         68 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/vercel.json                                                       | JSON               |         14 |          0 |          0 |         14 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/wsgi.py                                                           | Python             |          5 |          0 |          3 |          8 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/converter.py                                                 | Python             |          3 |          0 |          2 |          5 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/data.yaml                                                    | YAML               |         11 |          0 |          2 |         13 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/datasets copy/notes.json                                     | JSON               |         37 |          0 |          0 |         37 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/datasets/notes.json                                          | JSON               |         37 |          0 |          0 |         37 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/exp10-new/yolov8n-c3k2-6/args.yaml                           | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/exp10-new/yolov8n-c3k2-62/args.yaml                          | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/image.py                                                     | Python             |         42 |          9 |         17 |         68 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/main.py                                                      | Python             |         25 |          0 |          7 |         32 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/metadata_writer_tutorial.ipynb                               | JSON               |        866 |          0 |          1 |        867 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 11, 25 - best (YOLOv8n).pt                        | XML                |     30,555 |          0 |         66 |     30,621 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 11, 25 - last (YOLOv8n).pt                        | XML                |     30,555 |          0 |         66 |     30,621 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 15, 25 - best (YOLOv11n).pt                       | XML                |     35,454 |          0 |        163 |     35,617 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 15, 25 - last (YOLOv11n).pt                       | XML                |     35,454 |          0 |        163 |     35,617 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 29, 25 - best (YOLOv11).pt                        | XML                |     34,292 |          0 |        140 |     34,432 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 29, 25 - best (YOLOv11)_saved_model/metadata.yaml | YAML               |         25 |          0 |          1 |         26 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 29, 25 - last (YOLOv11).pt                        | XML                |     34,292 |          0 |        140 |     34,432 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 8, 25 - best (YOLOv11n).pt                        | XML                |     31,083 |          0 |         64 |     31,147 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 8, 25 - last (YOLOv11n).pt                        | XML                |     31,031 |          0 |         55 |     31,086 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/requirements.txt                                             | pip requirements   |          6 |          0 |          0 |          6 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/resize_image.py                                              | Python             |         13 |          0 |          4 |         17 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/rotated_transformation.py                                    | Python             |        207 |          4 |         54 |        265 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train/args.yaml                                  | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train2/args.yaml                                 | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train3/args.yaml                                 | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train4/args.yaml                                 | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/args.yaml                                 | YAML               |        107 |          0 |          1 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/results.csv                               | CSV                |         11 |          0 |          1 |         12 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/weights/best.pt                           | XML                |     34,817 |          0 |        152 |     34,969 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/weights/last.pt                           | XML                |     34,817 |          0 |        152 |     34,969 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/args.yaml                                 | YAML               |        106 |          0 |          1 |        107 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/results.csv                               | CSV                |          5 |          0 |          1 |          6 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/weights/best.pt                           | XML                |     34,292 |          0 |        140 |     34,432 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/weights/last.pt                           | XML                |     34,292 |          0 |        140 |     34,432 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/test.py                                                      | Python             |         40 |          0 |         19 |         59 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/test_1.ipynb                                                 | JSON               |      1,703 |          0 |          1 |      1,704 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/test_2.ipynb                                                 | JSON               |         63 |          0 |          1 |         64 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/train.py                                                     | Python             |          0 |          0 |          1 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/util.py                                                      | Python             |         13 |          0 |          6 |         19 |
+| /Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/yolo11n.pt                                                   | XML                |     35,992 |          0 |        174 |     36,166 |
+| /Users/daoduyluu/Healthy Nutrition/docker-compose.yml                                                                           | YAML               |         28 |          0 |          2 |         30 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/.fvm/fvm_config.json                                                       | JSON               |          3 |          0 |          0 |          3 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/README.md                                                                  | Markdown           |          2 |          0 |          2 |          4 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/analysis_options.yaml                                                      | YAML               |          1 |          0 |          1 |          2 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/debug/AndroidManifest.xml                                  | XML                |          3 |          4 |          1 |          8 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/AndroidManifest.xml                                   | XML                |         43 |         13 |          3 |         59 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/drawable-v21/launch_background.xml                | XML                |          4 |          7 |          2 |         13 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/drawable/launch_background.xml                    | XML                |          4 |          7 |          2 |         13 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/values-night/styles.xml                           | XML                |          9 |          9 |          1 |         19 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/values/styles.xml                                 | XML                |          9 |          9 |          1 |         19 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/profile/AndroidManifest.xml                                | XML                |          3 |          4 |          1 |          8 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/gradle.properties                                                  | Properties         |          3 |          0 |          1 |          4 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/gradle/wrapper/gradle-wrapper.properties                           | Properties         |          5 |          0 |          1 |          6 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/assets/food_data.json                                                      | JSON               |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/assets/model.pt                                                            | XML                |     34,292 |          0 |        140 |     34,432 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/flutter_launcher_icons.yaml                                                | YAML               |          6 |          9 |          2 |         17 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Podfile                                                                | Ruby               |         31 |          3 |         10 |         44 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/AppDelegate.swift                                               | Swift              |         12 |          0 |          2 |         14 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json                | JSON               |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json              | JSON               |         23 |          0 |          1 |         24 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md                  | Markdown           |          3 |          0 |          2 |          5 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Base.lproj/LaunchScreen.storyboard                              | XML                |         36 |          1 |          1 |         38 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Base.lproj/Main.storyboard                                      | XML                |         25 |          1 |          1 |         27 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Runner-Bridging-Header.h                                        | C++                |          1 |          0 |          1 |          2 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/RunnerTests/RunnerTests.swift                                          | Swift              |          7 |          2 |          4 |         13 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/constants.dart                                                         | Dart               |         36 |          2 |          6 |         44 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/extension.dart                                                         | Dart               |         28 |          0 |          7 |         35 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/file_manager.dart                                                      | Dart               |          6 |          0 |          3 |          9 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/machine_learning.dart                                                  | Dart               |          0 |          0 |          1 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/main.dart                                                              | Dart               |         65 |          3 |         10 |         78 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/models.dart                                                            | Dart               |        152 |          3 |         11 |        166 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/request.dart                                                           | Dart               |        296 |          0 |         67 |        363 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/analysis.dart                                                  | Dart               |        184 |          0 |         10 |        194 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/edit_info.dart                                 | Dart               |        187 |          1 |         11 |        199 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/foodSelection.dart                             | Dart               |        378 |          1 |         13 |        392 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/goal_edit.dart                                 | Dart               |         29 |          0 |          4 |         33 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/historyScreen.dart                             | Dart               |         24 |          0 |          4 |         28 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/info.dart                                      | Dart               |        791 |          2 |         26 |        819 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/scanning_camera.dart                           | Dart               |        323 |          7 |         38 |        368 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/specific_nutrition.dart                        | Dart               |         76 |          0 |          4 |         80 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/favorite.dart                                                  | Dart               |        107 |          0 |          8 |        115 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/history.dart                                                   | Dart               |        107 |          1 |          6 |        114 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/home.dart                                                      | Dart               |        202 |          0 |         11 |        213 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/login.dart                                                     | Dart               |        162 |          4 |         11 |        177 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/scanner.dart                                                   | Dart               |        180 |          0 |         12 |        192 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/signin_screen/about.dart                                       | Dart               |        746 |          0 |         15 |        761 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/signin_screen/goal.dart                                        | Dart               |        438 |          1 |         14 |        453 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/signin_screen/register.dart                                    | Dart               |        217 |          1 |         13 |        231 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/start.dart                                                     | Dart               |         81 |          0 |          4 |         85 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/user.dart                                                      | Dart               |         81 |          0 |         10 |         91 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/token.dart                                                             | Dart               |         24 |          0 |          8 |         32 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/utils.dart                                                             | Dart               |        225 |          6 |         21 |        252 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/caloriesColumnChart.dart                                       | Dart               |          4 |          0 |          2 |          6 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/circularIndicator.dart                                         | Dart               |          5 |          0 |          3 |          8 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/factorsPieChart.dart                                           | Dart               |         46 |          0 |          3 |         49 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/fatContainer.dart                                              | Dart               |         77 |          0 |          5 |         82 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/foodBox.dart                                                   | Dart               |        167 |          0 |          3 |        170 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/healthProfileContainer.dart                                    | Dart               |        268 |          1 |          7 |        276 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/historyNutritionView.dart                                      | Dart               |        101 |          0 |          7 |        108 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/mineralContainer.dart                                          | Dart               |         77 |          0 |          5 |         82 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/nutrientsDistribution.dart                                     | Dart               |         51 |          0 |          3 |         54 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/processWidget.dart                                             | Dart               |         33 |          0 |          2 |         35 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/vitaminContainer.dart                                          | Dart               |         70 |          0 |          5 |         75 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/weeklyNutrients.dart                                           | Dart               |        154 |          0 |         11 |        165 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/CMakeLists.txt                                                       | CMake              |        104 |          0 |         25 |        129 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/CMakeLists.txt                                               | CMake              |         79 |          0 |         10 |         89 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugin_registrant.cc                               | C++                |         15 |          4 |          5 |         24 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugin_registrant.h                                | C++                |          5 |          5 |          6 |         16 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugins.cmake                                      | CMake              |         21 |          0 |          6 |         27 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/CMakeLists.txt                                                | CMake              |         21 |          0 |          6 |         27 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/main.cc                                                       | C++                |          5 |          0 |          2 |          7 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/my_application.cc                                             | C++                |         83 |         21 |         27 |        131 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/my_application.h                                              | C++                |          7 |          7 |          5 |         19 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Flutter/GeneratedPluginRegistrant.swift                              | Swift              |         12 |          3 |          4 |         19 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Podfile                                                              | Ruby               |         32 |          1 |         10 |         43 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/AppDelegate.swift                                             | Swift              |         11 |          0 |          3 |         14 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json              | JSON               |         68 |          0 |          1 |         69 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/Base.lproj/MainMenu.xib                                       | XML                |        343 |          0 |          1 |        344 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/MainFlutterWindow.swift                                       | Swift              |         12 |          0 |          4 |         16 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/RunnerTests/RunnerTests.swift                                        | Swift              |          7 |          2 |          4 |         13 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/pubspec.yaml                                                               | YAML               |         51 |          8 |          8 |         67 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/web/index.html                                                             | HTML               |         19 |         15 |          5 |         39 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/web/manifest.json                                                          | JSON               |         35 |          0 |          1 |         36 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/web/package-lock.json                                                      | JSON               |          6 |          0 |          1 |          7 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/CMakeLists.txt                                                     | CMake              |         89 |          0 |         20 |        109 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/CMakeLists.txt                                             | CMake              |         98 |          0 |         12 |        110 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugin_registrant.cc                             | C++                |         12 |          4 |          5 |         21 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugin_registrant.h                              | C++                |          5 |          5 |          6 |         16 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugins.cmake                                    | CMake              |         21 |          0 |          6 |         27 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/CMakeLists.txt                                              | CMake              |         34 |          0 |          7 |         41 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/flutter_window.cpp                                          | C++                |         49 |          7 |         16 |         72 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/flutter_window.h                                            | C++                |         20 |          5 |          9 |         34 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/main.cpp                                                    | C++                |         30 |          4 |         10 |         44 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/resource.h                                                  | C++                |          9 |          6 |          2 |         17 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/utils.cpp                                                   | C++                |         54 |          2 |         10 |         66 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/utils.h                                                     | C++                |          8 |          6 |          6 |         20 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/win32_window.cpp                                            | C++                |        210 |         24 |         55 |        289 |
+| /Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/win32_window.h                                              | C++                |         48 |         31 |         24 |        103 |
+| /Users/daoduyluu/Healthy Nutrition/web/.prettierignore                                                                          | Ignore             |          6 |          2 |          2 |         10 |
+| /Users/daoduyluu/Healthy Nutrition/web/.prettierrc                                                                              | JSON               |         16 |          0 |          1 |         17 |
+| /Users/daoduyluu/Healthy Nutrition/web/README.md                                                                                | Markdown           |         24 |          0 |         15 |         39 |
+| /Users/daoduyluu/Healthy Nutrition/web/bun.lock                                                                                 | JSON with Comments |        357 |          0 |        326 |        683 |
+| /Users/daoduyluu/Healthy Nutrition/web/eslint.config.js                                                                         | JavaScript         |         36 |          2 |          3 |         41 |
+| /Users/daoduyluu/Healthy Nutrition/web/package.json                                                                             | JSON               |         37 |          0 |          1 |         38 |
+| /Users/daoduyluu/Healthy Nutrition/web/src/app.css                                                                              | PostCSS            |          5 |          0 |          3 |          8 |
+| /Users/daoduyluu/Healthy Nutrition/web/src/app.d.ts                                                                             | TypeScript         |          5 |          7 |          2 |         14 |
+| /Users/daoduyluu/Healthy Nutrition/web/src/app.html                                                                             | HTML               |         11 |          0 |          1 |         12 |
+| /Users/daoduyluu/Healthy Nutrition/web/src/lib/assets/favicon.svg                                                               | XML                |          1 |          0 |          0 |          1 |
+| /Users/daoduyluu/Healthy Nutrition/web/src/lib/index.ts                                                                         | TypeScript         |          0 |          1 |          1 |          2 |
+| /Users/daoduyluu/Healthy Nutrition/web/svelte.config.js                                                                         | JavaScript         |          7 |          3 |          3 |         13 |
+| /Users/daoduyluu/Healthy Nutrition/web/tsconfig.json                                                                            | JSON with Comments |         14 |          5 |          1 |         20 |
+| /Users/daoduyluu/Healthy Nutrition/web/vite.config.ts                                                                           | TypeScript         |          6 |          0 |          2 |          8 |
+| Total                                                                                                                           |                    |    501,710 |        311 |      3,190 |    505,211 |
++---------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

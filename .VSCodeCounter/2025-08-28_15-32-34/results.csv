@@ -1,0 +1,179 @@
+"filename", "language", "JSON", "Markdown", "Python", "CSV", "YAML", "HTML", "CMake", "C++", "pip requirements", "PostCSS", "TypeScript", "XML", "JavaScript", "Properties", "Dart", "Ignore", "JSON with Comments", "Ruby", "Swift", "Docker", "comment", "blank", "total"
+"/Users/daoduyluu/Healthy Nutrition/.dart_tool/extension_discovery/README.md", "Markdown", 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 32
+"/Users/daoduyluu/Healthy Nutrition/.dart_tool/extension_discovery/vs_code.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/.dart_tool/package_config.json", "JSON", 592, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 593
+"/Users/daoduyluu/Healthy Nutrition/.dart_tool/package_graph.json", "JSON", 848, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 848
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/.env", "Properties", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 4
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/Dockerfile", "Docker", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 5, 15
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/app.py", "Python", 0, 0, 209, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 273
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/application.py", "Python", 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 2, 9
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/assets/nutrients_csvfile.csv", "CSV", 0, 0, 0, 336, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 337
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/auth_middleware.py", "Python", 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 64
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/clean_data.ipynb", "JSON", 183, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 184
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/database.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/dataset.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/diet_chart.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/export_database.ipynb", "JSON", 1381, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1382
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/goal_generator.ipynb", "JSON", 1362, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1363
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/healthy_nutrition.foods.json", "JSON", 4210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4210
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/healthy_nutrition.json", "JSON", 4210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4210
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/models.py", "Python", 0, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 162
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/mongo-init.py", "Python", 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 10
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/mongodb/initdb.d/mongo-init.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4286, 0, 0, 0, 0, 0, 0, 0, 6, 8, 4300
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/requirements.txt", "pip requirements", 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/test.py", "Python", 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 19
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/util.py", "Python", 0, 0, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 68
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/vercel.json", "JSON", 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Database/wsgi.py", "Python", 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 8
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/converter.py", "Python", 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/data.yaml", "YAML", 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 13
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/datasets copy/notes.json", "JSON", 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/datasets/notes.json", "JSON", 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/exp10-new/yolov8n-c3k2-6/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/exp10-new/yolov8n-c3k2-62/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/image.py", "Python", 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 17, 68
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/main.py", "Python", 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 32
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/metadata_writer_tutorial.ipynb", "JSON", 866, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 867
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 11, 25 - best (YOLOv8n).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30555, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 30621
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 11, 25 - last (YOLOv8n).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30555, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66, 30621
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 15, 25 - best (YOLOv11n).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35454, 0, 0, 0, 0, 0, 0, 0, 0, 0, 163, 35617
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 15, 25 - last (YOLOv11n).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35454, 0, 0, 0, 0, 0, 0, 0, 0, 0, 163, 35617
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 29, 25 - best (YOLOv11).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 34432
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 29, 25 - best (YOLOv11)_saved_model/metadata.yaml", "YAML", 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 26
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 29, 25 - last (YOLOv11).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 34432
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 8, 25 - best (YOLOv11n).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31083, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 31147
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/models/Mar 8, 25 - last (YOLOv11n).pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31031, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 31086
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/requirements.txt", "pip requirements", 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/resize_image.py", "Python", 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 17
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/rotated_transformation.py", "Python", 0, 0, 207, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 54, 265
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train2/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train3/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train4/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/args.yaml", "YAML", 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 108
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/results.csv", "CSV", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 12
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/weights/best.pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34817, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 34969
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train5/weights/last.pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34817, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 34969
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/args.yaml", "YAML", 0, 0, 0, 0, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 107
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/results.csv", "CSV", 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 6
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/weights/best.pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 34432
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/runs/detect/train6/weights/last.pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 34432
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/test.py", "Python", 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 59
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/test_1.ipynb", "JSON", 1703, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1704
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/test_2.ipynb", "JSON", 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 64
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/train.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/util.py", "Python", 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 19
+"/Users/daoduyluu/Healthy Nutrition/Healthy Nutrition Deep Learning/yolo11n.pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35992, 0, 0, 0, 0, 0, 0, 0, 0, 0, 174, 36166
+"/Users/daoduyluu/Healthy Nutrition/docker-compose.yml", "YAML", 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 30
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/.fvm/fvm_config.json", "JSON", 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/README.md", "Markdown", 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/analysis_options.yaml", "YAML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/debug/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 8
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 13, 3, 59
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/drawable-v21/launch_background.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, 13
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/drawable/launch_background.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, 13
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/values-night/styles.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1, 19
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/main/res/values/styles.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 9, 1, 19
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/app/src/profile/AndroidManifest.xml", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 8
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/gradle.properties", "Properties", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/android/gradle/wrapper/gradle-wrapper.properties", "Properties", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 6
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/assets/food_data.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/assets/model.pt", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 140, 34432
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/flutter_launcher_icons.yaml", "YAML", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 2, 17
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Podfile", "Ruby", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 3, 10, 44
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/AppDelegate.swift", "Swift", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 2, 14
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json", "JSON", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 24
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md", "Markdown", 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Base.lproj/LaunchScreen.storyboard", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 38
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Base.lproj/Main.storyboard", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 27
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/Runner/Runner-Bridging-Header.h", "C++", 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/ios/RunnerTests/RunnerTests.swift", "Swift", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 2, 4, 13
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/constants.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 2, 6, 44
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/extension.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 7, 35
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/file_manager.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 3, 9
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/machine_learning.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/main.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 3, 10, 78
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/models.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 0, 0, 0, 0, 3, 11, 166
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/request.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 296, 0, 0, 0, 0, 0, 0, 67, 363
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/analysis.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 184, 0, 0, 0, 0, 0, 0, 10, 194
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/edit_info.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 187, 0, 0, 0, 0, 0, 1, 11, 199
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/foodSelection.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 378, 0, 0, 0, 0, 0, 1, 13, 392
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/goal_edit.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 4, 33
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/historyScreen.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 4, 28
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/info.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 791, 0, 0, 0, 0, 0, 2, 26, 819
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/scanning_camera.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 323, 0, 0, 0, 0, 0, 7, 38, 368
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/external_screen/specific_nutrition.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 4, 80
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/favorite.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 8, 115
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/history.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 1, 6, 114
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/home.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 202, 0, 0, 0, 0, 0, 0, 11, 213
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/login.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 162, 0, 0, 0, 0, 0, 4, 11, 177
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/scanner.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 12, 192
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/signin_screen/about.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 746, 0, 0, 0, 0, 0, 0, 15, 761
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/signin_screen/goal.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 438, 0, 0, 0, 0, 0, 1, 14, 453
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/signin_screen/register.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 217, 0, 0, 0, 0, 0, 1, 13, 231
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/start.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 81, 0, 0, 0, 0, 0, 0, 4, 85
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/screens/user.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 81, 0, 0, 0, 0, 0, 0, 10, 91
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/token.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 8, 32
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/utils.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 225, 0, 0, 0, 0, 0, 6, 21, 252
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/caloriesColumnChart.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 2, 6
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/circularIndicator.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 3, 8
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/factorsPieChart.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 3, 49
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/fatContainer.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 77, 0, 0, 0, 0, 0, 0, 5, 82
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/foodBox.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 0, 0, 0, 3, 170
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/healthProfileContainer.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 268, 0, 0, 0, 0, 0, 1, 7, 276
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/historyNutritionView.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 7, 108
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/mineralContainer.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 77, 0, 0, 0, 0, 0, 0, 5, 82
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/nutrientsDistribution.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 3, 54
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/processWidget.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 2, 35
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/vitaminContainer.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 5, 75
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/lib/widgets/weeklyNutrients.dart", "Dart", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 154, 0, 0, 0, 0, 0, 0, 11, 165
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/CMakeLists.txt", "CMake", 0, 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 129
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/CMakeLists.txt", "CMake", 0, 0, 0, 0, 0, 0, 79, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 89
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugin_registrant.cc", "C++", 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 24
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugin_registrant.h", "C++", 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 16
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/flutter/generated_plugins.cmake", "CMake", 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 27
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/CMakeLists.txt", "CMake", 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 27
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/main.cc", "C++", 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/my_application.cc", "C++", 0, 0, 0, 0, 0, 0, 0, 83, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 27, 131
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/linux/runner/my_application.h", "C++", 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 5, 19
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Flutter/GeneratedPluginRegistrant.swift", "Swift", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 3, 4, 19
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Podfile", "Ruby", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 1, 10, 43
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/AppDelegate.swift", "Swift", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 3, 14
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json", "JSON", 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 69
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/Base.lproj/MainMenu.xib", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 343, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 344
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/Runner/MainFlutterWindow.swift", "Swift", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 4, 16
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/macos/RunnerTests/RunnerTests.swift", "Swift", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 2, 4, 13
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/pubspec.yaml", "YAML", 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 67
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/web/index.html", "HTML", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 5, 39
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/web/manifest.json", "JSON", 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 36
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/web/package-lock.json", "JSON", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/CMakeLists.txt", "CMake", 0, 0, 0, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 109
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/CMakeLists.txt", "CMake", 0, 0, 0, 0, 0, 0, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 110
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugin_registrant.cc", "C++", 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 21
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugin_registrant.h", "C++", 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 16
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/flutter/generated_plugins.cmake", "CMake", 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 27
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/CMakeLists.txt", "CMake", 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 41
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/flutter_window.cpp", "C++", 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 16, 72
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/flutter_window.h", "C++", 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 9, 34
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/main.cpp", "C++", 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 10, 44
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/resource.h", "C++", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 17
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/utils.cpp", "C++", 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 10, 66
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/utils.h", "C++", 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 20
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/win32_window.cpp", "C++", 0, 0, 0, 0, 0, 0, 0, 210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 55, 289
+"/Users/daoduyluu/Healthy Nutrition/healthy_nutrition/windows/runner/win32_window.h", "C++", 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 24, 103
+"/Users/daoduyluu/Healthy Nutrition/web/.prettierignore", "Ignore", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 2, 2, 10
+"/Users/daoduyluu/Healthy Nutrition/web/.prettierrc", "JSON", 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 17
+"/Users/daoduyluu/Healthy Nutrition/web/README.md", "Markdown", 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 39
+"/Users/daoduyluu/Healthy Nutrition/web/bun.lock", "JSON with Comments", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 357, 0, 0, 0, 0, 326, 683
+"/Users/daoduyluu/Healthy Nutrition/web/eslint.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 0, 2, 3, 41
+"/Users/daoduyluu/Healthy Nutrition/web/package.json", "JSON", 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 38
+"/Users/daoduyluu/Healthy Nutrition/web/src/app.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 8
+"/Users/daoduyluu/Healthy Nutrition/web/src/app.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, 14
+"/Users/daoduyluu/Healthy Nutrition/web/src/app.html", "HTML", 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 12
+"/Users/daoduyluu/Healthy Nutrition/web/src/lib/assets/favicon.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/daoduyluu/Healthy Nutrition/web/src/lib/index.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2
+"/Users/daoduyluu/Healthy Nutrition/web/svelte.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 3, 3, 13
+"/Users/daoduyluu/Healthy Nutrition/web/tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 5, 1, 20
+"/Users/daoduyluu/Healthy Nutrition/web/vite.config.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"Total", "-", 15700, 50, 800, 352, 977, 30, 467, 561, 14, 5, 11, 471698, 4329, 10, 6198, 6, 371, 63, 61, 7, 311, 3190, 505211
