@@ -131,11 +131,13 @@ def update_user():
 @app.route('/refresh_token', methods=["POST"])
 def refresh_token():
     token = request.headers["Authorization"].split()[-1]
-    token = util.refresh_token(token)
 
     payload = util.decode_token(token)
     username = payload["username"]
     user = users.search(username)
+
+    token = util.refresh_token(token, username)
+
     if  user is None:
         return {
             "data": None,
